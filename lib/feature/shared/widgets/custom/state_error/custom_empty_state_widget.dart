@@ -22,18 +22,18 @@ class CustomEmptyStateWidget extends StatelessWidget {
           Icon(
             icon,
             size: AppDimens.bigIcon(context),
-            color: iconColor ?? AppColors.textPrimary,
+            color: iconColor ?? AppColors.textPrimary
           ),
           SizedBox(height: AppDimens.heightPercentage(0.02, context)),
           Text(
             message,
             style: TextStyle(
               fontSize: AppDimens.normalText(context),
-              color: AppColors.textPrimary,
-            ),
-          ),
-        ],
-      ),
+              color: AppColors.textPrimary
+            )
+          )
+        ]
+      )
     );
   }
 }
