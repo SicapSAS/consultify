@@ -14,6 +14,8 @@ class UserMapper {
         json['permisos'] ??
         '';
 
+    final clinicId = originalData['clinicId']?.toString();
+
     return User(
       id: originalData['_id']?.toString() ??
           originalData['user_id']?.toString() ??
@@ -22,6 +24,7 @@ class UserMapper {
       name: originalData['name']?.toString() ?? '',
       accessToken: token,
       role: roleData.toString().trim(), // <-- Forzar a String limpio sin espacios
+      clinicId: clinicId != null && clinicId.isNotEmpty ? clinicId : null,
     );
   }
 }

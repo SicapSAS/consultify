@@ -10,6 +10,10 @@ final class Roles {
   /// Rol del médico u odontólogo (Ver su agenda, adminicular/evolucionar citas)
   static const String professional = 'PROFESSIONAL';
 
+  /// Roles vinculados a una clínica (el login devuelve `clinicId`).
+  static bool isClinicScoped(String role) =>
+      role == adminClinic || role == professional;
+
   // --- Métodos utilitarios opcionales para usar en las Vistas de Flutter ---
 
   /// Devuelve un nombre legible en español para mostrar en la UI de la App

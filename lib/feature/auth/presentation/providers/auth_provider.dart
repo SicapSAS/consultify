@@ -86,12 +86,15 @@ class AuthNotifier extends StateNotifier<AuthState> {
           
           if (savedEmail != null && savedEmail.isNotEmpty) {
             // Crear un usuario temporal con el token y email guardados
+            final savedClinicId = await keyValueStorageService.getValue<String>('clinicId');
+
             final tempUser = User(
               id: '0', // ID temporal, se actualizará en la próxima verificación exitosa
               email: savedEmail,
               accessToken: accessToken,
               name: '',
               role: savedRole ?? '',
+              clinicId: savedClinicId,
             );
             
             if (!mounted) {
@@ -127,6 +130,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await keyValueStorageService.setKeyValue('accessToken', user.accessToken);
     await keyValueStorageService.setKeyValue('userEmail', user.email);
     await keyValueStorageService.setKeyValue('userRole', user.role);
+
+    if (user.clinicId != null && user.clinicId!.isNotEmpty) {
+      await keyValueStorageService.setKeyValue('clinicId', user.clinicId!);
+    } else {
+      await keyValueStorageService.removeKey('clinicId');
+    }
     
     // Guardar el password de forma temporal para renovación de token
     // Nota: En producción, considera usar flutter_secure_storage para mayor seguridad
@@ -150,6 +159,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await keyValueStorageService.removeKey('accessToken');
     await keyValueStorageService.removeKey('userEmail');
     await keyValueStorageService.removeKey('userRole');
+    await keyValueStorageService.removeKey('clinicId');
     await keyValueStorageService.removeKey('userPassword');
 
     if (!mounted) {
