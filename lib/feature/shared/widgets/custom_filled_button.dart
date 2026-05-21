@@ -29,19 +29,27 @@ class CustomFilledButton extends StatelessWidget {
       AppDimens.smallBorderRadius(0.025, context)
     );
 
-    return FilledButton(
+    final button = FilledButton(
       style: FilledButton.styleFrom(
         backgroundColor: buttonColor,
         disabledBackgroundColor: AppColors.disabledBackground,
         disabledForegroundColor: AppColors.textPrimary.withValues(alpha: 0.45),
+        minimumSize: Size(
+          width ?? 0,
+          height ?? AppDimens.heightPercentage(0.055, context),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimens.widthPercentage(0.04, context),
+          vertical: AppDimens.heightPercentage(0.01, context),
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: radius,
             bottomRight: radius,
             topLeft: radius,
             topRight: radius,
-          )
-        )
+          ),
+        ),
       ),
       onPressed: onPressed,
       child: Text(
@@ -49,8 +57,15 @@ class CustomFilledButton extends StatelessWidget {
         style: TextStyle(
           color: textColor ?? AppColors.textSecondary,
           fontSize: textSize ?? AppDimens.normalText(context),
-        )
-      )
+        ),
+      ),
+    );
+
+    if (width == null) return button;
+
+    return Align(
+      alignment: Alignment.center,
+      child: SizedBox(width: width, child: button),
     );
   }
 }

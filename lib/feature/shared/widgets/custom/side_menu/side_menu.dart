@@ -89,10 +89,10 @@ class SideMenuState extends ConsumerState<SideMenu> {
         if (userRole == Roles.superAdmin) 
           CustomSideMenuItem(
             icon: FontAwesomeIcons.building.data,
-            label: 'Crear clínica',
+            label: 'Clínicas',
             isSelected: currentRoute == '/clinic-screen',
             onTap: () {
-              context.push( '/clinic-screen' );
+              context.push('/clinic-screen');
               widget.scaffoldKey.currentState?.closeDrawer();
             }
           ),

@@ -9,6 +9,10 @@ class ClinicRoutes {
     GoRoute(
       path: '/clinic-screen',
       builder: (context, state) => ClinicScreen()
-    )
+    ),
+    GoRoute(
+      path: '/create-clinic-screen',
+      builder: (context, state) => CreateClinicScreen()
+    ),
   ];
 }

@@ -63,7 +63,7 @@ class LabeledFloatingActionButton extends StatelessWidget {
             label,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
               fontSize: labelFontSize ?? AppDimens.widthPercentage(0.025, context),
-              color: labelColor ?? AppColors.textInfo
+              color: labelColor ?? AppColors.textInfoDark
             )
           )
         ),
@@ -77,7 +77,7 @@ class LabeledFloatingActionButton extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: buttonBoxShadow ?? [
               BoxShadow(
-                color: AppColors.textPrimary.withOpacity(0.4),
+                color: AppColors.textPrimary.withValues(alpha: 0.4),
                 blurRadius: AppDimens.widthPercentage(0.02, context),
                 offset: Offset(0, AppDimens.widthPercentage(0.015, context))
               )

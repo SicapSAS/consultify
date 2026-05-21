@@ -23,7 +23,7 @@ class ClinicNotifier extends StateNotifier<ClinicRepositoryState> {
   }
 
   Future<void> getClinics() async {
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true, errorMessage: '');
     try {
       final clinics = await clinicRepository.getClinics();
       state = state.copyWith(clinics: clinics, isLoading: false, isSuccess: true);
@@ -34,15 +34,27 @@ class ClinicNotifier extends StateNotifier<ClinicRepositoryState> {
     }
   }
 
-  Future<void> createClinic(CreateClinic createClinic) async {
-    state = state.copyWith(isLoading: true);
+  Future<bool> createClinic(CreateClinic createClinic) async {
+    state = state.copyWith(isLoading: true, errorMessage: '');
     try {
       final clinic = await clinicRepository.createClinic(createClinic);
-      state = state.copyWith(clinics: [...state.clinics, clinic], isLoading: false, isSuccess: true);
+      state = state.copyWith(
+        clinics: [...state.clinics, clinic],
+        isLoading: false,
+        isSuccess: true,
+      );
+      await getClinics();
+      return true;
     } on CustomError catch (e) {
       state = state.copyWith(errorMessage: e.message, isLoading: false, isSuccess: false);
+      return false;
     } catch (e) {
-      state = state.copyWith(errorMessage: 'Error al crear la clínica', isLoading: false, isSuccess: false);
+      state = state.copyWith(
+        errorMessage: 'Error al crear la clínica',
+        isLoading: false,
+        isSuccess: false,
+      );
+      return false;
     }
   }
 }
