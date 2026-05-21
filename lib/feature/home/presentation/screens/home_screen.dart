@@ -25,7 +25,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   final List<String?> _routes = [
     '/home',
-    'null',
+    '/profile-screen',
   ];
 
   int _getCurrentIndex() {

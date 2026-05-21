@@ -34,11 +34,22 @@ final goRouterProvider = Provider((ref) {
         path: '/home',
         builder: (context, state) => const HomeScreen()
       ),
-      
+      /* ********** Profile Routes ********** */
+      ...ProfileRoutes.routes,
+
+
+
+
       /* ********** Clinic Routes ********** */
       // Cuando crees las rutas de tus módulos en las ramas correspondientes, las agregas aquí:
       // ...ClinicRoutes.routes,
     ],
+
+
+
+
+
+
 
     redirect: (context, state) {
       final isGoingTo = state.uri.path;

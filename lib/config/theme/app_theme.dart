@@ -3,45 +3,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  /* //************************* Colores principales ************************** */
-  static const secondary = Colors.black;
-  static const primary = Colors.white;
-
-  //************************* Colores para el texto ************************** */
-  static const textSecondary = Colors.white;
-  static const textPrimary = Colors.black;
-  static const textInfo = Color.fromARGB(255, 0, 26, 255);
-  static const textInfoDark = Color.fromARGB(255, 3, 28, 166);
-
-  //************************* Colores para el background ********************* */
-  static const primaryBackground = Color.fromRGBO(229, 229, 229, 1);
-  static const secondaryBackground = Colors.white;
-  static const tertiaryBackground = Color.fromRGBO(245, 243, 243, 1);
-  static const scanQrBackground = Colors.black;
-
-  //************************* Colores para el botón ************************** */
-  static const primaryButton = Colors.black;
-  static const secondaryButton = Color.fromARGB(255, 18, 42, 255);
-  static const secondaryButtonDark = Color.fromARGB(255, 3, 28, 166);
-
-  //************************* Colores para alertas, errores, etc. ************** */
-  static const errorBackground = Colors.red;
-  static const warningBackground = Colors.orange;
-  static const successBackground = Colors.green;
-  static const disabledBackground = Colors.grey;
-  static const infoBackground = Color.fromARGB(255, 0, 26, 255);
-  static const infoBackgroundDark = Color.fromARGB(255, 3, 28, 166);
-
-  //************************* Colores para los iconos ************************** */
-  static const iconPrimary = Colors.black;
-  static const iconSecondary = Colors.white;
-  static const iconTertiary = Color.fromRGBO(229, 229, 229, 1);
-  static const iconDisabled = Colors.grey;
-  static const iconError = Colors.red;
-  static const iconWarning = Colors.orange;
-  static const iconSuccess = Colors.green;
-  static const iconInfo = Color.fromARGB(255, 0, 26, 255);
-  static const iconInfoDark = Color.fromARGB(255, 3, 28, 166); */
+  
 
   // ************************* Colores principales ************************** //
   /// Azul Marino del logo para elementos oscuros primarios

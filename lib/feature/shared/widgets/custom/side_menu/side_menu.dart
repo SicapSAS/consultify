@@ -145,11 +145,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
           onTap: () {
             context.go( '/companies-screen' );
           }
-        ),
-        CustomFilledButton(
-          text: 'Cerrar sesión',
-          onPressed: () => ref.read(authProvider.notifier).logout()
-        ),
+        )
       ]
     );
   }

@@ -9,7 +9,7 @@ export 'auth/auth.dart';
 export 'home/home.dart';
 
 //*********** Profile ***********/
-//export 'profile_user/profile_user.dart';
+export 'profile/profile.dart';
 
 //*********** Permissions ***********/
 export 'permissions/permissions.dart';
