@@ -52,6 +52,14 @@ class MainAppState extends ConsumerState<MainApp> with WidgetsBindingObserver {
       supportedLocales: AppLocaleConfig.supportedLocales,
       localizationsDelegates: AppLocaleConfig.localizationsDelegates,
       locale: const Locale('es'),
+      builder: (context, child) {
+        return GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: child!
+        );
+      }
     );
   }
 }

@@ -13,7 +13,7 @@ class AppBarLogo extends StatelessWidget {
     this.height,
   });
 
-  static const String _defaultLogoPath = 'assets/logo/white_label.png';
+  static const String _defaultLogoPath = 'assets/logo/consultify_transparente2.png';
 
   @override
   Widget build(BuildContext context) {

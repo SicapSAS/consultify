@@ -41,24 +41,17 @@ class CustomBottomNavigationBar extends ConsumerWidget {
               //if (PermissionHelper.hasPermission(ref, UserPermission.novedades))
               _buildNavItem(
                 context: context,
-                icon: FontAwesomeIcons.circle.data,
-                label: '',
+                icon: FontAwesomeIcons.houseChimney.data,
+                label: 'Inicio',
                 index: 0,
                 route: routes != null && routes!.isNotEmpty ? routes![0] : null,
               ),
               _buildNavItem(
                 context: context,
-                icon: FontAwesomeIcons.circle.data,
-                label: '',
+                icon: FontAwesomeIcons.user.data,
+                label: 'Perfil',
                 index: 1,
                 route: routes != null && routes!.length > 1 ? routes![1] : null
-              ),
-              _buildNavItem(
-                context: context,
-                icon: FontAwesomeIcons.circle.data,
-                label: '',
-                index: 2,
-                route: routes != null && routes!.length > 2 ? routes![2] : null
               )
             ]
           )

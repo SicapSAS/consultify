@@ -6,35 +6,35 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatelessWidget {
   
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.primaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
+          reverse: false,
           child: SizedBox(
             height: AppDimens.heightPercentage(1, context),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: AppDimens.heightPercentage(0.15, context)),
-                /* Text(
-                  'White Label',
-                  style: TextStyle(
-                    fontSize: AppDimens.titleText(context),
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.secondary
+                SizedBox(height: AppDimens.heightPercentage(0.2, context)),
+                
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppDimens.widthPercentage(0.05, context),
+                  ),
+                  child: Image.asset(
+                    'assets/logo/consultify_transparente2.png',
+                    width: AppDimens.widthPercentage(0.8, context),
+                    fit: BoxFit.contain
                   )
-                ), */
-                Image.asset(
-                  'assets/logo/consultify_white.png',
-                  width: AppDimens.widthPercentage(0.8, context),
-                  fit: BoxFit.contain
                 ),
-                SizedBox(height: AppDimens.heightPercentage(0.08, context)),
+                SizedBox(height: AppDimens.heightPercentage(0.1, context)),
                 _LoginForm()
                 
               ]
@@ -71,6 +71,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
         children: [
           CustomTextFormField(
             label: 'Correo electrónico',
+            showLabel: false,
             onChanged: ref.read(loginFormProvider.notifier).onEmailChanged,
             //validator: ref.read(loginFormProvider.notifier).onEmailChanged,
             errorMessage: loginForm.isFormPosted ? 
@@ -80,6 +81,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
           SizedBox(height: AppDimens.heightPercentage(0.02, context)),
           CustomTextFormField(
             label: 'Contraseña',
+            showLabel: false,
             obscureText: _obscurePassword,
             onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
             //validator: (value) => ref.read(loginFormProvider.notifier).onEmailChanged(value),

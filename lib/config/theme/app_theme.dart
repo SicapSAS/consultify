@@ -64,7 +64,7 @@ class AppColors {
   static const scanQrBackground = Colors.black;
 
   // ************************* Colores para el botón ************************** //
-  static const primaryButton = Color(0xFF1E4264); // Azul Marino principal del logo
+  static const primaryButton = Color.fromARGB(255, 21, 79, 133); // Azul Marino principal del logo
   static const secondaryButton = Color(0xFF5CC0C6); // Turquesa brillante del logo
   static const secondaryButtonDark = Color(0xFF132A40); // Azul Marino profundo para el estado presionado
 

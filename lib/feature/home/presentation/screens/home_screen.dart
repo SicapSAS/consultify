@@ -26,8 +26,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   final List<String?> _routes = [
     '/home',
     'null',
-    'null',
-    'null',
   ];
 
   int _getCurrentIndex() {
@@ -48,7 +46,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       drawer: SideMenu(scaffoldKey: scaffoldKey),
       appBar: AppBar(
         backgroundColor: AppColors.secondaryBackground,
-        title: Text('Consultify'),
+        title: AppBarLogo(
+          imagePath: 'assets/logo/consultify_transparente2.png'
+        ),
       ),
       body: _HomeBody(),
       bottomNavigationBar: CustomBottomNavigationBar(

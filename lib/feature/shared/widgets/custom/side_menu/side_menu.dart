@@ -38,7 +38,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
       backgroundColor: AppColors.secondaryBackground,
       elevation: 1,
       children: [
-        CustomSideMenuItem(
+        /* CustomSideMenuItem(
           icon: FontAwesomeIcons.user.data,
           label: 'Mi perfil',
           isSelected: currentRoute == '/profile-user',
@@ -47,7 +47,19 @@ class SideMenuState extends ConsumerState<SideMenu> {
             context.go('/profile-user');
             widget.scaffoldKey.currentState?.closeDrawer();
           },
+        ), */
+        SizedBox(height: AppDimens.heightPercentage(0.03, context)),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimens.widthPercentage(0.06, context),
+          ),
+          child: Image.asset(
+            'assets/logo/consultify_transparente2.png',
+            width: AppDimens.widthPercentage(0.1, context),
+            fit: BoxFit.contain
+          ),
         ),
+        SizedBox(height: AppDimens.heightPercentage(0.03, context)),
         CustomSideMenuItem(
           icon: FontAwesomeIcons.houseChimney.data,
           label: 'Inicio',
@@ -58,11 +70,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             widget.scaffoldKey.currentState?.closeDrawer();
           }
         ),
-        
 
-        
-
-        
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: AppDimens.widthPercentage(0.05, context),
@@ -78,26 +86,36 @@ class SideMenuState extends ConsumerState<SideMenu> {
           ),
           child: Text('Otras opciones')
         ),
-        if (userRole == Roles.superAdmin)
+        if (userRole == Roles.superAdmin) 
+          CustomSideMenuItem(
+            icon: FontAwesomeIcons.building.data,
+            label: 'Crear clínica',
+            isSelected: currentRoute == '/companies-screen',
+            onTap: () {
+              context.go( '/companies-screen' );
+              widget.scaffoldKey.currentState?.closeDrawer();
+            }
+          ),
+        //if (userRole == Roles.adminClinic)
         CustomSideMenuItem(
-          icon: FontAwesomeIcons.circle.data,
-          label: 'Crear clínica',
+          icon: FontAwesomeIcons.calendarCheck.data,
+          label: 'Nueva cita',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );
           }
         ),
-        if (userRole == Roles.adminClinic)
         CustomSideMenuItem(
-          icon: FontAwesomeIcons.circle.data,
-          label: 'Admicion',
+          icon: FontAwesomeIcons.calendarDays.data,
+          label: 'Ver agendas',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );
           }
         ),
+        //if (userRole == Roles.adminClinic)
         CustomSideMenuItem(
-          icon: FontAwesomeIcons.circle.data,
+          icon: Icons.person_add_alt_1_outlined,
           label: 'Registrar paciente',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
@@ -105,8 +123,24 @@ class SideMenuState extends ConsumerState<SideMenu> {
           }
         ),
         CustomSideMenuItem(
-          icon: FontAwesomeIcons.circle.data,
-          label: 'Crear cita',
+          icon: FontAwesomeIcons.userPlus.data,
+          label: 'Admicionar paciente',
+          isSelected: currentRoute == '/companies-screen',
+          onTap: () {
+            context.go( '/companies-screen' );
+          }
+        ),
+        CustomSideMenuItem(
+          icon: FontAwesomeIcons.userDoctor.data,
+          label: 'Atender paciente',
+          isSelected: currentRoute == '/companies-screen',
+          onTap: () {
+            context.go( '/companies-screen' );
+          }
+        ),
+        CustomSideMenuItem(
+          icon: FontAwesomeIcons.gear.data,
+          label: 'Parametrizar atención',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );
