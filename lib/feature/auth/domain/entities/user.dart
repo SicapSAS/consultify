@@ -5,7 +5,7 @@ class User {
   final String email;
   final String name;  
   //final String lastName;
-  final String roles;
+  final String role;
   final String accessToken;
 
   User({
@@ -14,7 +14,7 @@ class User {
     required this.name,
     //required this.lastName,
     required this.accessToken,
-    required this.roles,
+    required this.role,
   });
 
   /*bool isAdmin() {

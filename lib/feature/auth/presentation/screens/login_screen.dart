@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                   )
                 ), */
                 Image.asset(
-                  'assets/logo/white_label.png',
+                  'assets/logo/consultify_white.png',
                   width: AppDimens.widthPercentage(0.8, context),
                   fit: BoxFit.contain
                 ),

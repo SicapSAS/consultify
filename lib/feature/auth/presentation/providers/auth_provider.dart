@@ -90,7 +90,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
               email: savedEmail,
               accessToken: accessToken,
               name: '',
-              roles: '',
+              role: '',
             );
             
             if (!mounted) {

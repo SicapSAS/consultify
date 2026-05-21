@@ -31,6 +31,8 @@ class SideMenuState extends ConsumerState<SideMenu> {
   @override
   Widget build(BuildContext context) {
     final currentRoute = _getCurrentRoute();
+    final authState = ref.watch(authProvider);
+    final userRole = authState.user?.role;
 
     return NavigationDrawer(
       backgroundColor: AppColors.secondaryBackground,
@@ -56,6 +58,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             widget.scaffoldKey.currentState?.closeDrawer();
           }
         ),
+        
 
         
 
@@ -75,14 +78,44 @@ class SideMenuState extends ConsumerState<SideMenu> {
           ),
           child: Text('Otras opciones')
         ),
+        if (userRole == Roles.superAdmin)
         CustomSideMenuItem(
           icon: FontAwesomeIcons.circle.data,
-          label: 'Empresas',
+          label: 'Crear clínica',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );
           }
-        )
+        ),
+        if (userRole == Roles.adminClinic)
+        CustomSideMenuItem(
+          icon: FontAwesomeIcons.circle.data,
+          label: 'Admicion',
+          isSelected: currentRoute == '/companies-screen',
+          onTap: () {
+            context.go( '/companies-screen' );
+          }
+        ),
+        CustomSideMenuItem(
+          icon: FontAwesomeIcons.circle.data,
+          label: 'Registrar paciente',
+          isSelected: currentRoute == '/companies-screen',
+          onTap: () {
+            context.go( '/companies-screen' );
+          }
+        ),
+        CustomSideMenuItem(
+          icon: FontAwesomeIcons.circle.data,
+          label: 'Crear cita',
+          isSelected: currentRoute == '/companies-screen',
+          onTap: () {
+            context.go( '/companies-screen' );
+          }
+        ),
+        CustomFilledButton(
+          text: 'Cerrar sesión',
+          onPressed: () => ref.read(authProvider.notifier).logout()
+        ),
       ]
     );
   }

@@ -1,6 +1,5 @@
 import 'package:consultify/feature/feature.dart';
 
-
 class UserMapper {
   static User userJsonToEntity(Map<String, dynamic> json, {String? email, String? accessToken}) {
     final originalData = json['data']?['original'] ?? json;
@@ -10,9 +9,10 @@ class UserMapper {
         originalData['access_token'] as String? ??
         '';
 
-    final role = originalData['role'] ??
+    final roleData = originalData['role'] ??
         originalData['roles'] ??
-        json['permisos'];
+        json['permisos'] ??
+        '';
 
     return User(
       id: originalData['_id']?.toString() ??
@@ -21,7 +21,7 @@ class UserMapper {
       email: email ?? originalData['email']?.toString() ?? '',
       name: originalData['name']?.toString() ?? '',
       accessToken: token,
-      roles: role?.toString() ?? '',
+      role: roleData.toString().trim(), // <-- Forzar a String limpio sin espacios
     );
   }
 }
