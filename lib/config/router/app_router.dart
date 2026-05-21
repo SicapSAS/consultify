@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// Importa la ruta exacta de tu archivo roles.dart (ajústala según tus carpetas)
 
 final goRouterProvider = Provider((ref) {
 
@@ -37,12 +36,8 @@ final goRouterProvider = Provider((ref) {
       /* ********** Profile Routes ********** */
       ...ProfileRoutes.routes,
 
-
-
-
       /* ********** Clinic Routes ********** */
-      // Cuando crees las rutas de tus módulos en las ramas correspondientes, las agregas aquí:
-      // ...ClinicRoutes.routes,
+      ...ClinicRoutes.routes,
     ],
 
 

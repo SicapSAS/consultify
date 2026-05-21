@@ -14,8 +14,8 @@ export 'profile/profile.dart';
 //*********** Permissions ***********/
 export 'permissions/permissions.dart';
 
-//*********** Pqrs ***********/
-//export 'pqrs/pqrs.dart';
+//*********** Clinic ***********/
+export 'clinic/clinic.dart';
 
 //*********** Mailbox ***********/
 //export 'mailbox/mailbox.dart';

@@ -90,9 +90,9 @@ class SideMenuState extends ConsumerState<SideMenu> {
           CustomSideMenuItem(
             icon: FontAwesomeIcons.building.data,
             label: 'Crear clínica',
-            isSelected: currentRoute == '/companies-screen',
+            isSelected: currentRoute == '/clinic-screen',
             onTap: () {
-              context.go( '/companies-screen' );
+              context.push( '/clinic-screen' );
               widget.scaffoldKey.currentState?.closeDrawer();
             }
           ),
