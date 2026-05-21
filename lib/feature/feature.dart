@@ -17,8 +17,8 @@ export 'permissions/permissions.dart';
 //*********** Clinic ***********/
 export 'clinic/clinic.dart';
 
-//*********** Mailbox ***********/
-//export 'mailbox/mailbox.dart';
+//*********** Patient ***********/
+export 'patient/patient.dart';
 
 //*********** Ads ***********/
 //export 'ads/ads.dart';
