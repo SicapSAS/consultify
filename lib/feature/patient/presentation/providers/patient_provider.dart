@@ -85,7 +85,7 @@ class PatientNotifier extends StateNotifier<PatientRepositoryState> {
   }
 
   Future<void> getPatientShow(String patientId) async {
-    state = state.copyWith(isLoading: true, errorMessage: '');
+    state = state.copyWith(isLoading: true, errorMessage: '', history: null);
     try {
       final history = await patientRepository.getPatientShow(patientId);
       state = state.copyWith(

@@ -10,7 +10,16 @@ class PatientRoutes {
   static final routes = [
     GoRoute(
       path: '/patient-screen',
-      builder: (context, state) => PatientScreen()
+      builder: (context, state) => PatientScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) {
+            final patientId = state.pathParameters['id'] ?? '';
+            return PatientDetailScreen(patientId: patientId);
+          }
+        )
+      ]
     )
   ];
 }

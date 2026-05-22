@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +29,7 @@ class PatientView extends ConsumerWidget {
       return CustomEmptyStateWidget(
         message: 'No hay pacientes registrados',
         icon: FontAwesomeIcons.user.data,
-        iconColor: AppColors.secondary.withValues(alpha: 0.5),
+        iconColor: AppColors.secondary.withValues(alpha: 0.5)
       );
     }
 
@@ -36,7 +37,8 @@ class PatientView extends ConsumerWidget {
       onRefresh: () => ref.read(patientProvider.notifier).getPatients(),
       isRefreshing: state.isLoading,
       child: PatientList(
-        patients: state.patients
+        patients: state.patients,
+        onPatientTap: (patient) => context.push('/patient-screen/${patient.id}')
       )
     );
   }
