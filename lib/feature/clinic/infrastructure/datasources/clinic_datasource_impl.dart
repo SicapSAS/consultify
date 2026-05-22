@@ -31,10 +31,11 @@ class ClinicDatasourceImpl implements ClinicDataSource {
   Future<List<ListClinic>> getClinics() async {
     try {
       // Tu endpoint en Vercel mapeado en app_router es /clinics
-      final response = await dio.get('/clinics');
+      final response = await dio.get('/clinics/list');
       
-      // Como tu backend devuelve el arreglo directamente en el cuerpo raíz de la respuesta:
-      final List<dynamic> dataList = response.data is List ? response.data : [];
+      final List<dynamic> dataList = (response.data != null && response.data['clinics'] is List)
+          ? response.data['clinics']
+          : [];
       
       return dataList.map((item) => ListClinicMapper.fromJson(item)).toList();
     } on DioException catch (e) {

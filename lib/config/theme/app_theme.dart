@@ -48,6 +48,7 @@ class AppColors {
   static const iconSuccess = Colors.green;
   static const iconInfo = Color(0xFF5CC0C6); // Turquesa
   static const iconInfoDark = Color(0xFF1E4264); // Azul Marino
+  static const iconDark = Colors.black; // Azul Marino
 
 
 
