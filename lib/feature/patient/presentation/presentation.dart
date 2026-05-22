@@ -1,7 +1,7 @@
 
 
-export 'navigation/example_routes.dart';
-export 'screens/screen.dart';
-export 'screens/views/view.dart';
-export 'providers/provider.dart';
-export 'providers/repository_provider.dart';
+export 'navigation/patient_routes.dart';
+export 'screens/patient_screen.dart';
+export 'screens/views/patient_view.dart';
+export 'providers/patient_provider.dart';
+export 'providers/patient_repository_provider.dart';

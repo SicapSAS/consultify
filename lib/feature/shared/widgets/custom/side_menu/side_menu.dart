@@ -116,7 +116,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
         //if (userRole == Roles.adminClinic)
         CustomSideMenuItem(
           icon: Icons.person_add_alt_1_outlined,
-          label: 'Registrar paciente',
+          label: 'Pacientes',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );

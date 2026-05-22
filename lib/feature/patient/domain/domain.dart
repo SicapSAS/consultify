@@ -1,5 +1,5 @@
 
 
-export 'datasources/datasource.dart';
-export 'entities/entities.dart';
-export 'repositories/repository.dart';
+export 'datasources/patient_datasource.dart';
+export 'entities/create_patient.dart';
+export 'repositories/patient_repository.dart';
