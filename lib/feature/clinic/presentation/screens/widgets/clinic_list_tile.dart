@@ -1,19 +1,33 @@
+import 'package:flutter/material.dart';
 import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ClinicListTile extends StatelessWidget {
   final ListClinic clinic;
   final VoidCallback? onTap;
-  final VoidCallback? onMenuTap;
+  final ValueChanged<ClinicMenuAction>? onMenuAction;
 
   const ClinicListTile({
     super.key,
     required this.clinic,
     this.onTap,
-    this.onMenuTap,
+    this.onMenuAction,
   });
+
+  static const _menuItems = [
+    ContextMenuItem<ClinicMenuAction>(
+      value: ClinicMenuAction.disable,
+      label: 'Inhabilitar clínica',
+      icon: Icons.block_outlined,
+      isDestructive: true,
+    ),
+    ContextMenuItem<ClinicMenuAction>(
+      value: ClinicMenuAction.update,
+      label: 'Actualizar clínica',
+      icon: Icons.edit_outlined,
+    ),
+  ];
 
   bool _hasText(String? value) {
     if (value == null) return false;
@@ -141,20 +155,12 @@ class ClinicListTile extends StatelessWidget {
               bottom: 0,
               right: 6,
               child: Center(
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: onMenuTap,
-                    borderRadius: BorderRadius.circular(20),
-                    child: Padding(
-                      padding: EdgeInsets.all(AppDimens.widthPercentage(0.01, context)),
-                      child: Icon(
-                        FontAwesomeIcons.ellipsisVertical.data,
-                        color: AppColors.iconDark,
-                        size: menuIconSize
-                      )
-                    )
-                  )
+                child: ContextMenuButton<ClinicMenuAction>(
+                  items: _menuItems,
+                  onSelected: onMenuAction,
+                  iconColor: AppColors.iconDark,
+                  iconSize: menuIconSize,
+                  padding: EdgeInsets.all(AppDimens.widthPercentage(0.01, context)),
                 )
               )
             )
