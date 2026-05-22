@@ -47,5 +47,21 @@ class PatientDatasourceImpl implements PatientDataSource {
       throw const CustomError(message: 'Ocurrió un error inesperado al listar los pacientes.');
     }
   }
+  
+  @override
+  Future<PatientShow> getPatientShow(String patientId) async {
+    try {
+    // Petición al endpoint dinámico de Vercel
+    final response = await dio.get('/patients/appointments/history/$patientId');
+    
+    // Mapeamos el mapa JSON directamente con el mapeador especializado
+    return PatientShowMapper.fromJson(response.data ?? {});
+  } on DioException catch (e) {
+    throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al obtener el historial del paciente.');
+  } catch (e) {
+    if (e is CustomError) rethrow;
+    throw const CustomError(message: 'Ocurrió un error inesperado al procesar el historial.');
+  }
+  }
 
 }

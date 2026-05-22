@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/legacy.dart';
 /* *********** Notifier Provider ************* */
 
 final patientProvider = StateNotifierProvider<PatientNotifier, PatientRepositoryState>((ref) {
-  final patientRepository = ref.read(patientRepositoryProvider);
+  final patientRepository = ref.watch(patientRepositoryProvider);
   return PatientNotifier(
     patientRepository: patientRepository,
   );
@@ -83,6 +83,33 @@ class PatientNotifier extends StateNotifier<PatientRepositoryState> {
       return false;
     }
   }
+
+  Future<void> getPatientShow(String patientId) async {
+    state = state.copyWith(isLoading: true, errorMessage: '');
+    try {
+      final history = await patientRepository.getPatientShow(patientId);
+      state = state.copyWith(
+        history: history,
+        isLoading: false,
+        isSuccess: true,
+        isError: false,
+      );
+    } on CustomError catch (e) {
+      state = state.copyWith(
+        errorMessage: e.message,
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        errorMessage: 'Error al procesar el historial médico.',
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+      );
+    }
+  }
 }
 
 
@@ -99,6 +126,7 @@ class PatientNotifier extends StateNotifier<PatientRepositoryState> {
 class PatientRepositoryState {
   final List<Patient> patients;
   final Patient? patient;
+  final PatientShow? history;
   final bool isLoading;
   final bool isSuccess;
   final bool isError;
@@ -107,6 +135,7 @@ class PatientRepositoryState {
   PatientRepositoryState({
     this.patients = const [],
     this.patient,
+    this.history,
     this.isLoading = false,
     this.isSuccess = false,
     this.isError = false,
@@ -116,6 +145,7 @@ class PatientRepositoryState {
   PatientRepositoryState copyWith({
     List<Patient>? patients,
     Patient? patient,
+    PatientShow? history,
     bool? isLoading,
     bool? isSuccess,
     bool? isError,
@@ -123,6 +153,7 @@ class PatientRepositoryState {
   }) => PatientRepositoryState(
     patients: patients ?? this.patients,
     patient: patient ?? this.patient,
+    history: history ?? this.history,
     isLoading: isLoading ?? this.isLoading,
     isSuccess: isSuccess ?? this.isSuccess,
     isError: isError ?? this.isError,

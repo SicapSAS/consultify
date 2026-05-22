@@ -17,4 +17,9 @@ class PatientRepositoryImpl implements PatientRepository {
   Future<Patient> createPatient(CreatePatient createPatient) {
     return dataSource.createPatient(createPatient);
   }
+  
+  @override
+  Future<PatientShow> getPatientShow(String patientId) {
+    return dataSource.getPatientShow(patientId);
+  }
 }

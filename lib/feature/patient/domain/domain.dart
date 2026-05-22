@@ -5,3 +5,4 @@ export 'entities/create_patient.dart';
 export 'repositories/patient_repository.dart';
 
 export 'entities/list_patient.dart';
+export 'entities/patient_show.dart';

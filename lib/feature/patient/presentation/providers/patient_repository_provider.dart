@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final patientRepositoryProvider = Provider<PatientRepository>((ref) {
   return PatientRepositoryImpl(
     dataSource: PatientDatasourceImpl(
-      dio: ref.read(dioProvider),
+      dio: ref.watch(dioProvider),
     ),
   );
 });
