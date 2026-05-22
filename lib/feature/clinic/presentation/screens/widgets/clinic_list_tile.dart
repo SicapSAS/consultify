@@ -15,19 +15,22 @@ class ClinicListTile extends StatelessWidget {
     this.onMenuAction,
   });
 
-  static const _menuItems = [
-    ContextMenuItem<ClinicMenuAction>(
-      value: ClinicMenuAction.disable,
-      label: 'Inhabilitar clínica',
-      icon: Icons.block_outlined,
-      isDestructive: true,
-    ),
-    ContextMenuItem<ClinicMenuAction>(
-      value: ClinicMenuAction.update,
-      label: 'Actualizar clínica',
-      icon: Icons.edit_outlined,
-    ),
-  ];
+  List<ContextMenuItem<ClinicMenuAction>> _buildMenuItems() {
+    return [
+      if (clinic.isActive)
+        const ContextMenuItem<ClinicMenuAction>(
+          value: ClinicMenuAction.disable,
+          label: 'Inhabilitar clínica',
+          icon: Icons.block_outlined,
+          isDestructive: true,
+        ),
+      const ContextMenuItem<ClinicMenuAction>(
+        value: ClinicMenuAction.update,
+        label: 'Actualizar clínica',
+        icon: Icons.edit_outlined,
+      ),
+    ];
+  }
 
   bool _hasText(String? value) {
     if (value == null) return false;
@@ -49,7 +52,11 @@ class ClinicListTile extends StatelessWidget {
     final cardPadding = AppDimens.widthPercentage(0.04, context);
     final menuIconSize = AppDimens.normalIcon(context) * 0.85;
 
-    return Container(
+    final isInactive = !clinic.isActive;
+
+    return Opacity(
+      opacity: isInactive ? 0.72 : 1,
+      child: Container(
       decoration: BoxDecoration(
         color: AppColors.secondaryBackground,
         borderRadius: BorderRadius.circular(radius),
@@ -103,10 +110,10 @@ class ClinicListTile extends StatelessWidget {
                             style: TextStyle(
                               fontSize: AppDimens.subtitleText(context),
                               color: AppColors.textPrimary,
-                              fontWeight: FontWeight.w700
+                              fontWeight: FontWeight.w700,
                             ),
                             maxLines: 2,
-                            overflow: TextOverflow.ellipsis
+                            overflow: TextOverflow.ellipsis,
                           ),
                           /* if (displayAddress != null) ...[
                             SizedBox(height: AppDimens.heightPercentage(0.008, context)),
@@ -140,10 +147,17 @@ class ClinicListTile extends StatelessWidget {
                             SizedBox(height: rowGap),
                             _ClinicDetailRow(
                               icon: FontAwesomeIcons.envelope.data,
-                              text: clinic.email!.trim()
-                            )
-                          ]
-                        ]
+                              text: clinic.email!.trim(),
+                            ),
+                          ],
+                          if (isInactive) ...[
+                            SizedBox(height: rowGap),
+                            const StatusBadge(
+                              label: 'Inactiva',
+                              accentColor: AppColors.disabledBackground,
+                            ),
+                          ],
+                        ],
                       )
                     )
                   ]
@@ -156,7 +170,7 @@ class ClinicListTile extends StatelessWidget {
               right: 6,
               child: Center(
                 child: ContextMenuButton<ClinicMenuAction>(
-                  items: _menuItems,
+                  items: _buildMenuItems(),
                   onSelected: onMenuAction,
                   iconColor: AppColors.iconDark,
                   iconSize: menuIconSize,
@@ -166,7 +180,8 @@ class ClinicListTile extends StatelessWidget {
             )
           ]
         )
-      )
+      ),
+      ),
     );
   }
 }

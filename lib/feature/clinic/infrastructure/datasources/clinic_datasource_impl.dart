@@ -45,4 +45,20 @@ class ClinicDatasourceImpl implements ClinicDataSource {
       throw const CustomError(message: 'Ocurrió un error inesperado al listar clínicas.');
     }
   }
+  
+  @override
+  Future<ListClinic> deactivateClinic(String clinicId) async {
+    try {
+    // Petición PUT hacia tu endpoint dinámico en Vercel
+    final response = await dio.put('/clinics/deactivate/$clinicId');
+    
+    // ListClinicMapper procesará de forma segura el nodo response.data['clinic']
+    return ListClinicMapper.fromJson(response.data);
+  } on DioException catch (e) {
+    throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al inhabilitar la clínica.');
+  } catch (e) {
+    if (e is CustomError) rethrow;
+    throw const CustomError(message: 'Ocurrió un error inesperado al inhabilitar la clínica.');
+  }
+  }
 }

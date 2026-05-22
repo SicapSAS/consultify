@@ -29,6 +29,7 @@ class AppColors {
   static const primaryButton = Color.fromARGB(255, 21, 79, 133); // Azul Marino principal del logo
   static const secondaryButton = Color(0xFF5CC0C6); // Turquesa brillante del logo
   static const secondaryButtonDark = Color(0xFF132A40); // Azul Marino profundo para el estado presionado
+  static const disabledButton = Colors.grey; // Azul Marino profundo para el estado presionado
 
   // ************************* Colores para alertas, errores, etc. ************** //
   static const errorBackground = Colors.red;

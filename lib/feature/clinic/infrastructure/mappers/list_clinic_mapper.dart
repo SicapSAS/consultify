@@ -12,7 +12,7 @@ class ListClinicMapper {
       phone: cleanJson['phone']?.toString() ?? 'Sin teléfono',
       
       // Mapeo de campos requeridos por el constructor
-      isActive: cleanJson['isActive'] as bool? ?? false, // 🔑 Agregado: Requerido por tu modelo
+      isActive: cleanJson['isActive'] as bool? ?? true,
       v: cleanJson['__v'] as int? ?? 0, // Requerido por tu modelo
       createdAt: cleanJson['createdAt'] != null
           ? DateTime.parse(cleanJson['createdAt'])
