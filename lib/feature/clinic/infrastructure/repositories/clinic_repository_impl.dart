@@ -16,4 +16,9 @@ class ClinicRepositoryImpl implements ClinicRepository {
   Future<List<ListClinic>> getClinics() {
     return dataSource.getClinics();
   }
+  
+  @override
+  Future<ListClinic> deactivateClinic(String clinicId) {
+    return dataSource.deactivateClinic(clinicId);
+  }
 }

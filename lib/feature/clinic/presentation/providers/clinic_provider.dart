@@ -57,6 +57,33 @@ class ClinicNotifier extends StateNotifier<ClinicRepositoryState> {
       return false;
     }
   }
+
+  Future<bool> deactivateClinic(String clinicId) async {
+    state = state.copyWith(errorMessage: '');
+    try {
+      final updatedClinic = await clinicRepository.deactivateClinic(clinicId);
+
+      final updatedList = state.clinics.map((clinic) {
+        return clinic.id == clinicId ? updatedClinic : clinic;
+      }).toList();
+
+      state = state.copyWith(
+        clinics: updatedList,
+        isSuccess: true,
+      );
+
+      return true;
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isSuccess: false);
+      return false;
+    } catch (e) {
+      state = state.copyWith(
+        errorMessage: 'Error al inhabilitar la clínica.',
+        isSuccess: false,
+      );
+      return false;
+    }
+  }
 }
 
 
