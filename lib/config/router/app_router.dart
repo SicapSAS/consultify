@@ -38,6 +38,9 @@ final goRouterProvider = Provider((ref) {
 
       /* ********** Clinic Routes ********** */
       ...ClinicRoutes.routes,
+
+      /* ********** Patient Routes ********** */
+      ...PatientRoutes.routes,
     ],
 
 

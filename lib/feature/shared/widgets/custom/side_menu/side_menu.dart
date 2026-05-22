@@ -111,15 +111,17 @@ class SideMenuState extends ConsumerState<SideMenu> {
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );
+            widget.scaffoldKey.currentState?.closeDrawer();
           }
         ),
         //if (userRole == Roles.adminClinic)
         CustomSideMenuItem(
           icon: Icons.person_add_alt_1_outlined,
           label: 'Pacientes',
-          isSelected: currentRoute == '/companies-screen',
+          isSelected: currentRoute == '/patient-screen',
           onTap: () {
-            context.go( '/companies-screen' );
+            context.push( '/patient-screen' );
+            widget.scaffoldKey.currentState?.closeDrawer();
           }
         ),
         CustomSideMenuItem(
