@@ -8,6 +8,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class PatientView extends ConsumerWidget {
   const PatientView({super.key});
 
+  void _onMenuAction(Patient patient, PatientMenuAction action) {
+    switch (action) {
+      case PatientMenuAction.update:
+        break;
+      case PatientMenuAction.disable:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(patientProvider);
@@ -38,8 +47,9 @@ class PatientView extends ConsumerWidget {
       isRefreshing: state.isLoading,
       child: PatientList(
         patients: state.patients,
-        onPatientTap: (patient) => context.push('/patient-screen/${patient.id}')
-      )
+        onPatientTap: (patient) => context.push('/patient-screen/${patient.id}'),
+        onMenuAction: _onMenuAction,
+      ),
     );
   }
 }

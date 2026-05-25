@@ -19,6 +19,7 @@ class Patient {
     final DateTime createdAt;
     final int v;
     final String? documentType;
+    final bool isActive;
 
     Patient({
         required this.id,
@@ -30,6 +31,7 @@ class Patient {
         required this.createdAt,
         required this.v,
         this.documentType,
+        required this.isActive,
     });
 
 }

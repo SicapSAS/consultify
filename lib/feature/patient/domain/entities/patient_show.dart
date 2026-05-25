@@ -19,12 +19,14 @@ class PatientDetail {
   final String name;
   final String documentType;
   final String documentId;
+  final bool isActive;
 
   PatientDetail({
     required this.id,
     required this.name,
     required this.documentType,
     required this.documentId,
+    required this.isActive,
   });
 }
 

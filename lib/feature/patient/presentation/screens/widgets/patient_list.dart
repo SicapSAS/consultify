@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 class PatientList extends StatelessWidget {
   final List<Patient> patients;
   final void Function(Patient patient)? onPatientTap;
+  final void Function(Patient patient, PatientMenuAction action)? onMenuAction;
 
   const PatientList({
     super.key,
     required this.patients,
     this.onPatientTap,
+    this.onMenuAction,
   });
 
   @override
@@ -30,7 +32,10 @@ class PatientList extends StatelessWidget {
         final patient = patients[index];
         return PatientListTile(
           patient: patient,
-          onTap: onPatientTap != null ? () => onPatientTap!(patient) : null
+          onTap: onPatientTap != null ? () => onPatientTap!(patient) : null,
+          onMenuAction: onMenuAction != null
+              ? (action) => onMenuAction!(patient, action)
+              : null,
         );
       }
     );

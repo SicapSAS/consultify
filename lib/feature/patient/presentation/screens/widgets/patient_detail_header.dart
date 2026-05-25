@@ -82,7 +82,16 @@ class PatientDetailHeader extends StatelessWidget {
                 _PatientInfoRow(
                   icon: FontAwesomeIcons.calendarCheck.data,
                   text: '$totalAppointments cita${totalAppointments == 1 ? '' : 's'} registrada${totalAppointments == 1 ? '' : 's'}'
-                )
+                ),
+                SizedBox(height: AppDimens.heightPercentage(0.008, context)),
+                _PatientInfoRow(
+                  icon: patient.isActive
+                      ? FontAwesomeIcons.userCheck.data
+                      : FontAwesomeIcons.userSlash.data,
+                  text: patient.isActive
+                      ? 'Paciente activo'
+                      : 'Paciente inactivo',
+                ),
               ]
             )
           )

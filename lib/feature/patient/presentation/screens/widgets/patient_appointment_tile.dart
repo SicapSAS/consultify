@@ -30,6 +30,8 @@ class PatientAppointmentTile extends StatelessWidget {
         return 'Completada';
       case 'ATTENDED':
         return 'Atendida';
+      case 'NOT_ATTENDED':
+        return 'No atendida';
       case 'CANCELLED':
         return 'Cancelada';
       default:
@@ -47,6 +49,8 @@ class PatientAppointmentTile extends StatelessWidget {
         return AppColors.successBackground;
       case 'ATTENDED':
         return AppColors.successBackground;
+      case 'NOT_ATTENDED':
+        return AppColors.disabledBackground;
       case 'CANCELLED':
         return AppColors.disabledBackground;
       default:

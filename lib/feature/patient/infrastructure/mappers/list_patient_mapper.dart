@@ -17,6 +17,7 @@ class ListPatientMapper {
       createdAt: cleanJson['createdAt'] != null
           ? DateTime.parse(cleanJson['createdAt'])
           : DateTime.now(),
+      isActive: cleanJson['isActive'] as bool? ?? true,
     );
   }
 
@@ -31,6 +32,7 @@ class ListPatientMapper {
       'documentType': patient.documentType,
       'createdAt': patient.createdAt.toIso8601String(),
       '__v': patient.v,
+      'isActive': patient.isActive,
     };
   }
 }

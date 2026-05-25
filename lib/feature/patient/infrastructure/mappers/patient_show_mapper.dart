@@ -24,6 +24,7 @@ class PatientShowMapper {
       name: json['name']?.toString() ?? 'Sin nombre',
       documentType: json['documentType']?.toString() ?? 'CC',
       documentId: json['documentId']?.toString() ?? '',
+      isActive: json['isActive'] as bool? ?? true,
     );
   }
 
