@@ -23,8 +23,8 @@ export 'patient/patient.dart';
 //*********** Appointments ***********/
 export 'appointment/appointment.dart';
 
-//*********** Assemblies ***********/
-//export 'assemblies/assemblies.dart';
+//*********** Doctors ***********/
+export 'doctors/doctors.dart';
 
 //*********** Logo ***********/
 //export 'logo/logo.dart';

@@ -144,9 +144,10 @@ class SideMenuState extends ConsumerState<SideMenu> {
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userDoctor.data,
             label: 'Doctores',
-            isSelected: currentRoute == '/companies-screen',
+            isSelected: currentRoute == '/doctors-screen',
             onTap: () {
-              context.go( '/companies-screen' );
+              context.go( '/doctors-screen' );
+              widget.scaffoldKey.currentState?.closeDrawer();
             }
           )
         ]
