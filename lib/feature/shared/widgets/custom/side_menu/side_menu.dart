@@ -88,10 +88,11 @@ class SideMenuState extends ConsumerState<SideMenu> {
           CustomSideMenuSectionTitle(label: 'Citas'),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.calendarCheck.data,
-            label: 'Nueva cita',
-            isSelected: currentRoute == '/companies-screen',
+            label: 'Citas',
+            isSelected: currentRoute == '/appointment-screen',
             onTap: () {
-              context.go( '/companies-screen' );
+              context.go( '/appointment-screen' );
+              widget.scaffoldKey.currentState?.closeDrawer();
             }
           ),
           CustomSideMenuItem(

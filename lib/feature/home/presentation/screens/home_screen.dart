@@ -42,6 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final currentIndex = _getCurrentIndex();
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: AppColors.primaryBackground,
       drawer: SideMenu(scaffoldKey: scaffoldKey),
       appBar: AppBar(
@@ -50,6 +51,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           imagePath: 'assets/logo/consultify_transparente2.png'
         ),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () => scaffoldKey.currentState?.openDrawer(),
+          icon: Icon(
+            Icons.menu_rounded,
+            color: AppColors.secondary,
+            size: 35,
+          ),
+        ),
       ),
       body: _HomeBody(),
       bottomNavigationBar: CustomBottomNavigationBar(
