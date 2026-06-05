@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:consultify/config/config.dart';
 
 class AppBarLogo extends StatelessWidget {
   final String? imagePath;
@@ -17,8 +16,9 @@ class AppBarLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final path = imagePath ?? _defaultLogoPath;
-    final logoWidth = width ?? AppDimens.widthPercentage(0.3, context);
+    final logoWidth = width ?? size.width * 0.3;
 
     return Image.asset(
       path,

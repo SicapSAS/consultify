@@ -37,49 +37,50 @@ class LabeledFloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         // Etiqueta
         Container(
           padding: labelPadding ?? EdgeInsets.symmetric(
-            vertical: AppDimens.heightPercentage(0.007, context),
-            horizontal: AppDimens.widthPercentage(0.017, context)
+            vertical: size.height * 0.007,
+            horizontal: size.width * 0.017
           ),
           decoration: BoxDecoration(
             color: labelBackgroundColor ?? AppColors.secondaryBackground,
             borderRadius: BorderRadius.circular(
-              borderRadius ?? AppDimens.widthPercentage(0.05, context)
+              borderRadius ?? size.width * 0.05
             ),
             boxShadow: labelBoxShadow ?? [
               BoxShadow(
                 color: AppColors.textPrimary,
-                blurRadius: AppDimens.widthPercentage(0.02, context),
-                offset: Offset(0, AppDimens.widthPercentage(0.015, context))
+                blurRadius: size.width * 0.02,
+                offset: Offset(0, size.width * 0.015)
               )
             ]
           ),
           child: Text(
             label,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              fontSize: labelFontSize ?? AppDimens.widthPercentage(0.025, context),
+              fontSize: labelFontSize ?? size.width * 0.025,
               color: labelColor ?? AppColors.textInfoDark
             )
           )
         ),
         SizedBox(
-          height: AppDimens.heightPercentage(0.005, context)
+          height: size.height * 0.005
         ),
         // Botón flotante
         Container(
-          width: AppDimens.widthPercentage(0.13, context),
+          width: size.width * 0.13,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             boxShadow: buttonBoxShadow ?? [
               BoxShadow(
                 color: AppColors.textPrimary.withValues(alpha: 0.4),
-                blurRadius: AppDimens.widthPercentage(0.02, context),
-                offset: Offset(0, AppDimens.widthPercentage(0.015, context))
+                blurRadius: size.width * 0.02,
+                offset: Offset(0, size.width * 0.015)
               )
             ]
           ),
@@ -91,7 +92,7 @@ class LabeledFloatingActionButton extends StatelessWidget {
             child: Icon(
               icon,
               color: iconColor ?? AppColors.primaryBackground,
-              size: iconSize ?? AppDimens.bigIcon(context),
+              size: iconSize ?? size.width * 0.08,
             )
           )
         )

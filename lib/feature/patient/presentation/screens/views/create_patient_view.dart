@@ -1,4 +1,3 @@
-import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +11,13 @@ class CreatePatientView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
-        AppDimens.widthPercentage(0.06, context),
-        AppDimens.heightPercentage(0.03, context),
-        AppDimens.widthPercentage(0.06, context),
-        AppDimens.heightPercentage(0.04, context),
+        size.width * 0.06,
+        size.height * 0.03,
+        size.width * 0.06,
+        size.height * 0.04,
       ),
       child: CreatePatientForm(patient: patient),
     );

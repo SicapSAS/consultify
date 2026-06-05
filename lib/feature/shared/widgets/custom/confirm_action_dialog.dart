@@ -42,13 +42,14 @@ class ConfirmActionDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return AlertDialog(
       backgroundColor: AppColors.secondaryBackground,
       title: Text(
         title,
         style: TextStyle(
           color: AppColors.textPrimary,
-          fontSize: AppDimens.titleText(context),
+          fontSize: size.width * 0.04,
           fontWeight: FontWeight.bold,
         ),
         textAlign: TextAlign.center,
@@ -57,7 +58,7 @@ class ConfirmActionDialog extends StatelessWidget {
         message,
         style: TextStyle(
           color: AppColors.textPrimary,
-          fontSize: AppDimens.subtitleText(context),
+          fontSize: size.width * 0.03,
           fontWeight: FontWeight.normal,
         )
       ),
@@ -71,7 +72,7 @@ class ConfirmActionDialog extends StatelessWidget {
               buttonColor: AppColors.disabledButton,
               textColor: AppColors.textSecondary
             ),
-            SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+            SizedBox(width: size.width * 0.02),
             CustomFilledButton(
               text: confirmLabel,
               onPressed: () => Navigator.of(context).pop(true),

@@ -40,9 +40,10 @@ class _PermissionsViewState extends ConsumerState<_PermissionsView> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final permissions = ref.watch(devicePermissionsProvider);
-    final horizontal = AppDimens.widthPercentage(0.05, context);
-    final vertical = AppDimens.heightPercentage(0.02, context);
+    final horizontal = size.width * 0.05;
+    final vertical = size.height * 0.02;
 
     return ListView(
       padding: EdgeInsets.fromLTRB(horizontal, vertical, horizontal, vertical),
@@ -57,7 +58,7 @@ class _PermissionsViewState extends ConsumerState<_PermissionsView> {
             ref.read(devicePermissionsProvider.notifier).requestCameraAccess();
           }
         ),
-        SizedBox(height: AppDimens.heightPercentage(0.018, context)),
+        SizedBox(height: size.height * 0.018),
         PermissionCard(
           icon: Icons.photo_library_rounded,
           iconColor: AppColors.warningBackground,
@@ -69,7 +70,7 @@ class _PermissionsViewState extends ConsumerState<_PermissionsView> {
           }
         ),
         
-        SizedBox(height: AppDimens.heightPercentage(0.018, context)),
+        SizedBox(height: size.height * 0.018),
         PermissionCard(
           icon: Icons.mic_rounded,
           iconColor: AppColors.successBackground,
@@ -80,7 +81,7 @@ class _PermissionsViewState extends ConsumerState<_PermissionsView> {
             //ref.read(devicePermissionsProvider.notifier).requestNotificationsAccess();
           }
         ),
-        SizedBox(height: AppDimens.heightPercentage(0.018, context)),
+        SizedBox(height: size.height * 0.018),
         PermissionCard(
           icon: Icons.notifications_rounded,
           iconColor: AppColors.successBackground,
@@ -91,7 +92,7 @@ class _PermissionsViewState extends ConsumerState<_PermissionsView> {
             //ref.read(devicePermissionsProvider.notifier).requestNotificationsAccess();
           }
         ),
-        SizedBox(height: AppDimens.heightPercentage(0.018, context)),
+        SizedBox(height: size.height * 0.018),
         PermissionCard(
           icon: Icons.record_voice_over_rounded,
           iconColor: AppColors.successBackground,
@@ -102,7 +103,7 @@ class _PermissionsViewState extends ConsumerState<_PermissionsView> {
             //ref.read(devicePermissionsProvider.notifier).requestNotificationsAccess();
           }
         ),
-        SizedBox(height: AppDimens.heightPercentage(0.018, context)),
+        SizedBox(height: size.height * 0.018),
         PermissionCard(
           icon: Icons.location_on_rounded,
           iconColor: AppColors.successBackground,

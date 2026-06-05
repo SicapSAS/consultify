@@ -32,19 +32,20 @@ class RecentReportsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null)
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: AppDimens.widthPercentage(0.04, context),
-              vertical: AppDimens.heightPercentage(0.02, context)
+              horizontal: size.width * 0.04,
+              vertical: size.height * 0.02
             ),
             child: Text(
               title!,
               style: TextStyle(
-                fontSize: AppDimens.titleText(context),
+                fontSize: size.width * 0.03,
                 color: AppColors.secondary,
                 fontWeight: FontWeight.bold
               )
@@ -54,7 +55,7 @@ class RecentReportsList extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.widthPercentage(0.04, context)
+            horizontal: size.width * 0.04
           ),
           itemCount: reports.length,
           itemBuilder: (context, index) {
@@ -82,16 +83,17 @@ class ReportSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final statusColor = report.statusColor ?? AppColors.secondaryButton;
 
     return Container(
       margin: EdgeInsets.only(
-        bottom: isLast ? 0 : AppDimens.heightPercentage(0.015, context)
+        bottom: isLast ? 0 : size.height * 0.015
       ),
       decoration: BoxDecoration(
         color: AppColors.secondaryBackground,
         borderRadius: BorderRadius.circular(
-          AppDimens.smallBorderRadius(0.02, context)
+          size.width * 0.02
         ),
         boxShadow: [
           BoxShadow(
@@ -106,25 +108,25 @@ class ReportSummaryCard extends StatelessWidget {
           // Aquí se puede agregar navegación o acción
         },
         child: Padding(
-          padding: EdgeInsets.all(AppDimens.widthPercentage(0.04, context)),
+          padding: EdgeInsets.all(size.width * 0.04),
           child: Row(
             children: [
               Container(
-                width: AppDimens.widthPercentage(0.12, context),
-                height: AppDimens.widthPercentage(0.12, context),
+                width: size.width * 0.12,
+                height: size.width * 0.12,
                 decoration: BoxDecoration(
                   color: statusColor.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(
-                    AppDimens.smallBorderRadius(0.07, context)
+                    size.width * 0.07
                   )
                 ),
                 child: Icon(
                   report.icon,
                   color: statusColor,
-                  size: AppDimens.normalIcon(context)
+                  size: size.width * 0.08
                 )
               ),
-              SizedBox(width: AppDimens.widthPercentage(0.03, context)),
+              SizedBox(width: size.width * 0.03),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,62 +134,62 @@ class ReportSummaryCard extends StatelessWidget {
                     Text(
                       report.title,
                       style: TextStyle(
-                        fontSize: AppDimens.subtitleText(context),
+                        fontSize: size.width * 0.03,
                         color: AppColors.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: AppDimens.heightPercentage(0.005, context)),
+                    SizedBox(height: size.height * 0.005),
                     Text(
                       report.description,
                       style: TextStyle(
-                        fontSize: AppDimens.normalText(context) * 0.9,
+                        fontSize: size.width * 0.03 * 0.9,
                         color: AppColors.secondary.withValues(alpha: 0.7)
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis
                     ),
-                    SizedBox(height: AppDimens.heightPercentage(0.005, context)),
+                    SizedBox(height: size.height * 0.005),
                     Row(
                       children: [
                         Icon(
                           FontAwesomeIcons.clock.data,
-                          size: AppDimens.tinyIcon(context),
+                          size: size.width * 0.08,
                           color: AppColors.secondary.withValues(alpha: 0.5),
                         ),
-                        SizedBox(width: AppDimens.widthPercentage(0.01, context)),
+                        SizedBox(width: size.width * 0.01),
                         Flexible(
                           child: Text(
                             report.time,
                             style: TextStyle(
-                              fontSize: AppDimens.tinyText(context),
+                              fontSize: size.width * 0.03,
                               color: AppColors.secondary.withValues(alpha: 0.5),
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+                        SizedBox(width: size.width * 0.02),
                         Flexible(
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: AppDimens.widthPercentage(0.02, context),
-                                vertical: AppDimens.heightPercentage(0.003, context),
+                                horizontal: size.width * 0.02,
+                                vertical: size.height * 0.003,
                               ),
                               decoration: BoxDecoration(
                                 color: statusColor.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(
-                                  AppDimens.smallBorderRadius(0.01, context),
+                                  size.width * 0.01,
                                 ),
                               ),
                               child: Text(
                                 report.type,
                                 style: TextStyle(
-                                  fontSize: AppDimens.tinyText(context) * 0.85,
+                                  fontSize: size.width * 0.03 * 0.85,
                                   color: statusColor,
                                   fontWeight: FontWeight.w500,
                                 ),

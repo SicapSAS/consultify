@@ -79,9 +79,10 @@ class PatientAppointmentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = AppDimens.smallBorderRadius(0.02, context);
-    final rowGap = AppDimens.heightPercentage(0.006, context);
-    final cardPadding = AppDimens.widthPercentage(0.04, context);
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.02;
+    final rowGap = size.height * 0.006;
+    final cardPadding = size.width * 0.04;
 
     return Container(
       decoration: BoxDecoration(
@@ -106,7 +107,7 @@ class PatientAppointmentTile extends StatelessWidget {
                 child: Text(
                   _formatDateTime(appointment.dateTime),
                   style: TextStyle(
-                    fontSize: AppDimens.subtitleText(context),
+                    fontSize: size.width * 0.04,
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700
                   )
@@ -149,7 +150,7 @@ class PatientAppointmentTile extends StatelessWidget {
             )
           ],
           if (_hasText(appointment.evolutionNotes)) ...[
-            SizedBox(height: AppDimens.heightPercentage(0.012, context)),
+            SizedBox(height: size.height * 0.012),
             _EvolutionNotesSection(
               evolutionNotes: appointment.evolutionNotes.trim()
             )
@@ -173,15 +174,16 @@ class _AppointmentDetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
-          size: AppDimens.tinyIcon(context),
+          size: size.width * 0.08,
           color: AppColors.textPrimary.withValues(alpha: 0.45),
         ),
-        SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+        SizedBox(width: size.width * 0.02),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,17 +192,17 @@ class _AppointmentDetailRow extends StatelessWidget {
                 Text(
                   label!,
                   style: TextStyle(
-                    fontSize: AppDimens.tinyText(context),
+                    fontSize: size.width * 0.03,
                     color: AppColors.textPrimary.withValues(alpha: 0.5),
                     fontWeight: FontWeight.w600
                   )
                 ),
-                SizedBox(height: AppDimens.heightPercentage(0.002, context))
+                SizedBox(height: size.height * 0.002)
               ],
               Text(
                 text,
                 style: TextStyle(
-                  fontSize: AppDimens.littleText(context),
+                  fontSize: size.width * 0.03,
                   color: AppColors.textPrimary.withValues(alpha: 0.7),
                   fontWeight: FontWeight.w500
                 )
@@ -222,11 +224,11 @@ class _EvolutionNotesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sectionRadius = AppDimens.smallBorderRadius(0.015, context);
-
+    final size = MediaQuery.of(context).size;
+    final sectionRadius = size.width * 0.015;
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(AppDimens.widthPercentage(0.03, context)),
+      padding: EdgeInsets.all(size.width * 0.03),
       decoration: BoxDecoration(
         color: AppColors.tertiaryBackground,
         borderRadius: BorderRadius.circular(sectionRadius),
@@ -241,25 +243,25 @@ class _EvolutionNotesSection extends StatelessWidget {
             children: [
               Icon(
                 FontAwesomeIcons.fileMedical.data,
-                size: AppDimens.tinyIcon(context),
+                size: size.width * 0.08,
                 color: AppColors.secondary
               ),
-              SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+              SizedBox(width: size.width * 0.02),
               Text(
                 'Evolución clínica',
                 style: TextStyle(
-                  fontSize: AppDimens.littleText(context),
+                  fontSize: size.width * 0.03,
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w700
                 )
               )
             ]
           ),
-          SizedBox(height: AppDimens.heightPercentage(0.008, context)),
+          SizedBox(height: size.height * 0.008),
           Text(
             evolutionNotes,
             style: TextStyle(
-              fontSize: AppDimens.littleText(context),
+              fontSize: size.width * 0.03,
               color: AppColors.textPrimary.withValues(alpha: 0.75),
               fontWeight: FontWeight.w500,
               height: 1.4

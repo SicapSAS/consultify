@@ -31,7 +31,8 @@ class ContextMenuButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = AppDimens.smallBorderRadius(0.02, context);
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.02;
 
     return PopupMenuButton<T>(
       padding: EdgeInsets.zero,
@@ -40,7 +41,7 @@ class ContextMenuButton<T> extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),
       ),
-      offset: Offset(0, AppDimens.heightPercentage(0.01, context)),
+      offset: Offset(0, size.height * 0.01),
       onSelected: onSelected,
       itemBuilder: (context) => items.map(
         (item) => PopupMenuItem<T>(
@@ -49,11 +50,11 @@ class ContextMenuButton<T> extends StatelessWidget {
         )
       ).toList(),
       child: child ?? Padding(
-        padding: padding ?? EdgeInsets.all(AppDimens.widthPercentage(0.01, context)),
+        padding: padding ?? EdgeInsets.all(size.width * 0.01),
         child: Icon(
           FontAwesomeIcons.ellipsisVertical.data,
           color: iconColor ?? AppColors.iconDark,
-          size: iconSize ?? AppDimens.normalIcon(context) * 0.85
+          size: iconSize ?? size.width * 0.085
         )
       )
     );
@@ -67,6 +68,7 @@ class _ContextMenuItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final textColor = item.isDestructive
         ? AppColors.errorBackground
         : AppColors.textPrimary;
@@ -76,16 +78,16 @@ class _ContextMenuItemTile extends StatelessWidget {
         if (item.icon != null) ...[
           Icon(
             item.icon,
-            size: AppDimens.tinyIcon(context),
+            size: size.width * 0.08,
             color: textColor.withValues(alpha: item.isDestructive ? 1 : 0.7)
           ),
-          SizedBox(width: AppDimens.widthPercentage(0.03, context))
+          SizedBox(width: size.width * 0.03)
         ],
         Expanded(
           child: Text(
             item.label,
             style: TextStyle(
-              fontSize: AppDimens.littleText(context),
+              fontSize: size.width * 0.03,
               color: textColor,
               fontWeight: FontWeight.w500
             )

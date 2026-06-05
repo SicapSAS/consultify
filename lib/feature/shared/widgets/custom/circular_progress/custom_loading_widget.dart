@@ -14,16 +14,17 @@ class CustomLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
 
     return Center(
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.08, context)
+          horizontal: size.width * 0.08
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(
-            AppDimens.widthPercentage(0.04, context)
+            size.width * 0.04
           ),
           child: BackdropFilter(
             filter: ImageFilter.blur(
@@ -33,29 +34,29 @@ class CustomLoadingWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                  AppDimens.widthPercentage(0.04, context)
+                  size.width * 0.04
                 )
               ),
               padding: EdgeInsets.symmetric(
-                vertical: AppDimens.heightPercentage(0.03, context),
-                horizontal: AppDimens.widthPercentage(0.06, context)
+                vertical: size.height * 0.03,
+                horizontal: size.width * 0.06
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  GradientSpinner(size: AppDimens.widthPercentage(0.18, context)),
-                  SizedBox(height: AppDimens.heightPercentage(0.02, context)),
+                  GradientSpinner(size: size.width * 0.18),
+                  SizedBox(height: size.height * 0.02),
                   Text(
                     message ?? 'Cargando...',
                     textAlign: TextAlign.center,
                     style: textTheme.titleMedium?.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.bold,
-                      fontSize: AppDimens.normalText(context),
+                      fontSize: size.width * 0.04,
                       letterSpacing: 0.2
                     )
                   ),
-                  SizedBox(height: AppDimens.heightPercentage(0.006, context)),
+                  SizedBox(height: size.height * 0.006),
                   Opacity(
                     opacity: 0.75,
                     child: Text(
@@ -63,7 +64,7 @@ class CustomLoadingWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: textTheme.bodyMedium?.copyWith(
                         color: AppColors.textPrimary,
-                        fontSize: AppDimens.normalText(context),
+                        fontSize: size.width * 0.04,
                         fontWeight: FontWeight.bold
                       )
                     )
@@ -111,7 +112,8 @@ class _GradientSpinnerState extends State<GradientSpinner>
 
   @override
   Widget build(BuildContext context) {
-    final double thickness = widget.size * 0.12;
+    final size = MediaQuery.of(context).size;
+    final thickness = size.width * 0.12;
 
     return SizedBox(
       width: widget.size,
@@ -128,30 +130,30 @@ class _GradientSpinnerState extends State<GradientSpinner>
           painter: SweepRingPainter(
             thickness: thickness,
             colors: [
-              AppColors.primary.withValues(alpha: 0.15),
+              AppColors.infoBackground.withValues(alpha: 0.15),
               AppColors.primary,
-              AppColors.primary.withValues(alpha: 0.15)
+              AppColors.infoBackground.withValues(alpha: 0.15)
             ]
           ),
           child: Center(
             child: Container(
-              width: widget.size - thickness * 2.2,
-              height: widget.size - thickness * 2.2,
+              width:  thickness * 2.2,
+              height: thickness * 2.2,
               decoration: BoxDecoration(
                 color: AppColors.primary.withValues(alpha: 0.65),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.primary.withValues(alpha: 0.15),
-                    blurRadius: AppDimens.widthPercentage(0.02, context),
-                    spreadRadius: AppDimens.widthPercentage(0.01, context)
+                    blurRadius: 2,
+                    spreadRadius: 1
                   )
                 ]
               ),
               child: Icon(
-                Icons.sync_rounded,
-                size: AppDimens.normalIcon(context),
-                color: AppColors.iconInfo
+                Icons.refresh_rounded,
+                size: 25,
+                color: AppColors.iconDark
               )
             )
           )

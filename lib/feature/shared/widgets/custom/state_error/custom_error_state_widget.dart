@@ -26,25 +26,25 @@ class CustomErrorStateWidget extends StatelessWidget {
         children: [
           Icon(
             icon ?? Icons.error_outline,
-            size: AppDimens.bigIcon(context),
+            size: 10,
             color: iconColor ?? AppColors.errorBackground
           ),
-          SizedBox(height: AppDimens.heightPercentage(0.02, context)),
+          SizedBox(height: 10),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: AppDimens.widthPercentage(0.08, context)
+              horizontal: 8
             ),
             child: Text(
               message,
               style: TextStyle(
-                fontSize: AppDimens.normalText(context),
+                fontSize: 15,
                 color: AppColors.textPrimary
               ),
               textAlign: TextAlign.center
             )
           ),
           if (onRetry != null) ...[
-            SizedBox(height: AppDimens.heightPercentage(0.03, context)),
+            SizedBox(height:  10),
             CustomFilledButton(
               text: buttonText ?? 'Reintentar',
               onPressed: onRetry

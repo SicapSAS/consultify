@@ -10,6 +10,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.primaryBackground,
@@ -17,24 +18,23 @@ class LoginScreen extends StatelessWidget {
         child: SingleChildScrollView(
           reverse: false,
           child: SizedBox(
-            height: AppDimens.heightPercentage(1, context),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: AppDimens.heightPercentage(0.2, context)),
+                SizedBox(height: size.height * 0.2),
                 
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: AppDimens.widthPercentage(0.05, context),
+                    horizontal: size.width * 0.05,
                   ),
                   child: Image.asset(
                     'assets/logo/consultify_transparente2.png',
-                    width: AppDimens.widthPercentage(0.8, context),
+                    width: size.width * 0.8,
                     fit: BoxFit.contain
                   )
                 ),
-                SizedBox(height: AppDimens.heightPercentage(0.1, context)),
+                SizedBox(height: size.height * 0.1),
                 _LoginForm()
                 
               ]
@@ -59,14 +59,14 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
   @override
   Widget build(BuildContext context) {
     final loginForm = ref.watch(loginFormProvider);
-
+    final size = MediaQuery.of(context).size;
     ref.listen(authProvider, (previous, next) {
       if ( next.errorMessage.isEmpty) return;
       showSnackBar(context, next.errorMessage);
     });
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppDimens.widthPercentage(0.06, context)),
+      padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
       child: Column(
         children: [
           CustomTextFormField(
@@ -78,7 +78,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
               loginForm.email.errorMessage 
               : null
           ),
-          SizedBox(height: AppDimens.heightPercentage(0.02, context)),
+          SizedBox(height: size.height * 0.02),
           CustomTextFormField(
             label: 'Contraseña',
             showLabel: false,
@@ -94,7 +94,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
                 FontAwesomeIcons.eyeLowVision.data : 
                 FontAwesomeIcons.solidEye.data,
                 color: AppColors.primaryButton,
-                size: AppDimens.normalIcon(context) * 0.9
+                size: 20
               ),
               onPressed: () {
                 setState(() {
@@ -103,9 +103,9 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
               }
             )
           ),
-          SizedBox(height: AppDimens.heightPercentage(0.02, context)),
+          SizedBox(height: size.height * 0.02),
           SizedBox(
-            width: AppDimens.widthPercentage(0.5, context),
+            width: size.width * 0.5,
             child: CustomFilledButton(
               text: 'Iniciar sesión', 
               buttonColor: AppColors.primaryButton,
@@ -119,6 +119,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
   }
   
   void showSnackBar(BuildContext context, String errorMessage) {
+    final size = MediaQuery.of(context).size;
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -126,7 +127,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
           errorMessage,
           style: TextStyle(
             color: AppColors.textSecondary,
-            fontSize: AppDimens.widthPercentage(0.04, context),
+            fontSize: size.width * 0.04,
             fontWeight: FontWeight.bold
           )
         ),

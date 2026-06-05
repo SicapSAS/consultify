@@ -44,7 +44,8 @@ class Select<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popMenuHeight = height ?? AppDimens.heightPercentage(0.05, context);
+    final size = MediaQuery.of(context).size;
+    final popMenuHeight = height ?? size.height * 0.05;
     return GestureDetector(
       onTap: isActive? () async {
         // showMenu exige items.isNotEmpty; sin datos ni "Añadir" no hay menú.
@@ -71,7 +72,7 @@ class Select<T> extends StatelessWidget {
           menuPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-              AppDimens.widthPercentage(0.02, context)
+              size.width * 0.02
             ),
           ),
           color: AppColors.secondaryBackground,
@@ -86,19 +87,19 @@ class Select<T> extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      AppDimens.widthPercentage(0.02, context)
+                      size.width * 0.02
                     ),
                     color:  areTheSame(c, selected)?
                       (selectedItemColor ?? AppColors.infoBackground):
                       AppColors.secondaryBackground
                   ),
                   padding: itemPadding ?? EdgeInsets.symmetric(
-                    vertical: AppDimens.heightPercentage(0.01, context)
+                    vertical: size.height * 0.01
                   ),
                   child: Center(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: AppDimens.widthPercentage(0.02, context)
+                        horizontal: size.width * 0.02
                       ),
                       child: Text(
                         getTextBySelected(c),
@@ -132,11 +133,11 @@ class Select<T> extends StatelessWidget {
         width: width,
         height: popMenuHeight,
         padding:  EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.05, context)
+          horizontal: size.width * 0.05
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppDimens.widthPercentage(0.02, context)
+            size.width * 0.02
           ),
           color: AppColors.secondaryBackground,
           border: Border.all(
@@ -179,13 +180,13 @@ class Select<T> extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 )
               ),
-            SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+            SizedBox(width: size.width * 0.02),
             Icon(
               Icons.arrow_drop_down_outlined,
               color: isActive?
                 AppColors.textPrimary:
                 AppColors.textPrimary.withValues(alpha: 0.6),
-              size: AppDimens.normalIcon(context)
+              size: size.width * 0.08
             )
           ]
         )

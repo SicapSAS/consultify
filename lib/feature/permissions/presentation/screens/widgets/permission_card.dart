@@ -22,7 +22,8 @@ class PermissionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = AppDimens.widthPercentage(0.1, context);
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.1;
 
     return Material(
       color: AppColors.secondaryBackground,
@@ -31,13 +32,13 @@ class PermissionCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.03, context),
-          vertical: AppDimens.heightPercentage(0.01, context)
+          horizontal: size.width * 0.03,
+          vertical: size.height * 0.01
         ),
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(AppDimens.widthPercentage(0.02, context)),
+              padding: EdgeInsets.all(size.width * 0.02),
               decoration: BoxDecoration(
                 color: iconColor.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(radius * 0.85)
@@ -45,10 +46,10 @@ class PermissionCard extends StatelessWidget {
               child: Icon(
                 icon,
                 color: iconColor,
-                size: AppDimens.bigIcon(context) * 0.9
+                size: size.width * 0.08 * 0.9
               )
             ),
-            SizedBox(width: AppDimens.widthPercentage(0.04, context)),
+            SizedBox(width: size.width * 0.04),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,17 +59,17 @@ class PermissionCard extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,
-                      fontSize: AppDimens.normalText(context)
+                      fontSize: size.width * 0.04
                     )
                   ),
-                  SizedBox(height: AppDimens.heightPercentage(0.004, context)),
+                  SizedBox(height: size.height * 0.004),
                   Text(
                     subtitle,
                     style: TextStyle(
                       color: value ? AppColors.successBackground
                         : AppColors.textPrimary.withValues(alpha: 0.55),
                       fontWeight: FontWeight.w600,
-                      fontSize: AppDimens.littleText(context)
+                      fontSize: size.width * 0.03
                     )
                   )
                 ]

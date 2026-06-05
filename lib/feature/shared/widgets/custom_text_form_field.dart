@@ -43,17 +43,18 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
 
     final colors = Theme.of(context).colorScheme;
 
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.circular(
-        AppDimens.smallBorderRadius(0.04, context)
+        size.width * 0.04
       )
     );
 
-    final borderRadius = Radius.circular(AppDimens.smallBorderRadius(0.04, context));
+    final borderRadius = Radius.circular(20);
 
     return Container(
       // padding: const EdgeInsets.only(bottom: 0, top: 15),
@@ -68,9 +69,9 @@ class CustomTextFormField extends StatelessWidget {
         border: Border.all(color: borderColor ?? Colors.transparent),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 10,
-            offset: Offset(0,5)
+            color: Colors.black.withValues(alpha: 0.3),
+            blurRadius: 4,
+            offset: Offset(0,3)
           )
         ]
       ),
@@ -84,14 +85,14 @@ class CustomTextFormField extends StatelessWidget {
         obscureText: obscureText,
         keyboardType: keyboardType,
         style:  TextStyle( 
-          fontSize: AppDimens.subtitleText(context), 
+          fontSize: 20, 
           color: AppColors.textPrimary.withValues(alpha: 0.78)
         ),
         decoration: InputDecoration(
           floatingLabelStyle:  TextStyle(
             color: AppColors.textPrimary, 
             fontWeight: FontWeight.bold, 
-            fontSize: AppDimens.subtitleText(context)
+            fontSize: 20,
           ),
           enabledBorder: border,
           focusedBorder: border,
@@ -103,7 +104,7 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hint ?? (label != null && !showLabel ? label : null),
           hintStyle: TextStyle(
             color: AppColors.textPrimary,
-            fontSize: AppDimens.normalText(context)
+            fontSize: 20,
           ),
           errorText: errorMessage,
           focusColor: colors.primary,

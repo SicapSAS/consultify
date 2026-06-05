@@ -42,38 +42,36 @@ class CustomSideMenuItem extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.02, context),
-          vertical: AppDimens.heightPercentage(0.005, context),
+          horizontal: 10,
+          vertical: 5,
         ),
         padding: EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.03, context),
-          vertical: AppDimens.heightPercentage(0.015, context),
+          horizontal: 15,
+          vertical: 10,
         ),
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(
-            AppDimens.smallBorderRadius(0.05, context),
-          ),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
             Icon(
               icon,
               color: iconColor,
-              size: AppDimens.normalIcon(context),
+              size: 25
             ),
-            SizedBox(width: AppDimens.widthPercentage(0.03, context)),
+            SizedBox(width: 15),
             Text(
               label,
               style: TextStyle(
                 color: textColor,
-                fontSize: AppDimens.titleText(context) * 0.8,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-      ),
+                fontSize: 20,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal
+              )
+            )
+          ]
+        )
+      )
     );
   }
 }

@@ -29,7 +29,6 @@ class _CheckAuthStatusScreenState extends State<CheckAuthStatusScreen>
 
   @override
   Widget build(BuildContext context) {
-    final size = AppDimens.widthPercentage(0.3, context);
 
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
@@ -46,8 +45,8 @@ class _CheckAuthStatusScreenState extends State<CheckAuthStatusScreen>
             child: ClipOval(
               child: Image.asset(
                 'assets/icons/consultify_icon.png',
-                width: size,
-                height: size,
+                width: 100,
+                height: 100,
                 fit: BoxFit.cover
               )
             )

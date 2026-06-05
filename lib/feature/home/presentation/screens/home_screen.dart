@@ -49,6 +49,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: AppBarLogo(
           imagePath: 'assets/logo/consultify_transparente2.png'
         ),
+        centerTitle: true,
       ),
       body: _HomeBody(),
       bottomNavigationBar: CustomBottomNavigationBar(
@@ -65,6 +66,7 @@ class _HomeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final size = MediaQuery.of(context).size;
     return Container(
       color: AppColors.primaryBackground,
       child: Column(
@@ -79,8 +81,8 @@ class _HomeBody extends ConsumerWidget {
           ),
           Divider(
             color: AppColors.secondary,
-            height: AppDimens.heightPercentage(0.01, context),
-            thickness: AppDimens.heightPercentage(0.001, context),
+            height: size.height * 0.01,
+            thickness: size.height * 0.001,
           ),
           Expanded(
             child: Container(),

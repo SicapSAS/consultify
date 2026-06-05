@@ -16,35 +16,36 @@ class PatientAppointmentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
           style: TextStyle(
-            fontSize: AppDimens.subtitleText(context),
+            fontSize: size.width * 0.04,
             color: AppColors.textPrimary,
             fontWeight: FontWeight.w700
           )
         ),
-        SizedBox(height: AppDimens.heightPercentage(0.012, context)),
+        SizedBox(height: size.height * 0.012),
       if (appointments.isEmpty)
         Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.widthPercentage(0.04, context),
-            vertical: AppDimens.heightPercentage(0.018, context)
+            horizontal: size.width * 0.04,
+            vertical: size.height * 0.018
           ),
           decoration: BoxDecoration(
             color: AppColors.secondaryBackground,
             borderRadius: BorderRadius.circular(
-              AppDimens.smallBorderRadius(0.02, context)
+              size.width * 0.02
             )
           ),
           child: Text(
             emptyMessage,
             style: TextStyle(
-              fontSize: AppDimens.littleText(context),
+              fontSize: size.width * 0.03,
               color: AppColors.textPrimary.withValues(alpha: 0.55),
               fontWeight: FontWeight.w500
             )
@@ -56,7 +57,7 @@ class PatientAppointmentSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: appointments.length,
           separatorBuilder: (context, _) => SizedBox(
-            height: AppDimens.heightPercentage(0.012, context),
+            height: size.height * 0.012,
           ),
           itemBuilder: (context, index) {
             return PatientAppointmentTile(

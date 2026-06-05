@@ -9,6 +9,7 @@ class ProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final size = MediaQuery.of(context).size;
     final user = ref.watch(authProvider).user;
 
     if (user == null) {
@@ -17,21 +18,21 @@ class ProfileView extends ConsumerWidget {
           'No hay sesión activa',
           style: TextStyle(
             color: AppColors.textPrimary.withValues(alpha: 0.6),
-            fontSize: AppDimens.normalText(context)
+            fontSize: size.width * 0.04
           )
         )
       );
     }
 
-    final horizontalPadding = AppDimens.widthPercentage(0.06, context);
-    final verticalGap = AppDimens.heightPercentage(0.02, context);
+    final horizontalPadding = size.width * 0.06;
+    final verticalGap = size.height * 0.02;
 
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
         horizontalPadding,
-        AppDimens.heightPercentage(0.02, context),
+        size.height * 0.02,
         horizontalPadding,
-        AppDimens.heightPercentage(0.04, context)
+        size.height * 0.04
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

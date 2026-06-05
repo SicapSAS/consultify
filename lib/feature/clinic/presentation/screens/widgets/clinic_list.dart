@@ -1,4 +1,3 @@
-import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
 
@@ -16,17 +15,18 @@ class ClinicList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return ListView.separated(
       physics: const AlwaysScrollableScrollPhysics(),
       padding: EdgeInsets.fromLTRB(
-        AppDimens.widthPercentage(0.04, context),
-        AppDimens.heightPercentage(0.02, context),
-        AppDimens.widthPercentage(0.04, context),
-        AppDimens.heightPercentage(0.04, context)
+        size.width * 0.04,
+        size.height * 0.02,
+        size.width * 0.04,
+        size.height * 0.04
       ),
       itemCount: clinics.length,
       separatorBuilder: (context, _) => SizedBox(
-        height: AppDimens.heightPercentage(0.015, context),
+        height: size.height * 0.015,
       ),
       itemBuilder: (context, index) {
         final clinic = clinics[index];

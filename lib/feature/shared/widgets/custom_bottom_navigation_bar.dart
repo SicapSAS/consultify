@@ -31,9 +31,9 @@ class CustomBottomNavigationBar extends ConsumerWidget {
       ),
       child: SafeArea(
         child: Container(
-          height: AppDimens.heightPercentage(0.08, context),
+          height: 60,
           padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.widthPercentage(0.02, context)
+            horizontal: 10,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -91,16 +91,16 @@ class CustomBottomNavigationBar extends ConsumerWidget {
                 Icon(
                   icon,
                   color: color,
-                  size: AppDimens.normalIcon(context),
+                  size: 22,
                 )
               ]
             ),
-            SizedBox(height: AppDimens.heightPercentage(0.002, context)),
+            SizedBox(height:10),
             Text(
               label,
               style: TextStyle(
                 color: color,
-                fontSize: AppDimens.normalText(context) * 0.8,
+                fontSize: 15,
                 fontWeight: FontWeight.normal,
               )
             )

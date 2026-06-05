@@ -21,14 +21,14 @@ class CustomEmptyStateWidget extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: AppDimens.bigIcon(context),
+            size: 10,
             color: iconColor ?? AppColors.textPrimary
           ),
-          SizedBox(height: AppDimens.heightPercentage(0.02, context)),
+          SizedBox(height: 10),
           Text(
             message,
             style: TextStyle(
-              fontSize: AppDimens.normalText(context),
+              fontSize: 15,
               color: AppColors.textPrimary
             )
           )

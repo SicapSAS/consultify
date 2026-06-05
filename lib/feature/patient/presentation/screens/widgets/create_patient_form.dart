@@ -115,10 +115,11 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final isLoading = ref.watch(patientProvider).isLoading;
-    final fieldGap = AppDimens.heightPercentage(0.02, context);
-    final rowGap = AppDimens.widthPercentage(0.03, context);
-    final documentTypeWidth = AppDimens.widthPercentage(0.32, context);
+    final fieldGap = size.height * 0.02;
+    final rowGap = size.width * 0.03;
+    final documentTypeWidth = size.width * 0.32;
 
     return Form(
       key: _formKey,
@@ -133,7 +134,7 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.user.data,
               color: AppColors.secondary,
-              size: AppDimens.normalIcon(context),
+              size: size.width * 0.09,
             ),
             validator: (value) => _requiredValidator(value, 'El nombre'),
           ),
@@ -162,7 +163,7 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
                   prefixIcon: Icon(
                     FontAwesomeIcons.idCard.data,
                     color: AppColors.secondary,
-                    size: AppDimens.normalIcon(context),
+                    size: size.width * 0.09,
                   ),
                   validator: (value) => _requiredValidator(value, 'El documento'),
                 ),
@@ -178,7 +179,7 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.phone.data,
               color: AppColors.secondary,
-              size: AppDimens.normalIcon(context),
+              size: size.width * 0.09,
             ),
           ),
           SizedBox(height: fieldGap),
@@ -190,19 +191,19 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.envelope.data,
               color: AppColors.secondary,
-              size: AppDimens.normalIcon(context),
+              size: size.width * 0.09,
             ),
             validator: _emailValidator,
           ),
-          SizedBox(height: AppDimens.heightPercentage(0.04, context)),
+          SizedBox(height: size.height * 0.04),
           CustomFilledButton(
             text: isLoading
                 ? 'Guardando...'
                 : (_isEditing ? 'Actualizar paciente' : 'Crear paciente'),
             buttonColor: AppColors.primaryButton,
-            width: AppDimens.widthPercentage(0.4, context),
-            height: AppDimens.heightPercentage(0.05, context),
-            textSize: AppDimens.littleText(context),
+            width: size.width * 0.4,
+            height: size.height * 0.05,
+            textSize: size.width * 0.03,
             onPressed: isLoading ? null : _onSubmit,
           ),
         ],

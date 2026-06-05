@@ -8,6 +8,7 @@ class ClinicScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
       appBar: CustomAppBar(
@@ -17,8 +18,8 @@ class ClinicScreen extends StatelessWidget {
       body: ClinicView(),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(
-          bottom: AppDimens.heightPercentage(0.02, context),
-          right: AppDimens.widthPercentage(0.02, context)
+          bottom: size.height * 0.02,
+          right: size.width * 0.02
         ),
         child: LabeledFloatingActionButton(
           label: 'Crear clínica',

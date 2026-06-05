@@ -18,6 +18,7 @@ export 'custom/appbar/custom_app_bar.dart';
 export 'custom/side_menu/side_menu.dart';
 export 'custom_bottom_navigation_bar.dart';
 export 'custom/side_menu/custom_side_menu_item.dart';
+export 'custom/side_menu/custom_side_menu_section_title.dart';
 export 'shortcuts_grid.dart';
 export 'recent_reports_list.dart';
 export 'custom_refresh_widget.dart';

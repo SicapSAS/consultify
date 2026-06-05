@@ -53,10 +53,11 @@ class PatientListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = AppDimens.smallBorderRadius(0.02, context);
-    final rowGap = AppDimens.heightPercentage(0.006, context);
-    final cardPadding = AppDimens.widthPercentage(0.04, context);
-    final menuIconSize = AppDimens.normalIcon(context) * 0.85;
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.02;
+    final rowGap = size.height * 0.006;
+    final cardPadding = size.width * 0.04;
+    final menuIconSize = size.width * 0.08 * 0.85;
 
     final isInactive = !patient.isActive;
 
@@ -92,12 +93,12 @@ class PatientListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: AppDimens.widthPercentage(0.12, context),
-                      height: AppDimens.widthPercentage(0.12, context),
+                      width: size.width * 0.12,
+                      height: size.width * 0.12,
                       decoration: BoxDecoration(
                         color: AppColors.secondaryButton.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(
-                          AppDimens.smallBorderRadius(0.07, context),
+                          size.width * 0.07,
                         ),
                       ),
                       child: Center(
@@ -106,12 +107,12 @@ class PatientListTile extends StatelessWidget {
                           style: TextStyle(
                             color: AppColors.secondary,
                             fontWeight: FontWeight.w700,
-                            fontSize: AppDimens.subtitleText(context),
+                            fontSize: size.width * 0.04,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: AppDimens.widthPercentage(0.03, context)),
+                    SizedBox(width: size.width * 0.03),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +120,7 @@ class PatientListTile extends StatelessWidget {
                           Text(
                             patient.name,
                             style: TextStyle(
-                              fontSize: AppDimens.subtitleText(context),
+                              fontSize: size.width * 0.04,
                               color: AppColors.textPrimary,
                               fontWeight: FontWeight.w700,
                             ),
@@ -150,7 +151,7 @@ class PatientListTile extends StatelessWidget {
                   onSelected: onMenuAction,
                   iconColor: AppColors.iconDark,
                   iconSize: menuIconSize,
-                  padding: EdgeInsets.all(AppDimens.widthPercentage(0.01, context)),
+                  padding: EdgeInsets.all(size.width * 0.01),
                 ),
               ),
             ),
@@ -173,20 +174,21 @@ class _PatientDetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
-          size: AppDimens.tinyIcon(context),
+          size: size.width * 0.08,
           color: AppColors.textPrimary.withValues(alpha: 0.45),
         ),
-        SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+        SizedBox(width: size.width * 0.02),
         Expanded(
           child: Text(
             text,
             style: TextStyle(
-              fontSize: AppDimens.littleText(context),
+              fontSize: size.width * 0.03,
               color: AppColors.textPrimary.withValues(alpha: 0.7),
               fontWeight: FontWeight.w500,
             ),

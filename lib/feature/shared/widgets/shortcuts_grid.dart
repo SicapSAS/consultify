@@ -44,7 +44,8 @@ class ShortcutsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final outerPadding = AppDimens.widthPercentage(0.04, context);
+    final size = MediaQuery.of(context).size;
+    final outerPadding = size.width * 0.04;
     return Padding(
       padding: EdgeInsets.all(outerPadding),
       child: LayoutBuilder(
@@ -82,10 +83,11 @@ class _ShortcutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final iconColor = shortcut.iconColor ?? AppColors.secondaryButton;
     final backgroundColor =
         shortcut.backgroundColor ?? AppColors.secondaryBackground;
-    final iconPixelSize = shortcut.iconSize ?? AppDimens.normalIcon(context);
+    final iconPixelSize = shortcut.iconSize ?? size.width * 0.08;
 
     return InkWell(
       onTap: () {
@@ -96,13 +98,13 @@ class _ShortcutCard extends StatelessWidget {
         }
       },
       borderRadius: BorderRadius.circular(
-        AppDimens.smallBorderRadius(0.05, context),
+        size.width * 0.05,
       ),
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(
-            AppDimens.smallBorderRadius(0.05, context),
+            size.width * 0.05,
           ),
           boxShadow: [
             BoxShadow(
@@ -120,10 +122,10 @@ class _ShortcutCard extends StatelessWidget {
               color: iconColor,
               size: iconPixelSize,
             ),
-            SizedBox(height: AppDimens.heightPercentage(0.01, context)),
+            SizedBox(height: size.height * 0.01),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: AppDimens.widthPercentage(0.02, context)
+                horizontal: size.width * 0.02
               ),
               child: Text(
                 shortcut.label,
@@ -132,7 +134,7 @@ class _ShortcutCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: AppColors.secondary,
-                  fontSize: AppDimens.normalText(context) * 0.9,
+                  fontSize: size.width * 0.03 * 0.9,
                 )
               )
             )

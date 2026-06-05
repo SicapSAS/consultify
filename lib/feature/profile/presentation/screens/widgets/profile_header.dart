@@ -14,7 +14,8 @@ class ProfileHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final radius = AppDimens.widthPercentage(0.04, context);
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.04;
 
     return Material(
       color: AppColors.secondaryBackground,
@@ -23,8 +24,8 @@ class ProfileHeader extends ConsumerWidget {
       borderRadius: BorderRadius.circular(radius),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.05, context),
-          vertical: AppDimens.heightPercentage(0.01, context),
+          horizontal: size.width * 0.05,
+          vertical: size.height * 0.01,
         ),
         child: Column(
           children: [Align(
@@ -35,7 +36,7 @@ class ProfileHeader extends ConsumerWidget {
                 'Cerrar sesión',
                 style: TextStyle(
                   color: AppColors.textPrimary,
-                  fontSize: AppDimens.normalText(context),
+                  fontSize: size.width * 0.04,
                   fontWeight: FontWeight.bold
                 )
               ),
@@ -45,22 +46,22 @@ class ProfileHeader extends ConsumerWidget {
               )
             )
           ),
-          SizedBox(height: AppDimens.heightPercentage(0.02, context)),
+          SizedBox(height: size.height * 0.02),
             Row(
               children: [
                 CircleAvatar(
-                  radius: AppDimens.bigIcon(context),
+                  radius: size.width * 0.08,
                   backgroundColor: AppColors.secondaryButton.withValues(alpha: 0.2),
                   child: Text(
                     _initialsFromName(name),
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,
-                      fontSize: AppDimens.subtitleText(context)
+                      fontSize: size.width * 0.04
                     )
                   )
                 ),
-                SizedBox(width: AppDimens.widthPercentage(0.04, context)),
+                SizedBox(width: size.width * 0.04),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,29 +71,29 @@ class ProfileHeader extends ConsumerWidget {
                         style: TextStyle(
                           color: AppColors.textPrimary,
                           fontWeight: FontWeight.w700,
-                          fontSize: AppDimens.titleText(context)
+                          fontSize: size.width * 0.04
                         )
                       ),
-                      SizedBox(height: AppDimens.heightPercentage(0.006, context)),
+                      SizedBox(height: size.height * 0.006),
                       Row(
                         children: [
                           Icon(
                             FontAwesomeIcons.user.data,
-                            size: AppDimens.tinyIcon(context),
+                            size: size.width * 0.08,
                             color: AppColors.textPrimary.withValues(alpha: 0.5)
                           ),
-                          SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+                          SizedBox(width: size.width * 0.02),
                           Text(
                             'Mi cuenta',
                             style: TextStyle(
                               color: AppColors.textPrimary.withValues(alpha: 0.55),
                               fontWeight: FontWeight.w500,
-                              fontSize: AppDimens.littleText(context)
+                              fontSize: size.width * 0.03
                             )
                           )
                         ]
                       ),
-                      SizedBox(height: AppDimens.heightPercentage(0.0, context)),
+                      SizedBox(height: size.height * 0.008),
                     ]
                   )
                 )

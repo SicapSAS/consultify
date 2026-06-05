@@ -24,10 +24,7 @@ class CustomFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final radius = Radius.circular(
-      AppDimens.smallBorderRadius(0.025, context)
-    );
+    final radius = Radius.circular(20);
 
     final button = FilledButton(
       style: FilledButton.styleFrom(
@@ -36,11 +33,11 @@ class CustomFilledButton extends StatelessWidget {
         disabledForegroundColor: AppColors.textPrimary.withValues(alpha: 0.45),
         minimumSize: Size(
           width ?? 0,
-          height ?? AppDimens.heightPercentage(0.055, context),
+          height ?? 50,
         ),
         padding: EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.04, context),
-          vertical: AppDimens.heightPercentage(0.01, context),
+          horizontal: 20,
+          vertical: 10,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -56,7 +53,7 @@ class CustomFilledButton extends StatelessWidget {
         text,
         style: TextStyle(
           color: textColor ?? AppColors.textSecondary,
-          fontSize: textSize ?? AppDimens.normalText(context),
+          fontSize: textSize ?? 20,
         ),
       ),
     );

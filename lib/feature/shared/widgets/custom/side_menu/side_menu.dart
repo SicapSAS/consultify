@@ -30,6 +30,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final currentRoute = _getCurrentRoute();
     final authState = ref.watch(authProvider);
     final userRole = authState.user?.role;
@@ -38,28 +39,20 @@ class SideMenuState extends ConsumerState<SideMenu> {
       backgroundColor: AppColors.secondaryBackground,
       elevation: 1,
       children: [
-        /* CustomSideMenuItem(
-          icon: FontAwesomeIcons.user.data,
-          label: 'Mi perfil',
-          isSelected: currentRoute == '/profile-user',
-          route: '/profile-user',
-          onTap: () {
-            context.go('/profile-user');
-            widget.scaffoldKey.currentState?.closeDrawer();
-          },
-        ), */
-        SizedBox(height: AppDimens.heightPercentage(0.03, context)),
+        
+        SizedBox(height: size.height * 0.03),
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.widthPercentage(0.06, context),
+            horizontal: 15,
           ),
           child: Image.asset(
             'assets/logo/consultify_transparente2.png',
-            width: AppDimens.widthPercentage(0.1, context),
+            width: 100,
             fit: BoxFit.contain
-          ),
+          )
         ),
-        SizedBox(height: AppDimens.heightPercentage(0.03, context)),
+        SizedBox(height: 15),
+        CustomSideMenuSectionTitle(label: 'Opcion principal'),
         CustomSideMenuItem(
           icon: FontAwesomeIcons.houseChimney.data,
           label: 'Inicio',
@@ -73,20 +66,14 @@ class SideMenuState extends ConsumerState<SideMenu> {
 
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.widthPercentage(0.05, context),
+            horizontal: size.width * 0.05,
             //vertical: AppDimens.heightPercentage(0.02, context),
           ),
           child: Divider()
         ),
 
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.widthPercentage(0.05, context),
-            //vertical: AppDimens.heightPercentage(0.01, context),
-          ),
-          child: Text('Otras opciones')
-        ),
-        if (userRole == Roles.superAdmin) 
+        if (userRole == Roles.superAdmin) ...[  
+          CustomSideMenuSectionTitle(label: 'Empresas'),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.building.data,
             label: 'Clínicas',
@@ -95,26 +82,31 @@ class SideMenuState extends ConsumerState<SideMenu> {
               context.push('/clinic-screen');
               widget.scaffoldKey.currentState?.closeDrawer();
             }
-          ),
+          )
+        ],
         //if (userRole == Roles.adminClinic)
-        CustomSideMenuItem(
-          icon: FontAwesomeIcons.calendarCheck.data,
-          label: 'Nueva cita',
-          isSelected: currentRoute == '/companies-screen',
-          onTap: () {
-            context.go( '/companies-screen' );
-          }
-        ),
+          CustomSideMenuSectionTitle(label: 'Citas'),
+          CustomSideMenuItem(
+            icon: FontAwesomeIcons.calendarCheck.data,
+            label: 'Nueva cita',
+            isSelected: currentRoute == '/companies-screen',
+            onTap: () {
+              context.go( '/companies-screen' );
+            }
+          ),
         CustomSideMenuItem(
           icon: FontAwesomeIcons.calendarDays.data,
-          label: 'Ver agendas',
+          label: 'Agendas',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );
             widget.scaffoldKey.currentState?.closeDrawer();
           }
         ),
+
         //if (userRole == Roles.adminClinic)
+        CustomSideMenuSectionTitle(label: 'Pacientes'),
+
         CustomSideMenuItem(
           icon: Icons.person_add_alt_1_outlined,
           label: 'Pacientes',
@@ -126,7 +118,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
         ),
         CustomSideMenuItem(
           icon: FontAwesomeIcons.userPlus.data,
-          label: 'Admicionar paciente',
+          label: 'Admiciones',
           isSelected: currentRoute == '/create-patient-screen',
           onTap: () {
             context.push('/create-patient-screen');
@@ -135,15 +127,26 @@ class SideMenuState extends ConsumerState<SideMenu> {
         ),
         CustomSideMenuItem(
           icon: FontAwesomeIcons.userDoctor.data,
-          label: 'Atender paciente',
+          label: 'Atenciones',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );
           }
         ),
+        CustomSideMenuSectionTitle(label: 'Configuración'),
+
         CustomSideMenuItem(
           icon: FontAwesomeIcons.gear.data,
-          label: 'Parametrizar atención',
+          label: 'Parametrizar',
+          isSelected: currentRoute == '/companies-screen',
+          onTap: () {
+            context.go( '/companies-screen' );
+          }
+        ),
+        CustomSideMenuSectionTitle(label: 'Doctores'),
+        CustomSideMenuItem(
+          icon: FontAwesomeIcons.userDoctor.data,
+          label: 'Doctores',
           isSelected: currentRoute == '/companies-screen',
           onTap: () {
             context.go( '/companies-screen' );

@@ -34,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title != null && title!.isNotEmpty ? Text(
         title!,
         style: TextStyle(
-          fontSize: AppDimens.giantText(context) * 0.85,
+          fontSize: 25,
           fontWeight: FontWeight.bold,
           color: AppColors.secondary
         )
@@ -61,7 +61,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       icon: Icon(
         Icons.arrow_back_ios_new_rounded,
         color: AppColors.secondary,
-        size: AppDimens.bigIcon(context)
+        size: 30
       )
     );
   }

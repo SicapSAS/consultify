@@ -20,6 +20,7 @@ class CustomMultiLineFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
@@ -35,39 +36,39 @@ class CustomMultiLineFormField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           color: AppColors.textPrimary,
-          fontSize: AppDimens.normalText(context)
+          fontSize: size.width * 0.03
         ),
         filled: true,
         fillColor: AppColors.tertiaryBackground,
         contentPadding: EdgeInsets.symmetric(
-          vertical: AppDimens.heightPercentage(0.01, context),
-          horizontal: AppDimens.widthPercentage(0.02, context)
+          vertical: size.height * 0.01,
+          horizontal: size.width * 0.02
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            AppDimens.widthPercentage(0.02, context)
+            size.width * 0.02
           ),
           borderSide: BorderSide(
             color: AppColors.textSecondary,
-            width: AppDimens.widthPercentage(0.003, context)
+            width: size.width * 0.003
           )
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            AppDimens.widthPercentage(0.02, context)
+            size.width * 0.02
           ),
           borderSide: BorderSide(
             color: AppColors.textSecondary,
-            width: AppDimens.widthPercentage(0.003, context)
+            width: size.width * 0.003
           )
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            AppDimens.widthPercentage(0.02, context)
+            size.width * 0.02
           ),
           borderSide: BorderSide(
             color: AppColors.textSecondary, 
-            width: AppDimens.widthPercentage(0.003, context)
+            width: size.width * 0.003
           )
         ),
         counter: ValueListenableBuilder<TextEditingValue>(
@@ -77,7 +78,7 @@ class CustomMultiLineFormField extends StatelessWidget {
             return Text(
               '$remaining caracteres',
               style: TextStyle(
-                fontSize: AppDimens.normalText(context),
+                fontSize: size.width * 0.03,
                 color: AppColors.textPrimary
               )
             );
@@ -85,7 +86,7 @@ class CustomMultiLineFormField extends StatelessWidget {
         )
       ),
       style:  TextStyle( 
-        fontSize: AppDimens.subtitleText(context), 
+        fontSize: size.width * 0.03, 
         color: AppColors.textPrimary.withValues(alpha: 0.78)
       )
     );

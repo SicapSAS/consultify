@@ -25,6 +25,7 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
@@ -33,10 +34,10 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
           label,
           style: TextStyle(
             color: AppColors.textPrimary.withValues(alpha: 0.55),
-            fontSize: AppDimens.littleText(context)
+            fontSize: size.width * 0.03
           )
         ),
-        SizedBox(height: AppDimens.heightPercentage(0.008, context)),
+        SizedBox(height: size.height * 0.008),
         TextField(
           controller: controller,
           enabled: enabled,
@@ -52,7 +53,7 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             final cap = maxLength ?? this.maxLength;
             return Padding(
               padding: EdgeInsets.only(
-                top: AppDimens.heightPercentage(0.004, context)
+                top: size.height * 0.004
               ),
               child: Align(
                 alignment: Alignment.centerRight,
@@ -60,7 +61,7 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
                   '$currentLength/$cap',
                   style: TextStyle(
                     color: AppColors.textPrimary.withValues(alpha: 0.45),
-                    fontSize: AppDimens.tinyText(context)
+                    fontSize: size.width * 0.03
                   )
                 )
               )
@@ -70,15 +71,15 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(
               color: AppColors.textPrimary.withValues(alpha: 0.35),
-              fontSize: AppDimens.littleText(context)
+              fontSize: size.width * 0.03
             ),
             contentPadding: EdgeInsets.symmetric(
-              horizontal: AppDimens.widthPercentage(0.03, context),
-              vertical: AppDimens.heightPercentage(0.014, context)
+              horizontal: size.width * 0.03,
+              vertical: size.height * 0.014
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
-                AppDimens.smallBorderRadius(0.02, context)
+                size.width * 0.02
               ),
               borderSide: BorderSide(
                 color: AppColors.textPrimary.withValues(alpha: 0.2)
@@ -86,7 +87,7 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
-                AppDimens.smallBorderRadius(0.02, context)
+                size.width * 0.02
               ),
               borderSide: BorderSide(
                 color: AppColors.textPrimary.withValues(alpha: 0.2)
@@ -94,14 +95,14 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
-                AppDimens.smallBorderRadius(0.02, context)
+                size.width * 0.02
               ),
               borderSide: BorderSide(color: AppColors.secondaryButton)
             )
           ),
           style: TextStyle(
             color: AppColors.textPrimary,
-            fontSize: AppDimens.littleText(context)
+            fontSize: size.width * 0.03
           ),
           onChanged: onChanged
         )

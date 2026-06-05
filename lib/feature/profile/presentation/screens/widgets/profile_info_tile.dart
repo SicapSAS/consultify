@@ -15,7 +15,8 @@ class ProfileInfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = AppDimens.widthPercentage(0.04, context);
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.04;
 
     return Material(
       color: AppColors.secondaryBackground,
@@ -24,13 +25,13 @@ class ProfileInfoTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: AppDimens.widthPercentage(0.05, context),
-          vertical: AppDimens.heightPercentage(0.018, context)
+          horizontal: size.width * 0.05,
+          vertical: size.height * 0.018
         ),
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(AppDimens.widthPercentage(0.025, context)),
+              padding: EdgeInsets.all(size.width * 0.025),
               decoration: BoxDecoration(
                 color: AppColors.secondaryButton.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(radius * 0.85),
@@ -38,10 +39,10 @@ class ProfileInfoTile extends StatelessWidget {
               child: Icon(
                 icon,
                 color: AppColors.secondary,
-                size: AppDimens.normalIcon(context)
+                size: size.width * 0.08
               )
             ),
-            SizedBox(width: AppDimens.widthPercentage(0.04, context)),
+            SizedBox(width: size.width * 0.04),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,16 +52,16 @@ class ProfileInfoTile extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.textPrimary.withValues(alpha: 0.55),
                       fontWeight: FontWeight.w500,
-                      fontSize: AppDimens.littleText(context)
+                      fontSize: size.width * 0.03
                     )
                   ),
-                  SizedBox(height: AppDimens.heightPercentage(0.004, context)),
+                  SizedBox(height: size.height * 0.004),
                   Text(
                     value,
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w600,
-                      fontSize: AppDimens.normalText(context)
+                      fontSize: size.width * 0.04
                     )
                   )
                 ]

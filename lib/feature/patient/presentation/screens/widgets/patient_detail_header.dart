@@ -29,8 +29,9 @@ class PatientDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = AppDimens.smallBorderRadius(0.02, context);
-    final cardPadding = AppDimens.widthPercentage(0.04, context);
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.02;
+    final cardPadding = size.width * 0.04;
 
     return Container(
       decoration: BoxDecoration(
@@ -49,18 +50,18 @@ class PatientDetailHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CircleAvatar(
-            radius: AppDimens.bigIcon(context),
+            radius: size.width * 0.09,
             backgroundColor: AppColors.secondaryButton.withValues(alpha: 0.15),
             child: Text(
               _initialsFromName(patient.name),
               style: TextStyle(
                 color: AppColors.secondary,
                 fontWeight: FontWeight.w700,
-                fontSize: AppDimens.subtitleText(context)
+                fontSize: size.width * 0.04
               )
             )
           ),
-          SizedBox(width: AppDimens.widthPercentage(0.04, context)),
+          SizedBox(width: size.width * 0.04),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,22 +69,22 @@ class PatientDetailHeader extends StatelessWidget {
                 Text(
                   patient.name,
                   style: TextStyle(
-                    fontSize: AppDimens.titleText(context),
+                    fontSize: size.width * 0.04,
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700
                   )
                 ),
-                SizedBox(height: AppDimens.heightPercentage(0.008, context)),
+                SizedBox(height: size.height * 0.008),
                 _PatientInfoRow(
                   icon: FontAwesomeIcons.idCard.data,
                   text: '${patient.documentType} · ${patient.documentId}'
                 ),
-                SizedBox(height: AppDimens.heightPercentage(0.008, context)),
+                SizedBox(height: size.height * 0.008),
                 _PatientInfoRow(
                   icon: FontAwesomeIcons.calendarCheck.data,
                   text: '$totalAppointments cita${totalAppointments == 1 ? '' : 's'} registrada${totalAppointments == 1 ? '' : 's'}'
                 ),
-                SizedBox(height: AppDimens.heightPercentage(0.008, context)),
+                SizedBox(height: size.height * 0.008),
                 _PatientInfoRow(
                   icon: patient.isActive
                       ? FontAwesomeIcons.userCheck.data
@@ -112,20 +113,21 @@ class _PatientInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
-          size: AppDimens.tinyIcon(context),
+          size: size.width * 0.08,
           color: AppColors.textPrimary.withValues(alpha: 0.45)
         ),
-        SizedBox(width: AppDimens.widthPercentage(0.02, context)),
+        SizedBox(width: size.width * 0.02),
         Expanded(
           child: Text(
             text,
             style: TextStyle(
-              fontSize: AppDimens.littleText(context),
+              fontSize: size.width * 0.03,
               color: AppColors.textPrimary.withValues(alpha: 0.7),
               fontWeight: FontWeight.w500
             )

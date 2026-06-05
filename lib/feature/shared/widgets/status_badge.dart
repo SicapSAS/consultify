@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:consultify/config/config.dart';
 
 /// Chip de estado reutilizable (texto + color de acento).
 class StatusBadge extends StatelessWidget {
@@ -14,23 +13,24 @@ class StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final text = label.trim().isEmpty ? '—' : label.trim();
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.widthPercentage(0.025, context),
-        vertical: AppDimens.heightPercentage(0.004, context),
+        horizontal: size.width * 0.025,
+        vertical: size.height * 0.004,
       ),
       decoration: BoxDecoration(
         color: accentColor.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(
-          AppDimens.smallBorderRadius(0.01, context)
+          size.width * 0.01
         )
       ),
       child: Text(
         text,
         style: TextStyle(
           color: accentColor,
-          fontSize: AppDimens.tinyText(context),
+          fontSize: size.width * 0.03,
           fontWeight: FontWeight.w600
         )
       )
