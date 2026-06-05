@@ -44,7 +44,9 @@ class Select<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popMenuHeight = height ?? 50.0;
+    final popMenuHeight = height ?? 56.0;
+    const placeholderFontSize = 17.0;
+    const selectedFontSize = 17.0;
     return GestureDetector(
       onTap: isActive? () async {
         // showMenu exige items.isNotEmpty; sin datos ni "Añadir" no hay menú.
@@ -69,6 +71,10 @@ class Select<T> extends StatelessWidget {
           context: context,
           position: position,
           menuPadding: EdgeInsets.zero,
+          constraints: BoxConstraints(
+            minWidth: width,
+            maxWidth: width,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               10
@@ -78,38 +84,38 @@ class Select<T> extends StatelessWidget {
           items: [
             ...items.map(
               (c) => PopupMenuItem(
-              // enabled: isActive,
-                height: 0,
                 padding: EdgeInsets.zero,
                 onTap: () => onTap(c),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      10
-                    ),
-                    color:  areTheSame(c, selected)?
-                      (selectedItemColor ?? AppColors.infoBackground):
-                      AppColors.secondaryBackground
-                  ),
-                  padding: itemPadding ?? EdgeInsets.symmetric(
-                    vertical: 5
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10
+                child: SizedBox(
+                  width: width,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        10
                       ),
+                      color:  areTheSame(c, selected)?
+                        (selectedItemColor ?? AppColors.infoBackground):
+                        AppColors.secondaryBackground
+                    ),
+                    padding: itemPadding ?? EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 10,
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
                       child: Text(
                         getTextBySelected(c),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: areTheSame(c, selected)?
                             (selectedTextColor ?? AppColors.secondaryBackground):
-                            (unselectedTextColor ?? AppColors.textPrimary)
+                            (unselectedTextColor ?? AppColors.textPrimary),
+                          fontSize: 17,
                         )
                       )
                     )
-                  )
+                  ),
                 )
               )
             ),
@@ -119,8 +125,13 @@ class Select<T> extends StatelessWidget {
                 child: SizedBox(
                   width: width,
                   child: Center(
-                    child: Text(
-                      'Añadir'
+                    child: TextButton.icon(
+                      icon: Icon(Icons.add, color: AppColors.iconSuccess),
+                      label: Text('Añadir', style: TextStyle(
+                        color: AppColors.iconSuccess,
+                        fontSize: 17,
+                      )),
+                      onPressed: addNew,
                     )
                   )
                 )
@@ -156,7 +167,12 @@ class Select<T> extends StatelessWidget {
                       getTextBySelected(selected as T),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: textColor != null ? TextStyle(color: textColor) : null,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: textColor ?? AppColors.textPrimary,
+                        fontSize: selectedFontSize,
+                        fontWeight: FontWeight.w600,
+                      ),
                     )
                   )
                 else
@@ -165,8 +181,11 @@ class Select<T> extends StatelessWidget {
                     defaultValue,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: textColor ?? AppColors.textPrimary
+                      color: textColor ?? AppColors.textPrimary,
+                      fontSize: placeholderFontSize,
+                      fontWeight: FontWeight.w400,
                     )
                   )
                 )
@@ -177,6 +196,11 @@ class Select<T> extends StatelessWidget {
                   disabledMessage,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 20,
+                  ),
                 )
               ),
             SizedBox(width: 10),

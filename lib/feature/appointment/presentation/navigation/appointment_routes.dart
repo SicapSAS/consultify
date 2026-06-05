@@ -10,7 +10,11 @@ class AppointmentRoutes {
   static final routes = [
     GoRoute(
       path: '/appointment-screen',
-      builder: (context, state) => AppointmentScreen()
-    )
+      builder: (context, state) => const AppointmentScreen(),
+    ),
+    GoRoute(
+      path: '/create-appointment-screen',
+      builder: (context, state) => const CreateAppointmentScreen(),
+    ),
   ];
 }

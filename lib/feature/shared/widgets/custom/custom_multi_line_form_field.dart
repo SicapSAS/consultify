@@ -20,7 +20,6 @@ class CustomMultiLineFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
@@ -36,39 +35,39 @@ class CustomMultiLineFormField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           color: AppColors.textPrimary,
-          fontSize: size.width * 0.03
+          fontSize: 20
         ),
         filled: true,
-        fillColor: AppColors.tertiaryBackground,
+        fillColor: AppColors.primaryBackground,
         contentPadding: EdgeInsets.symmetric(
-          vertical: size.height * 0.01,
-          horizontal: size.width * 0.02
+          vertical: 10,
+          horizontal: 20
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            size.width * 0.02
+            20
           ),
           borderSide: BorderSide(
-            color: AppColors.textSecondary,
-            width: size.width * 0.003
+            color: AppColors.infoBackground,
+            width: 3
           )
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            size.width * 0.02
+            20
           ),
           borderSide: BorderSide(
-            color: AppColors.textSecondary,
-            width: size.width * 0.003
+            color: AppColors.disabledBackground.withValues(alpha: 0.5),
+            width: 2
           )
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            size.width * 0.02
+            20
           ),
           borderSide: BorderSide(
-            color: AppColors.textSecondary, 
-            width: size.width * 0.003
+            color: AppColors.infoBackground, 
+            width: 3
           )
         ),
         counter: ValueListenableBuilder<TextEditingValue>(
@@ -78,7 +77,7 @@ class CustomMultiLineFormField extends StatelessWidget {
             return Text(
               '$remaining caracteres',
               style: TextStyle(
-                fontSize: size.width * 0.03,
+                fontSize: 18,
                 color: AppColors.textPrimary
               )
             );
@@ -86,7 +85,7 @@ class CustomMultiLineFormField extends StatelessWidget {
         )
       ),
       style:  TextStyle( 
-        fontSize: size.width * 0.03, 
+        fontSize: 20, 
         color: AppColors.textPrimary.withValues(alpha: 0.78)
       )
     );

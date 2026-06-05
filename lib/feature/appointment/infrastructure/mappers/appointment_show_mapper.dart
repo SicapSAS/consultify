@@ -2,14 +2,33 @@ import 'package:consultify/feature/feature.dart';
 
 class AppointmentShowMapper {
   static AppointmentShow fromJson(Map<String, dynamic> json) {
-    // Tolerancia a respuestas envueltas en nodos 'appointment' o 'data'
     final cleanJson = json['appointment'] ?? json['data'] ?? json;
 
     return AppointmentShow(
       id: cleanJson['_id']?.toString() ?? '',
       clinicId: cleanJson['clinicId']?.toString() ?? '',
-      patientId: _patientIdFromJson(cleanJson['patientId'] ?? {}),
-      professionalId: _professionalIdFromJson(cleanJson['professionalId'] ?? {}),
+      
+      // 🔑 CORRECCIÓN INTELIGENTE PARA PATIENT
+      patientId: (cleanJson['patientId'] is Map)
+          ? _patientIdFromJson(cleanJson['patientId'] as Map<String, dynamic>)
+          : PatientId(
+              id: cleanJson['patientId']?.toString() ?? '',
+              name: 'Paciente registrado', // Fallback temporal si solo viene el ID string
+              documentId: '',
+              email: '',
+              phone: '',
+              documentType: 'CC',
+            ),
+
+      // 🔑 CORRECCIÓN INTELIGENTE PARA PROFESSIONAL
+      professionalId: (cleanJson['professionalId'] is Map)
+          ? _professionalIdFromJson(cleanJson['professionalId'] as Map<String, dynamic>)
+          : ProfessionalId(
+              id: cleanJson['professionalId']?.toString() ?? '',
+              name: 'Profesional asignado', // Fallback temporal si solo viene el ID string
+              specialty: 'General',
+            ),
+
       durationMinutes: cleanJson['durationMinutes'] as int? ?? 0,
       status: cleanJson['status']?.toString() ?? 'PENDING',
       paymentStatus: cleanJson['paymentStatus']?.toString() ?? 'PENDING',

@@ -19,7 +19,6 @@ class AppointmentFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final hasDateSelected = filter.selectedDate != null;
 
     return Column(
@@ -30,10 +29,10 @@ class AppointmentFilterBar extends StatelessWidget {
           style: TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.w700,
-            fontSize: size.width * 0.042,
+            fontSize: 20,
           ),
         ),
-        SizedBox(height: size.height * 0.015),
+        SizedBox(height: 15),
         Row(
           children: [
             Text(
@@ -41,10 +40,10 @@ class AppointmentFilterBar extends StatelessWidget {
               style: TextStyle(
                 color: AppColors.textPrimary.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w600,
-                fontSize: size.width * 0.035,
+                fontSize: 18,
               ),
             ),
-            SizedBox(width: size.width * 0.03),
+            SizedBox(width: 10),
             Select<int>(
               onTap: (value) {
                 if (value == null) return;
@@ -71,7 +70,7 @@ class AppointmentFilterBar extends StatelessWidget {
               getTextBySelected: (year) => year.toString(),
               isActive: true,
               disabledMessage: '',
-              width: size.width * 0.32,
+              width: 150,
               areTheSame: (a, b) => a == b,
             ),
             if (hasDateSelected) ...[
@@ -82,22 +81,22 @@ class AppointmentFilterBar extends StatelessWidget {
                 ),
                 icon: Icon(
                   Icons.close_rounded,
-                  size: 18,
-                  color: AppColors.secondaryButton,
+                  size: 20,
+                  color: AppColors.primaryButton,
                 ),
                 label: Text(
                   'Limpiar día',
                   style: TextStyle(
-                    color: AppColors.secondaryButton,
+                    color: AppColors.primaryButton,
                     fontWeight: FontWeight.w600,
-                    fontSize: size.width * 0.032,
+                    fontSize: 18,
                   ),
                 ),
               ),
             ],
           ],
         ),
-        SizedBox(height: size.height * 0.02),
+        SizedBox(height: 20),
         AppCalendar(
           year: filter.year,
           selectedDay: filter.selectedDay,

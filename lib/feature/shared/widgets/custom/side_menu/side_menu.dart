@@ -80,7 +80,6 @@ class SideMenuState extends ConsumerState<SideMenu> {
             isSelected: currentRoute == '/clinic-screen',
             onTap: () {
               context.push('/clinic-screen');
-              widget.scaffoldKey.currentState?.closeDrawer();
             }
           )
         ],
@@ -91,8 +90,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             label: 'Citas',
             isSelected: currentRoute == '/appointment-screen',
             onTap: () {
-              context.go( '/appointment-screen' );
-              widget.scaffoldKey.currentState?.closeDrawer();
+              context.push( '/appointment-screen' );
             }
           ),
           CustomSideMenuItem(
@@ -100,8 +98,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             label: 'Agendas',
             isSelected: currentRoute == '/companies-screen',
             onTap: () {
-              context.go( '/companies-screen' );
-              widget.scaffoldKey.currentState?.closeDrawer();
+              context.push( '/companies-screen' );
             }
           ),
           CustomSideMenuSectionTitle(label: 'Pacientes'),
@@ -111,7 +108,6 @@ class SideMenuState extends ConsumerState<SideMenu> {
             isSelected: currentRoute == '/patient-screen',
             onTap: () {
               context.push( '/patient-screen' );
-              widget.scaffoldKey.currentState?.closeDrawer();
             }
           ),
           CustomSideMenuItem(
@@ -120,7 +116,6 @@ class SideMenuState extends ConsumerState<SideMenu> {
             isSelected: currentRoute == '/create-patient-screen',
             onTap: () {
               context.push('/create-patient-screen');
-              widget.scaffoldKey.currentState?.closeDrawer();
             }
           ),
           CustomSideMenuItem(
@@ -128,7 +123,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             label: 'Atenciones',
             isSelected: currentRoute == '/companies-screen',
             onTap: () {
-              context.go( '/companies-screen' );
+              context.push( '/companies-screen' );
             }
           ),
           CustomSideMenuSectionTitle(label: 'Configuración'),
@@ -137,7 +132,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             label: 'Parametrizar',
             isSelected: currentRoute == '/companies-screen',
             onTap: () {
-              context.go( '/companies-screen' );
+              context.push( '/companies-screen' );
             }
           ),
           CustomSideMenuSectionTitle(label: 'Doctores'),
@@ -146,8 +141,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             label: 'Doctores',
             isSelected: currentRoute == '/doctors-screen',
             onTap: () {
-              context.go( '/doctors-screen' );
-              widget.scaffoldKey.currentState?.closeDrawer();
+              context.push( '/doctors-screen' );
             }
           )
         ]
