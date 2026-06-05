@@ -26,17 +26,7 @@ class PatientDetailBody extends StatelessWidget {
           totalAppointments: history.total
         ),
         SizedBox(height: size.height * 0.02),
-        PatientAppointmentSection(
-          title: 'Próximas citas',
-          appointments: history.upcoming,
-          emptyMessage: 'No hay citas próximas'
-        ),
-        SizedBox(height: size.height * 0.02),
-        PatientAppointmentSection(
-          title: 'Historial de citas',
-          appointments: history.past,
-          emptyMessage: 'No hay citas anteriores'
-        )
+        PatientAppointmentsSection(history: history),
       ]
     );
   }

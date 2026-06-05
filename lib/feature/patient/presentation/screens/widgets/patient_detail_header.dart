@@ -13,30 +13,15 @@ class PatientDetailHeader extends StatelessWidget {
     required this.totalAppointments,
   });
 
-  String _initialsFromName(String fullName) {
-    final parts = fullName
-        .trim()
-        .split(RegExp(r'\s+'))
-        .where((p) => p.isNotEmpty)
-        .toList();
-    if (parts.isEmpty) return '?';
-    if (parts.length == 1) {
-      return parts.first[0].toUpperCase();
-    }
-    final surnameIndex = parts.length >= 3 ? 2 : 1;
-    return '${parts[0][0]}${parts[surnameIndex][0]}'.toUpperCase();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.02;
-    final cardPadding = size.width * 0.04;
+    final cardPadding = 15.0;
 
     return Container(
       decoration: BoxDecoration(
         color: AppColors.secondaryBackground,
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: AppColors.textPrimary.withValues(alpha: 0.3),
@@ -49,19 +34,6 @@ class PatientDetailHeader extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: size.width * 0.09,
-            backgroundColor: AppColors.secondaryButton.withValues(alpha: 0.15),
-            child: Text(
-              _initialsFromName(patient.name),
-              style: TextStyle(
-                color: AppColors.secondary,
-                fontWeight: FontWeight.w700,
-                fontSize: size.width * 0.04
-              )
-            )
-          ),
-          SizedBox(width: size.width * 0.04),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,22 +41,22 @@ class PatientDetailHeader extends StatelessWidget {
                 Text(
                   patient.name,
                   style: TextStyle(
-                    fontSize: size.width * 0.04,
+                    fontSize: 20,
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700
                   )
                 ),
-                SizedBox(height: size.height * 0.008),
+                SizedBox(height: 10),
                 _PatientInfoRow(
                   icon: FontAwesomeIcons.idCard.data,
                   text: '${patient.documentType} · ${patient.documentId}'
                 ),
-                SizedBox(height: size.height * 0.008),
+                SizedBox(height: 10),
                 _PatientInfoRow(
                   icon: FontAwesomeIcons.calendarCheck.data,
                   text: '$totalAppointments cita${totalAppointments == 1 ? '' : 's'} registrada${totalAppointments == 1 ? '' : 's'}'
                 ),
-                SizedBox(height: size.height * 0.008),
+                SizedBox(height: 10),
                 _PatientInfoRow(
                   icon: patient.isActive
                       ? FontAwesomeIcons.userCheck.data
@@ -113,21 +85,20 @@ class _PatientInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
-          size: size.width * 0.08,
-          color: AppColors.textPrimary.withValues(alpha: 0.45)
+          size: 20,
+          color: AppColors.textPrimary
         ),
-        SizedBox(width: size.width * 0.02),
+        SizedBox(width: 10),
         Expanded(
           child: Text(
             text,
             style: TextStyle(
-              fontSize: size.width * 0.03,
+              fontSize: 17,
               color: AppColors.textPrimary.withValues(alpha: 0.7),
               fontWeight: FontWeight.w500
             )

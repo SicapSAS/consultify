@@ -24,7 +24,7 @@ class CustomFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = Radius.circular(20);
+    final radius = Radius.circular(15);
 
     final button = FilledButton(
       style: FilledButton.styleFrom(
@@ -53,7 +53,7 @@ class CustomFilledButton extends StatelessWidget {
         text,
         style: TextStyle(
           color: textColor ?? AppColors.textSecondary,
-          fontSize: textSize ?? 20,
+          fontSize: textSize ?? 18,
         ),
       ),
     );

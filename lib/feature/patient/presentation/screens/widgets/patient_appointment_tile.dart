@@ -174,16 +174,15 @@ class _AppointmentDetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
-          size: size.width * 0.08,
-          color: AppColors.textPrimary.withValues(alpha: 0.45),
+          size: 20,
+          color: AppColors.textPrimary,
         ),
-        SizedBox(width: size.width * 0.02),
+        SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,17 +191,17 @@ class _AppointmentDetailRow extends StatelessWidget {
                 Text(
                   label!,
                   style: TextStyle(
-                    fontSize: size.width * 0.03,
+                    fontSize: 17,
                     color: AppColors.textPrimary.withValues(alpha: 0.5),
                     fontWeight: FontWeight.w600
                   )
                 ),
-                SizedBox(height: size.height * 0.002)
+                SizedBox(height: 5)
               ],
               Text(
                 text,
                 style: TextStyle(
-                  fontSize: size.width * 0.03,
+                  fontSize: 17,
                   color: AppColors.textPrimary.withValues(alpha: 0.7),
                   fontWeight: FontWeight.w500
                 )
@@ -224,11 +223,10 @@ class _EvolutionNotesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final sectionRadius = size.width * 0.015;
+    final sectionRadius = 10.0;
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(size.width * 0.03),
+      padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: AppColors.tertiaryBackground,
         borderRadius: BorderRadius.circular(sectionRadius),
@@ -243,25 +241,25 @@ class _EvolutionNotesSection extends StatelessWidget {
             children: [
               Icon(
                 FontAwesomeIcons.fileMedical.data,
-                size: size.width * 0.08,
+                size: 20,
                 color: AppColors.secondary
               ),
-              SizedBox(width: size.width * 0.02),
+              SizedBox(width: 10),
               Text(
                 'Evolución clínica',
                 style: TextStyle(
-                  fontSize: size.width * 0.03,
+                  fontSize: 17,
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w700
                 )
               )
             ]
           ),
-          SizedBox(height: size.height * 0.008),
+          SizedBox(height: 10),
           Text(
             evolutionNotes,
             style: TextStyle(
-              fontSize: size.width * 0.03,
+              fontSize: 17,
               color: AppColors.textPrimary.withValues(alpha: 0.75),
               fontWeight: FontWeight.w500,
               height: 1.4

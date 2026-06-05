@@ -75,21 +75,112 @@ class PatientView extends ConsumerWidget {
       );
     }
 
-    if (state.patients.isEmpty) {
-      return CustomEmptyStateWidget(
-        message: 'No hay pacientes registrados',
-        icon: FontAwesomeIcons.user.data,
-        iconColor: AppColors.secondary.withValues(alpha: 0.5),
+    final activePatients =
+        state.patients.where((patient) => patient.isActive).toList();
+    final inactivePatients =
+        state.patients.where((patient) => !patient.isActive).toList();
+
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          Container(
+            color: AppColors.secondaryBackground,
+            child: TabBar(
+              labelColor: AppColors.secondary,
+              unselectedLabelColor: AppColors.secondary.withValues(alpha: 0.5),
+              indicatorColor: AppColors.secondaryButton,
+              indicatorWeight: 3,
+              labelStyle: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
+              unselectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+              ),
+              tabs: const [
+                Tab(text: 'Habilitados'),
+                Tab(text: 'Inhabilitados'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                _PatientTabContent(
+                  patients: activePatients,
+                  emptyMessage: 'No hay pacientes habilitados',
+                  isRefreshing: state.isLoading,
+                  onRefresh: () => ref.read(patientProvider.notifier).getPatients(),
+                  onPatientTap: (patient) =>
+                      context.push('/patient-screen/${patient.id}'),
+                  onMenuAction: (patient, action) =>
+                      _onMenuAction(context, ref, patient, action),
+                ),
+                _PatientTabContent(
+                  patients: inactivePatients,
+                  emptyMessage: 'No hay pacientes inhabilitados',
+                  isRefreshing: state.isLoading,
+                  onRefresh: () => ref.read(patientProvider.notifier).getPatients(),
+                  onPatientTap: (patient) =>
+                      context.push('/patient-screen/${patient.id}'),
+                  onMenuAction: (patient, action) =>
+                      _onMenuAction(context, ref, patient, action),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PatientTabContent extends StatelessWidget {
+  final List<Patient> patients;
+  final String emptyMessage;
+  final bool isRefreshing;
+  final Future<void> Function() onRefresh;
+  final void Function(Patient patient)? onPatientTap;
+  final void Function(Patient patient, PatientMenuAction action)? onMenuAction;
+
+  const _PatientTabContent({
+    required this.patients,
+    required this.emptyMessage,
+    required this.isRefreshing,
+    required this.onRefresh,
+    this.onPatientTap,
+    this.onMenuAction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (patients.isEmpty) {
+      return CustomRefreshableContent(
+        onRefresh: onRefresh,
+        isRefreshing: isRefreshing,
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+            CustomEmptyStateWidget(
+              message: emptyMessage,
+              icon: FontAwesomeIcons.user.data,
+              iconColor: AppColors.secondary.withValues(alpha: 0.5),
+            ),
+          ],
+        ),
       );
     }
 
     return CustomRefreshableContent(
-      onRefresh: () => ref.read(patientProvider.notifier).getPatients(),
-      isRefreshing: state.isLoading,
+      onRefresh: onRefresh,
+      isRefreshing: isRefreshing,
       child: PatientList(
-        patients: state.patients,
-        onPatientTap: (patient) => context.push('/patient-screen/${patient.id}'),
-        onMenuAction: (patient, action) => _onMenuAction(context, ref, patient, action),
+        patients: patients,
+        onPatientTap: onPatientTap,
+        onMenuAction: onMenuAction,
       ),
     );
   }
