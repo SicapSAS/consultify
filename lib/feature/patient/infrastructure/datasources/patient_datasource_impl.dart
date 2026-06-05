@@ -63,5 +63,36 @@ class PatientDatasourceImpl implements PatientDataSource {
     throw const CustomError(message: 'Ocurrió un error inesperado al procesar el historial.');
   }
   }
+  
+  @override
+  Future<Patient> updatePatient(String patientId, CreatePatient updatePatient) async {
+    try {
+      // Reutilizamos el mapper de creación para empaquetar los mismos 5 campos
+      final data = CreatePatientMapper.toJson(updatePatient);
+      
+      // PUT /patients/update/:id
+      final response = await dio.put('/patients/update/$patientId', data: data);
+      
+      return ListPatientMapper.fromJson(response.data);
+    } on DioException catch (e) {
+      throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al actualizar los datos del paciente.');
+    } catch (e) {
+      if (e is CustomError) rethrow;
+      throw const CustomError(message: 'Ocurrió un error inesperado al actualizar.');
+    }
+  }
 
+  @override
+  Future<bool> deletePatient(String patientId) async {
+    try {
+      // DELETE /patients/delete/:id
+      await dio.delete('/patients/delete/$patientId');
+      return true;
+    } on DioException catch (e) {
+      throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al inhabilitar al paciente.');
+    } catch (e) {
+      if (e is CustomError) rethrow;
+      throw const CustomError(message: 'Ocurrió un error inesperado al eliminar.');
+    }
+  }
 }

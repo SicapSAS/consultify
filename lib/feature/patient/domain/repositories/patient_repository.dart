@@ -7,5 +7,6 @@ abstract class PatientRepository {
   Future<List<Patient>> getPatients();
   Future<Patient> createPatient(CreatePatient createPatient);
   Future<PatientShow> getPatientShow(String patientId);
-
+  Future<Patient> updatePatient(String patientId, CreatePatient updatePatient);
+  Future<bool> deletePatient(String patientId);
 }

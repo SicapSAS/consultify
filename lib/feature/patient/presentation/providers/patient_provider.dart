@@ -110,6 +110,57 @@ class PatientNotifier extends StateNotifier<PatientRepositoryState> {
       );
     }
   }
+
+  Future<bool> updatePatient(String patientId, CreatePatient updatedData) async {
+    state = state.copyWith(isLoading: true, errorMessage: '');
+    try {
+      final editedPatient = await patientRepository.updatePatient(patientId, updatedData);
+      
+      // Mapeamos el listado local reemplazando instantáneamente el paciente modificado
+      final updatedList = state.patients.map((p) => p.id == patientId ? editedPatient : p).toList();
+      
+      state = state.copyWith(
+        patients: updatedList,
+        patient: editedPatient,
+        isLoading: false,
+        isSuccess: true,
+        isError: false,
+      );
+
+      if (state.history?.patient.id == patientId) {
+        await getPatientShow(patientId);
+      }
+
+      await getPatients();
+      return true;
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isLoading: false, isSuccess: false, isError: true);
+      return false;
+    } catch (e) {
+      state = state.copyWith(errorMessage: 'Error al actualizar el paciente.', isLoading: false, isSuccess: false, isError: true);
+      return false;
+    }
+  }
+
+  Future<bool> deletePatient(String patientId) async {
+    state = state.copyWith(errorMessage: '');
+    try {
+      await patientRepository.deletePatient(patientId);
+
+      if (state.history?.patient.id == patientId) {
+        await getPatientShow(patientId);
+      }
+
+      await getPatients();
+      return true;
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isLoading: false, isSuccess: false, isError: true);
+      return false;
+    } catch (e) {
+      state = state.copyWith(errorMessage: 'Error al inhabilitar el paciente.', isLoading: false, isSuccess: false, isError: true);
+      return false;
+    }
+  }
 }
 
 

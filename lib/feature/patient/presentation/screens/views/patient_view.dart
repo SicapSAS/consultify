@@ -8,12 +8,41 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class PatientView extends ConsumerWidget {
   const PatientView({super.key});
 
-  void _onMenuAction(Patient patient, PatientMenuAction action) {
+  Future<void> _onMenuAction(
+    BuildContext context,
+    WidgetRef ref,
+    Patient patient,
+    PatientMenuAction action,
+  ) async {
     switch (action) {
       case PatientMenuAction.update:
-        break;
+        context.push('/create-patient-screen', extra: patient);
       case PatientMenuAction.disable:
-        break;
+        await _confirmDisable(context, ref, patient);
+    }
+  }
+
+  Future<void> _confirmDisable(
+    BuildContext context,
+    WidgetRef ref,
+    Patient patient,
+  ) async {
+    final confirmed = await DeactivatePatientDialog.show(context, patient);
+
+    if (!confirmed || !context.mounted) return;
+
+    final success = await ref.read(patientProvider.notifier).deletePatient(patient.id);
+
+    if (!context.mounted) return;
+
+    if (success) {
+      AppSnackBar.success(context, 'Paciente inhabilitado correctamente');
+      return;
+    }
+
+    final errorMessage = ref.read(patientProvider).errorMessage;
+    if (errorMessage.isNotEmpty) {
+      AppSnackBar.error(context, errorMessage);
     }
   }
 
@@ -38,7 +67,7 @@ class PatientView extends ConsumerWidget {
       return CustomEmptyStateWidget(
         message: 'No hay pacientes registrados',
         icon: FontAwesomeIcons.user.data,
-        iconColor: AppColors.secondary.withValues(alpha: 0.5)
+        iconColor: AppColors.secondary.withValues(alpha: 0.5),
       );
     }
 
@@ -48,7 +77,7 @@ class PatientView extends ConsumerWidget {
       child: PatientList(
         patients: state.patients,
         onPatientTap: (patient) => context.push('/patient-screen/${patient.id}'),
-        onMenuAction: _onMenuAction,
+        onMenuAction: (patient, action) => _onMenuAction(context, ref, patient, action),
       ),
     );
   }

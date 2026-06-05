@@ -1,8 +1,7 @@
 import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:go_router/go_router.dart';
 
 class PatientScreen extends StatelessWidget {
   const PatientScreen({super.key});
@@ -15,7 +14,18 @@ class PatientScreen extends StatelessWidget {
         title: 'Pacientes',
         backRoute: '/home',
       ),
-      body: PatientView(),
+      body: const PatientView(),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+          bottom: AppDimens.heightPercentage(0.02, context),
+          right: AppDimens.widthPercentage(0.02, context),
+        ),
+        child: LabeledFloatingActionButton(
+          label: 'Crear paciente',
+          heroTag: 'create-patient-fab',
+          onPressed: () => context.push('/create-patient-screen'),
+        ),
+      ),
     );
   }
 }

@@ -22,4 +22,14 @@ class PatientRepositoryImpl implements PatientRepository {
   Future<PatientShow> getPatientShow(String patientId) {
     return dataSource.getPatientShow(patientId);
   }
+  
+  @override
+  Future<bool> deletePatient(String patientId) {
+    return dataSource.deletePatient(patientId);
+  }
+  
+  @override
+  Future<Patient> updatePatient(String patientId, CreatePatient updatePatient) {
+    return dataSource.updatePatient(patientId, updatePatient);
+  }
 }

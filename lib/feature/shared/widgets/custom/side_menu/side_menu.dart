@@ -127,9 +127,10 @@ class SideMenuState extends ConsumerState<SideMenu> {
         CustomSideMenuItem(
           icon: FontAwesomeIcons.userPlus.data,
           label: 'Admicionar paciente',
-          isSelected: currentRoute == '/companies-screen',
+          isSelected: currentRoute == '/create-patient-screen',
           onTap: () {
-            context.go( '/companies-screen' );
+            context.push('/create-patient-screen');
+            widget.scaffoldKey.currentState?.closeDrawer();
           }
         ),
         CustomSideMenuItem(

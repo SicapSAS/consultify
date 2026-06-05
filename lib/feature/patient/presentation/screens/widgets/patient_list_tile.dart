@@ -15,19 +15,22 @@ class PatientListTile extends StatelessWidget {
     this.onMenuAction,
   });
 
-  static const _menuItems = [
-    ContextMenuItem<PatientMenuAction>(
-      value: PatientMenuAction.update,
-      label: 'Actualizar paciente',
-      icon: Icons.edit_outlined,
-    ),
-    ContextMenuItem<PatientMenuAction>(
-      value: PatientMenuAction.disable,
-      label: 'Inhabilitar paciente',
-      icon: Icons.block_outlined,
-      isDestructive: true,
-    ),
-  ];
+  List<ContextMenuItem<PatientMenuAction>> _buildMenuItems() {
+    return [
+      const ContextMenuItem<PatientMenuAction>(
+        value: PatientMenuAction.update,
+        label: 'Actualizar paciente',
+        icon: Icons.edit_outlined,
+      ),
+      if (patient.isActive)
+        const ContextMenuItem<PatientMenuAction>(
+          value: PatientMenuAction.disable,
+          label: 'Inhabilitar paciente',
+          icon: Icons.block_outlined,
+          isDestructive: true,
+        ),
+    ];
+  }
 
   bool _hasText(String? value) {
     if (value == null) return false;
@@ -55,7 +58,11 @@ class PatientListTile extends StatelessWidget {
     final cardPadding = AppDimens.widthPercentage(0.04, context);
     final menuIconSize = AppDimens.normalIcon(context) * 0.85;
 
-    return Container(
+    final isInactive = !patient.isActive;
+
+    return Opacity(
+      opacity: isInactive ? 0.72 : 1,
+      child: Container(
       decoration: BoxDecoration(
         color: AppColors.secondaryBackground,
         borderRadius: BorderRadius.circular(radius),
@@ -139,7 +146,7 @@ class PatientListTile extends StatelessWidget {
               right: 6,
               child: Center(
                 child: ContextMenuButton<PatientMenuAction>(
-                  items: _menuItems,
+                  items: _buildMenuItems(),
                   onSelected: onMenuAction,
                   iconColor: AppColors.iconDark,
                   iconSize: menuIconSize,
@@ -150,6 +157,7 @@ class PatientListTile extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }
