@@ -142,10 +142,10 @@ class PatientNotifier extends StateNotifier<PatientRepositoryState> {
     }
   }
 
-  Future<bool> deletePatient(String patientId) async {
+  Future<bool> updatePatientStatus(String patientId, bool isActive) async {
     state = state.copyWith(errorMessage: '');
     try {
-      await patientRepository.deletePatient(patientId);
+      await patientRepository.updatePatientStatus(patientId, isActive);
 
       if (state.history?.patient.id == patientId) {
         await getPatientShow(patientId);
@@ -157,7 +157,14 @@ class PatientNotifier extends StateNotifier<PatientRepositoryState> {
       state = state.copyWith(errorMessage: e.message, isLoading: false, isSuccess: false, isError: true);
       return false;
     } catch (e) {
-      state = state.copyWith(errorMessage: 'Error al inhabilitar el paciente.', isLoading: false, isSuccess: false, isError: true);
+      state = state.copyWith(
+        errorMessage: isActive
+            ? 'Error al habilitar el paciente.'
+            : 'Error al inhabilitar el paciente.',
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+      );
       return false;
     }
   }

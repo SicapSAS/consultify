@@ -2,4 +2,5 @@
 enum PatientMenuAction {
   update,
   disable,
+  enable,
 }

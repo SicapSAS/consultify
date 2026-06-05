@@ -8,6 +8,6 @@ abstract class PatientDataSource {
   Future<Patient> createPatient(CreatePatient createPatient);
   Future<PatientShow> getPatientShow(String patientId);
   Future<Patient> updatePatient(String patientId, CreatePatient updatePatient);
-  Future<bool> deletePatient(String patientId);
+  Future<bool> updatePatientStatus(String patientId, bool isActive);
 
 }

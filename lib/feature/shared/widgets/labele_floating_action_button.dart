@@ -63,24 +63,24 @@ class LabeledFloatingActionButton extends StatelessWidget {
           child: Text(
             label,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              fontSize: labelFontSize ?? size.width * 0.025,
+              fontSize: labelFontSize ?? 12,
               color: labelColor ?? AppColors.textInfoDark
             )
           )
         ),
         SizedBox(
-          height: size.height * 0.005
+          height: 5
         ),
         // Botón flotante
         Container(
-          width: size.width * 0.13,
+          width: 50,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             boxShadow: buttonBoxShadow ?? [
               BoxShadow(
                 color: AppColors.textPrimary.withValues(alpha: 0.4),
-                blurRadius: size.width * 0.02,
-                offset: Offset(0, size.width * 0.015)
+                blurRadius: 3,
+                offset: Offset(0, 5)
               )
             ]
           ),
@@ -92,7 +92,7 @@ class LabeledFloatingActionButton extends StatelessWidget {
             child: Icon(
               icon,
               color: iconColor ?? AppColors.primaryBackground,
-              size: iconSize ?? size.width * 0.08,
+              size: iconSize ?? 40,
             )
           )
         )

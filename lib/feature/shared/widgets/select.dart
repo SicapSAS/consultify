@@ -44,8 +44,7 @@ class Select<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final popMenuHeight = height ?? size.height * 0.05;
+    final popMenuHeight = height ?? 50.0;
     return GestureDetector(
       onTap: isActive? () async {
         // showMenu exige items.isNotEmpty; sin datos ni "Añadir" no hay menú.
@@ -72,7 +71,7 @@ class Select<T> extends StatelessWidget {
           menuPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-              size.width * 0.02
+              10
             ),
           ),
           color: AppColors.secondaryBackground,
@@ -87,19 +86,19 @@ class Select<T> extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      size.width * 0.02
+                      10
                     ),
                     color:  areTheSame(c, selected)?
                       (selectedItemColor ?? AppColors.infoBackground):
                       AppColors.secondaryBackground
                   ),
                   padding: itemPadding ?? EdgeInsets.symmetric(
-                    vertical: size.height * 0.01
+                    vertical: 5
                   ),
                   child: Center(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: size.width * 0.02
+                        horizontal: 10
                       ),
                       child: Text(
                         getTextBySelected(c),
@@ -133,11 +132,11 @@ class Select<T> extends StatelessWidget {
         width: width,
         height: popMenuHeight,
         padding:  EdgeInsets.symmetric(
-          horizontal: size.width * 0.05
+          horizontal: 20
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            size.width * 0.02
+            10
           ),
           color: AppColors.secondaryBackground,
           border: Border.all(
@@ -180,13 +179,13 @@ class Select<T> extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 )
               ),
-            SizedBox(width: size.width * 0.02),
+            SizedBox(width: 10),
             Icon(
               Icons.arrow_drop_down_outlined,
               color: isActive?
                 AppColors.textPrimary:
                 AppColors.textPrimary.withValues(alpha: 0.6),
-              size: size.width * 0.08
+              size: 30
             )
           ]
         )

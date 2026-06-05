@@ -17,7 +17,6 @@ class AppSnackBar {
     AppSnackBarType type = AppSnackBarType.info,
     Duration duration = const Duration(seconds: 3),
   }) {
-    final size = MediaQuery.of(context).size;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
@@ -26,7 +25,7 @@ class AppSnackBar {
             message,
             style: TextStyle(
               color: AppColors.textSecondary,
-              fontSize: size.width * 0.03,
+              fontSize: 15,
               fontWeight: FontWeight.w600,
             ),
           ),

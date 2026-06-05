@@ -83,16 +83,27 @@ class PatientDatasourceImpl implements PatientDataSource {
   }
 
   @override
-  Future<bool> deletePatient(String patientId) async {
+  Future<bool> updatePatientStatus(String patientId, bool isActive) async {
     try {
-      // DELETE /patients/delete/:id
-      await dio.delete('/patients/delete/$patientId');
+      await dio.delete(
+        '/patients/delete/$patientId',
+        data: {'isActive': isActive},
+      );
       return true;
     } on DioException catch (e) {
-      throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al inhabilitar al paciente.');
+      throw DioErrorMapper.fromDioException(
+        e,
+        mensajeFallback: isActive
+            ? 'Error al habilitar al paciente.'
+            : 'Error al inhabilitar al paciente.',
+      );
     } catch (e) {
       if (e is CustomError) rethrow;
-      throw const CustomError(message: 'Ocurrió un error inesperado al eliminar.');
+      throw CustomError(
+        message: isActive
+            ? 'Ocurrió un error inesperado al habilitar al paciente.'
+            : 'Ocurrió un error inesperado al inhabilitar al paciente.',
+      );
     }
   }
 }

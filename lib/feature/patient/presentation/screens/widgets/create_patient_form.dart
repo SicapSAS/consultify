@@ -117,9 +117,9 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isLoading = ref.watch(patientProvider).isLoading;
-    final fieldGap = size.height * 0.02;
-    final rowGap = size.width * 0.03;
-    final documentTypeWidth = size.width * 0.32;
+    final fieldGap = 10.0;
+    final rowGap = 10.0;
+    final documentTypeWidth = 150.0;
 
     return Form(
       key: _formKey,
@@ -134,7 +134,7 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.user.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 20,
             ),
             validator: (value) => _requiredValidator(value, 'El nombre'),
           ),
@@ -157,13 +157,13 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
               Expanded(
                 child: CustomTextFormField(
                   controller: _documentIdController,
-                  label: 'Número de documento',
+                  label: 'N° documento',
                   showLabel: false,
                   keyboardType: TextInputType.number,
                   prefixIcon: Icon(
                     FontAwesomeIcons.idCard.data,
                     color: AppColors.secondary,
-                    size: size.width * 0.09,
+                    size: 20,
                   ),
                   validator: (value) => _requiredValidator(value, 'El documento'),
                 ),
@@ -175,11 +175,11 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
             controller: _phoneController,
             label: 'Teléfono',
             showLabel: false,
-            keyboardType: TextInputType.phone,
+            keyboardType: TextInputType.number,
             prefixIcon: Icon(
               FontAwesomeIcons.phone.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 20,
             ),
           ),
           SizedBox(height: fieldGap),
@@ -191,7 +191,7 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.envelope.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 20,
             ),
             validator: _emailValidator,
           ),
@@ -199,11 +199,12 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
           CustomFilledButton(
             text: isLoading
                 ? 'Guardando...'
-                : (_isEditing ? 'Actualizar paciente' : 'Crear paciente'),
+                : (_isEditing ? 'Actualizar' : 'Registrar'),
+            
             buttonColor: AppColors.primaryButton,
-            width: size.width * 0.4,
-            height: size.height * 0.05,
-            textSize: size.width * 0.03,
+            width: 200,
+            height: 50,
+            textSize: 20,
             onPressed: isLoading ? null : _onSubmit,
           ),
         ],

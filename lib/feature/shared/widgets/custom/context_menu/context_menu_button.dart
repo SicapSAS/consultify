@@ -31,8 +31,7 @@ class ContextMenuButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.02;
+    final radius = 10.0;
 
     return PopupMenuButton<T>(
       padding: EdgeInsets.zero,
@@ -41,7 +40,7 @@ class ContextMenuButton<T> extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),
       ),
-      offset: Offset(0, size.height * 0.01),
+      offset: Offset(0, 10),
       onSelected: onSelected,
       itemBuilder: (context) => items.map(
         (item) => PopupMenuItem<T>(
@@ -50,11 +49,11 @@ class ContextMenuButton<T> extends StatelessWidget {
         )
       ).toList(),
       child: child ?? Padding(
-        padding: padding ?? EdgeInsets.all(size.width * 0.01),
+        padding: padding ?? EdgeInsets.all(5),
         child: Icon(
           FontAwesomeIcons.ellipsisVertical.data,
           color: iconColor ?? AppColors.iconDark,
-          size: iconSize ?? size.width * 0.085
+          size: iconSize ?? 20
         )
       )
     );
@@ -68,7 +67,6 @@ class _ContextMenuItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final textColor = item.isDestructive
         ? AppColors.errorBackground
         : AppColors.textPrimary;
@@ -78,16 +76,16 @@ class _ContextMenuItemTile extends StatelessWidget {
         if (item.icon != null) ...[
           Icon(
             item.icon,
-            size: size.width * 0.08,
+            size: 20,
             color: textColor.withValues(alpha: item.isDestructive ? 1 : 0.7)
           ),
-          SizedBox(width: size.width * 0.03)
+          SizedBox(width: 10)
         ],
         Expanded(
           child: Text(
             item.label,
             style: TextStyle(
-              fontSize: size.width * 0.03,
+              fontSize: 15,
               color: textColor,
               fontWeight: FontWeight.w500
             )

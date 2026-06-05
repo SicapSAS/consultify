@@ -24,8 +24,8 @@ class PatientRepositoryImpl implements PatientRepository {
   }
   
   @override
-  Future<bool> deletePatient(String patientId) {
-    return dataSource.deletePatient(patientId);
+  Future<bool> updatePatientStatus(String patientId, bool isActive) {
+    return dataSource.updatePatientStatus(patientId, isActive);
   }
   
   @override

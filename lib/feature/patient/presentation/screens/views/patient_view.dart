@@ -18,25 +18,37 @@ class PatientView extends ConsumerWidget {
       case PatientMenuAction.update:
         context.push('/create-patient-screen', extra: patient);
       case PatientMenuAction.disable:
-        await _confirmDisable(context, ref, patient);
+        await _confirmStatusChange(context, ref, patient, isActive: false);
+      case PatientMenuAction.enable:
+        await _confirmStatusChange(context, ref, patient, isActive: true);
     }
   }
 
-  Future<void> _confirmDisable(
+  Future<void> _confirmStatusChange(
     BuildContext context,
     WidgetRef ref,
-    Patient patient,
-  ) async {
-    final confirmed = await DeactivatePatientDialog.show(context, patient);
+    Patient patient, {
+    required bool isActive,
+  }) async {
+    final confirmed = isActive
+        ? await DeactivatePatientDialog.showEnable(context, patient)
+        : await DeactivatePatientDialog.showDisable(context, patient);
 
     if (!confirmed || !context.mounted) return;
 
-    final success = await ref.read(patientProvider.notifier).deletePatient(patient.id);
+    final success = await ref
+        .read(patientProvider.notifier)
+        .updatePatientStatus(patient.id, isActive);
 
     if (!context.mounted) return;
 
     if (success) {
-      AppSnackBar.success(context, 'Paciente inhabilitado correctamente');
+      AppSnackBar.success(
+        context,
+        isActive
+            ? 'Paciente habilitado correctamente'
+            : 'Paciente inhabilitado correctamente',
+      );
       return;
     }
 
