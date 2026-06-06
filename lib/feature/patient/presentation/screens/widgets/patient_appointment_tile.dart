@@ -79,10 +79,9 @@ class PatientAppointmentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.02;
-    final rowGap = size.height * 0.006;
-    final cardPadding = size.width * 0.04;
+    final radius = 12.0;
+    final rowGap = 8.0;
+    final cardPadding = 16.0;
 
     return Container(
       decoration: BoxDecoration(
@@ -107,7 +106,7 @@ class PatientAppointmentTile extends StatelessWidget {
                 child: Text(
                   _formatDateTime(appointment.dateTime),
                   style: TextStyle(
-                    fontSize: size.width * 0.04,
+                    fontSize: 18,
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700
                   )
@@ -150,7 +149,7 @@ class PatientAppointmentTile extends StatelessWidget {
             )
           ],
           if (_hasText(appointment.evolutionNotes)) ...[
-            SizedBox(height: size.height * 0.012),
+            SizedBox(height: 12),
             _EvolutionNotesSection(
               evolutionNotes: appointment.evolutionNotes.trim()
             )

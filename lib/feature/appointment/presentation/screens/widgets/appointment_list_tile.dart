@@ -84,10 +84,10 @@ class AppointmentListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.02;
-    final rowGap = size.height * 0.006;
-    final cardPadding = size.width * 0.04;
+    
+    final radius = 12.0;
+    final rowGap = 8.0;
+    final cardPadding = 16.0;
 
     return Material(
       color: Colors.transparent,
@@ -117,7 +117,7 @@ class AppointmentListTile extends StatelessWidget {
                     child: Text(
                       _formatSchedule(appointment),
                       style: TextStyle(
-                        fontSize: size.width * 0.04,
+                        fontSize: 18,
                         color: AppColors.textPrimary,
                         fontWeight: FontWeight.w700,
                       ),

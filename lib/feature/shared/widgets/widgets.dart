@@ -33,4 +33,5 @@ export 'custom/confirm_action_dialog.dart';
 export 'custom/app_calendar.dart';
 export 'custom/app_date_picker.dart';
 export 'custom/app_time_picker.dart';
+export 'custom/custom_tab_section.dart';
 export 'utils/colombia_holidays.dart';

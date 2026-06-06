@@ -22,8 +22,7 @@ class PermissionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.1;
+    final radius = 12.0;
 
     return Material(
       color: AppColors.secondaryBackground,
@@ -32,13 +31,13 @@ class PermissionCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: size.width * 0.03,
-          vertical: size.height * 0.01
+          horizontal: 16,
+          vertical: 12
         ),
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(size.width * 0.02),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: iconColor.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(radius * 0.85)
@@ -46,10 +45,10 @@ class PermissionCard extends StatelessWidget {
               child: Icon(
                 icon,
                 color: iconColor,
-                size: size.width * 0.08 * 0.9
+                size: 14.4
               )
             ),
-            SizedBox(width: size.width * 0.04),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,17 +58,17 @@ class PermissionCard extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,
-                      fontSize: size.width * 0.04
+                      fontSize: 18
                     )
                   ),
-                  SizedBox(height: size.height * 0.004),
+                  SizedBox(height: 4),
                   Text(
                     subtitle,
                     style: TextStyle(
                       color: value ? AppColors.successBackground
                         : AppColors.textPrimary.withValues(alpha: 0.55),
                       fontWeight: FontWeight.w600,
-                      fontSize: size.width * 0.03
+                      fontSize: 18
                     )
                   )
                 ]

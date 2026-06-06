@@ -115,7 +115,6 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final isLoading = ref.watch(patientProvider).isLoading;
     final fieldGap = 10.0;
     final rowGap = 10.0;
@@ -195,7 +194,7 @@ class _CreatePatientFormState extends ConsumerState<CreatePatientForm> {
             ),
             validator: _emailValidator,
           ),
-          SizedBox(height: size.height * 0.04),
+          SizedBox(height: 16),
           CustomFilledButton(
             text: isLoading
                 ? 'Guardando...'

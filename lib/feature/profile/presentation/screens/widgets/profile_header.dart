@@ -14,8 +14,7 @@ class ProfileHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.04;
+    final radius = 12.0;
 
     return Material(
       color: AppColors.secondaryBackground,
@@ -24,8 +23,8 @@ class ProfileHeader extends ConsumerWidget {
       borderRadius: BorderRadius.circular(radius),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: size.width * 0.05,
-          vertical: size.height * 0.01,
+          horizontal: 16,
+          vertical: 12,
         ),
         child: Column(
           children: [Align(
@@ -36,7 +35,7 @@ class ProfileHeader extends ConsumerWidget {
                 'Cerrar sesión',
                 style: TextStyle(
                   color: AppColors.textPrimary,
-                  fontSize: size.width * 0.04,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold
                 )
               ),
@@ -46,22 +45,22 @@ class ProfileHeader extends ConsumerWidget {
               )
             )
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: 12),
             Row(
               children: [
                 CircleAvatar(
-                  radius: size.width * 0.08,
+                  radius: 12,
                   backgroundColor: AppColors.secondaryButton.withValues(alpha: 0.2),
                   child: Text(
                     _initialsFromName(name),
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,
-                      fontSize: size.width * 0.04
+                      fontSize: 18
                     )
                   )
                 ),
-                SizedBox(width: size.width * 0.04),
+                SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,29 +70,29 @@ class ProfileHeader extends ConsumerWidget {
                         style: TextStyle(
                           color: AppColors.textPrimary,
                           fontWeight: FontWeight.w700,
-                          fontSize: size.width * 0.04
+                          fontSize: 18
                         )
                       ),
-                      SizedBox(height: size.height * 0.006),
+                      SizedBox(height: 8),
                       Row(
                         children: [
                           Icon(
                             FontAwesomeIcons.user.data,
-                            size: size.width * 0.08,
+                            size: 14.4,
                             color: AppColors.textPrimary.withValues(alpha: 0.5)
                           ),
-                          SizedBox(width: size.width * 0.02),
+                          SizedBox(width: 8),
                           Text(
                             'Mi cuenta',
                             style: TextStyle(
                               color: AppColors.textPrimary.withValues(alpha: 0.55),
                               fontWeight: FontWeight.w500,
-                              fontSize: size.width * 0.03
+                              fontSize: 18
                             )
                           )
                         ]
                       ),
-                      SizedBox(height: size.height * 0.008),
+                      SizedBox(height: 8),
                     ]
                   )
                 )

@@ -38,7 +38,6 @@ class AppSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final borderSide = BorderSide(
       color: borderColor ?? AppColors.secondaryButtonDark,
       width: 1,
@@ -53,7 +52,7 @@ class AppSearchField extends StatelessWidget {
     final icon = leading ??
         Icon(
           Icons.search,
-          size: size.width * 0.08,
+          size: 14,
           color: borderColor ?? AppColors.secondaryButtonDark,
         );
 
@@ -76,7 +75,7 @@ class AppSearchField extends StatelessWidget {
               onChanged: onChanged,
               onSubmitted: onSubmitted,
               style: TextStyle(
-                fontSize: size.width * 0.03,
+                fontSize: 18,
                 color: AppColors.textPrimary,
               ),
               cursorColor: AppColors.secondaryButtonDark,
@@ -88,7 +87,7 @@ class AppSearchField extends StatelessWidget {
                 disabledBorder: InputBorder.none,
                 hintText: hintText,
                 hintStyle: TextStyle(
-                  fontSize: size.width * 0.03,
+                  fontSize: 18,
                   color: AppColors.textPrimary.withValues(alpha: 0.45),
                   fontWeight: FontWeight.w400,
                 ),

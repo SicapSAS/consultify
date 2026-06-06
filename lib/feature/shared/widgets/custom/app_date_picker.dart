@@ -110,7 +110,6 @@ class _AppDatePickerState extends State<AppDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final daysInMonth =
         DateUtils.getDaysInMonth(_focusedMonth.year, _focusedMonth.month);
     final firstWeekday =
@@ -123,10 +122,10 @@ class _AppDatePickerState extends State<AppDatePicker> {
       clipBehavior: Clip.antiAlias,
       child: Padding(
         padding: EdgeInsets.fromLTRB(
-          size.width * 0.05,
-          size.height * 0.025,
-          size.width * 0.05,
-          size.height * 0.02,
+          12,
+          12,
+          12,
+          12,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -136,20 +135,20 @@ class _AppDatePickerState extends State<AppDatePicker> {
               widget.title,
               style: TextStyle(
                 color: AppColors.textPrimary.withValues(alpha: 0.65),
-                fontSize: size.width * 0.035,
+                fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: size.height * 0.008),
+            SizedBox(height: 8),
             Text(
               _formatSelectedDate(),
               style: TextStyle(
                 color: AppColors.secondary,
-                fontSize: size.width * 0.075,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: size.height * 0.02),
+            SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
@@ -158,7 +157,7 @@ class _AppDatePickerState extends State<AppDatePicker> {
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w600,
-                      fontSize: size.width * 0.042,
+                      fontSize: 18,
                     ),
                   ),
                 ),
@@ -167,7 +166,7 @@ class _AppDatePickerState extends State<AppDatePicker> {
                   enabled: _canGoToPreviousMonth,
                   onTap: _goToPreviousMonth,
                 ),
-                SizedBox(width: size.width * 0.01),
+                SizedBox(width: 12),
                 _MonthNavButton(
                   icon: Icons.chevron_right_rounded,
                   enabled: _canGoToNextMonth,
@@ -175,9 +174,9 @@ class _AppDatePickerState extends State<AppDatePicker> {
                 ),
               ],
             ),
-            SizedBox(height: size.height * 0.015),
+            SizedBox(height: 8),
             _WeekdayRow(labels: _weekdayLabels),
-            SizedBox(height: size.height * 0.01),
+            SizedBox(height: 8),
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -209,7 +208,7 @@ class _AppDatePickerState extends State<AppDatePicker> {
               },
             ),
             if (widget.onCancel != null) ...[
-              SizedBox(height: size.height * 0.01),
+              SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -219,7 +218,7 @@ class _AppDatePickerState extends State<AppDatePicker> {
                     style: TextStyle(
                       color: AppColors.secondary,
                       fontWeight: FontWeight.w600,
-                      fontSize: size.width * 0.038,
+                      fontSize: 18,
                     ),
                   ),
                 ),
@@ -272,7 +271,6 @@ class _WeekdayRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return Row(
       children: labels.map((label) {
@@ -283,7 +281,7 @@ class _WeekdayRow extends StatelessWidget {
               style: TextStyle(
                 color: AppColors.textPrimary.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w600,
-                fontSize: size.width * 0.032,
+                fontSize: 18,
               ),
             ),
           ),
@@ -310,7 +308,6 @@ class _DatePickerDayCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     Color backgroundColor = Colors.transparent;
     Color textColor = AppColors.textPrimary;
@@ -343,7 +340,7 @@ class _DatePickerDayCell extends StatelessWidget {
             style: TextStyle(
               color: textColor,
               fontWeight: fontWeight,
-              fontSize: size.width * 0.038,
+              fontSize: 18,
             ),
           ),
         ),

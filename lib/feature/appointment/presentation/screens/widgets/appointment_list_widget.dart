@@ -13,14 +13,13 @@ class AppointmentListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.only(top: size.height * 0.02),
+      padding: EdgeInsets.only(top: 12),
       itemCount: appointments.length,
-      separatorBuilder: (context, _) => SizedBox(height: size.height * 0.015),
+      separatorBuilder: (context, _) => SizedBox(height: 12),
       itemBuilder: (context, index) {
         final appointment = appointments[index];
         return AppointmentListTile(

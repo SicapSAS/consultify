@@ -16,13 +16,11 @@ class AppBarLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final path = imagePath ?? _defaultLogoPath;
-    final logoWidth = width ?? size.width * 0.3;
 
     return Image.asset(
       path,
-      width: logoWidth,
+      width: 180,
       //height: height ?? kToolbarHeight - 16,
       fit: BoxFit.contain,
       errorBuilder: (_, __, ___) => const SizedBox.shrink(),

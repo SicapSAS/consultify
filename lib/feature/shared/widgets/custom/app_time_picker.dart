@@ -104,7 +104,6 @@ class _AppTimePickerState extends State<AppTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return Material(
       color: AppColors.secondaryBackground,
@@ -112,10 +111,10 @@ class _AppTimePickerState extends State<AppTimePicker> {
       clipBehavior: Clip.antiAlias,
       child: Padding(
         padding: EdgeInsets.fromLTRB(
-          size.width * 0.05,
-          size.height * 0.025,
-          size.width * 0.05,
-          size.height * 0.02,
+          12,
+          12,
+          12,
+          12,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -125,11 +124,11 @@ class _AppTimePickerState extends State<AppTimePicker> {
               widget.title,
               style: TextStyle(
                 color: AppColors.textPrimary.withValues(alpha: 0.65),
-                fontSize: size.width * 0.035,
+                fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: size.height * 0.012),
+            SizedBox(height: 8),
             _TimeDisplay(
               hour: _selectedHour,
               minute: _selectedMinute,
@@ -141,7 +140,7 @@ class _AppTimePickerState extends State<AppTimePicker> {
                 }
               },
             ),
-            SizedBox(height: size.height * 0.018),
+            SizedBox(height: 8),
             Row(
               children: [
                 if (_step == _TimePickerStep.minute)
@@ -156,7 +155,7 @@ class _AppTimePickerState extends State<AppTimePicker> {
                     constraints: const BoxConstraints(),
                   ),
                 if (_step == _TimePickerStep.minute)
-                  SizedBox(width: size.width * 0.02),
+                  SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     _step == _TimePickerStep.hour
@@ -165,13 +164,13 @@ class _AppTimePickerState extends State<AppTimePicker> {
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w600,
-                      fontSize: size.width * 0.04,
+                      fontSize: 18,
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: size.height * 0.012),
+            SizedBox(height: 8),
             if (_step == _TimePickerStep.hour)
               _OptionGrid(
                 options: _hourOptions,
@@ -187,7 +186,7 @@ class _AppTimePickerState extends State<AppTimePicker> {
                 onSelected: _selectMinute,
               ),
             if (widget.onCancel != null) ...[
-              SizedBox(height: size.height * 0.008),
+              SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -197,7 +196,7 @@ class _AppTimePickerState extends State<AppTimePicker> {
                     style: TextStyle(
                       color: AppColors.secondary,
                       fontWeight: FontWeight.w600,
-                      fontSize: size.width * 0.038,
+                      fontSize: 18,
                     ),
                   ),
                 ),
@@ -227,7 +226,6 @@ class _TimeDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final hourSelected = activeStep == _TimePickerStep.hour;
     final minuteSelected = activeStep == _TimePickerStep.minute;
 
@@ -238,15 +236,15 @@ class _TimeDisplay extends StatelessWidget {
           value: hour.toString().padLeft(2, '0'),
           isActive: hourSelected,
           onTap: onHourTap,
-          fontSize: size.width * 0.11,
+          fontSize: 18,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.015),
+          padding: EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             ':',
             style: TextStyle(
               color: AppColors.secondary,
-              fontSize: size.width * 0.09,
+              fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -255,7 +253,7 @@ class _TimeDisplay extends StatelessWidget {
           value: minute.toString().padLeft(2, '0'),
           isActive: minuteSelected,
           onTap: onMinuteTap,
-          fontSize: size.width * 0.11,
+          fontSize: 18,
         ),
       ],
     );
@@ -316,7 +314,6 @@ class _OptionGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return GridView.builder(
       shrinkWrap: true,
@@ -346,7 +343,7 @@ class _OptionGrid extends StatelessWidget {
                       ? AppColors.secondaryBackground
                       : AppColors.textPrimary,
                   fontWeight: FontWeight.w600,
-                  fontSize: size.width * 0.042,
+                  fontSize: 18,
                 ),
               ),
             ),

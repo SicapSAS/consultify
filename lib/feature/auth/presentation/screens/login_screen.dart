@@ -10,7 +10,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.primaryBackground,
@@ -22,19 +21,19 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: size.height * 0.2),
+                SizedBox(height: 32),
                 
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.05,
+                    horizontal: 16,
                   ),
                   child: Image.asset(
                     'assets/logo/consultify_transparente2.png',
-                    width: size.width * 0.8,
+                    width: 256,
                     fit: BoxFit.contain
                   )
                 ),
-                SizedBox(height: size.height * 0.1),
+                SizedBox(height: 32),
                 _LoginForm()
                 
               ]
@@ -59,14 +58,13 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
   @override
   Widget build(BuildContext context) {
     final loginForm = ref.watch(loginFormProvider);
-    final size = MediaQuery.of(context).size;
     ref.listen(authProvider, (previous, next) {
       if ( next.errorMessage.isEmpty) return;
       showSnackBar(context, next.errorMessage);
     });
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           CustomTextFormField(
@@ -78,7 +76,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
               loginForm.email.errorMessage 
               : null
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: 12),
           CustomTextFormField(
             label: 'Contraseña',
             showLabel: false,
@@ -103,9 +101,9 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
               }
             )
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: 12),
           SizedBox(
-            width: size.width * 0.5,
+            width: 128,
             child: CustomFilledButton(
               text: 'Iniciar sesión', 
               buttonColor: AppColors.primaryButton,
@@ -119,7 +117,6 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
   }
   
   void showSnackBar(BuildContext context, String errorMessage) {
-    final size = MediaQuery.of(context).size;
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -127,7 +124,7 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
           errorMessage,
           style: TextStyle(
             color: AppColors.textSecondary,
-            fontSize: size.width * 0.04,
+            fontSize: 18,
             fontWeight: FontWeight.bold
           )
         ),

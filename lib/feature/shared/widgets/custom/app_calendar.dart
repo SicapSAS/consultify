@@ -96,8 +96,7 @@ class _AppCalendarState extends State<AppCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.03;
+    final radius = 12.0;
     final daysInMonth = DateUtils.getDaysInMonth(widget.year, _displayedMonth);
     final firstWeekday = DateTime(widget.year, _displayedMonth, 1).weekday;
     final leadingEmptyCells = firstWeekday - 1;
@@ -117,7 +116,7 @@ class _AppCalendarState extends State<AppCalendar> {
           ),
         ],
       ),
-      padding: EdgeInsets.all(size.width * 0.04),
+      padding: EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -126,12 +125,12 @@ class _AppCalendarState extends State<AppCalendar> {
             onPrevious: () => _changeMonth(-1),
             onNext: () => _changeMonth(1),
           ),
-          SizedBox(height: size.height * 0.015),
+          SizedBox(height: 12),
           _WeekdayRow(
             labels: _weekdayLabels,
             sundayHeaderColor: _nonWorkingHeaderText,
           ),
-          SizedBox(height: size.height * 0.01),
+          SizedBox(height: 12),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -187,7 +186,6 @@ class _CalendarHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return Row(
       children: [
@@ -202,7 +200,7 @@ class _CalendarHeader extends StatelessWidget {
             style: TextStyle(
               color: AppColors.textPrimary,
               fontWeight: FontWeight.w700,
-              fontSize: size.width * 0.042,
+              fontSize: 18,
             ),
           ),
         ),
@@ -256,7 +254,6 @@ class _WeekdayRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return Row(
       children: List.generate(labels.length, (index) {
@@ -271,7 +268,7 @@ class _WeekdayRow extends StatelessWidget {
                     ? sundayHeaderColor
                     : AppColors.textPrimary.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w700,
-                fontSize: size.width * 0.032,
+                fontSize: 18,
               ),
             ),
           ),
@@ -302,7 +299,6 @@ class _DayCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     Color backgroundColor = Colors.transparent;
     Color textColor = AppColors.textPrimary;
     Border? border;
@@ -341,7 +337,7 @@ class _DayCell extends StatelessWidget {
             style: TextStyle(
               color: textColor,
               fontWeight: isSelected || isToday ? FontWeight.w700 : FontWeight.w500,
-              fontSize: size.width * 0.035,
+              fontSize: 18,
             ),
           ),
         ),

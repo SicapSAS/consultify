@@ -14,17 +14,16 @@ class CustomLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
 
     return Center(
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: size.width * 0.08
+          horizontal: 16
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(
-            size.width * 0.04
+            12
           ),
           child: BackdropFilter(
             filter: ImageFilter.blur(
@@ -34,29 +33,29 @@ class CustomLoadingWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                  size.width * 0.04
+                  12
                 )
               ),
               padding: EdgeInsets.symmetric(
-                vertical: size.height * 0.03,
-                horizontal: size.width * 0.06
+                vertical: 12,
+                horizontal: 16
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  GradientSpinner(size: size.width * 0.18),
-                  SizedBox(height: size.height * 0.02),
+                  GradientSpinner(size: 14),
+                  SizedBox(height: 12),
                   Text(
                     message ?? 'Cargando...',
                     textAlign: TextAlign.center,
                     style: textTheme.titleMedium?.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.bold,
-                      fontSize: size.width * 0.04,
+                      fontSize: 18,
                       letterSpacing: 0.2
                     )
                   ),
-                  SizedBox(height: size.height * 0.006),
+                  SizedBox(height: 8),
                   Opacity(
                     opacity: 0.75,
                     child: Text(
@@ -64,7 +63,7 @@ class CustomLoadingWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: textTheme.bodyMedium?.copyWith(
                         color: AppColors.textPrimary,
-                        fontSize: size.width * 0.04,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold
                       )
                     )
@@ -112,8 +111,7 @@ class _GradientSpinnerState extends State<GradientSpinner>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final thickness = size.width * 0.12;
+    final thickness = 14.4;
 
     return SizedBox(
       width: widget.size,

@@ -46,11 +46,10 @@ class ClinicListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.02;
-    final rowGap = size.height * 0.006;
-    final cardPadding = size.width * 0.04;
-    final menuIconSize = size.width * 0.085;
+    final radius = 12.0;
+    final rowGap = 8.0;
+    final cardPadding = 16.0;
+    final menuIconSize = 13.6;
 
     final isInactive = !clinic.isActive;
 
@@ -86,21 +85,21 @@ class ClinicListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: size.width * 0.12,
-                      height: size.width * 0.12,
+                      width: 19,
+                      height: 19,
                       decoration: BoxDecoration(
                         color: AppColors.secondaryButton.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(
-                          size.width * 0.07
+                          11
                         )
                       ),
                       child: Icon(
                         FontAwesomeIcons.hospital.data,
                         color: AppColors.secondary,
-                        size: size.width * 0.09
+                        size: 14
                       )
                     ),
-                    SizedBox(width: size.width * 0.03),
+                    SizedBox(width: 4),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +107,7 @@ class ClinicListTile extends StatelessWidget {
                           Text(
                             clinic.name,
                             style: TextStyle(
-                              fontSize: size.width * 0.04,
+                              fontSize: 18,
                               color: AppColors.textPrimary,
                               fontWeight: FontWeight.w700,
                             ),
@@ -174,7 +173,7 @@ class ClinicListTile extends StatelessWidget {
                   onSelected: onMenuAction,
                   iconColor: AppColors.iconDark,
                   iconSize: menuIconSize,
-                  padding: EdgeInsets.all(size.width * 0.01),
+                  padding: EdgeInsets.all(4),
                 )
               )
             )
@@ -197,21 +196,20 @@ class _ClinicDetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           icon,
-          size: size.width * 0.08,
+          size: 12,
           color: AppColors.textPrimary.withValues(alpha: 0.45)
         ),
-        SizedBox(width: size.width * 0.02),
+        SizedBox(width: 4),
         Expanded(
           child: Text(
             text,
             style: TextStyle(
-              fontSize: size.width * 0.03,
+              fontSize: 18,
               color: AppColors.textPrimary.withValues(alpha: 0.7),
               fontWeight: FontWeight.w500
             ),

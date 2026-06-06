@@ -6,13 +6,12 @@ class CreateAppointmentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
-        size.width * 0.06,
-        size.height * 0.03,
-        size.width * 0.06,
-        size.height * 0.04,
+        16,
+        12,
+        16,
+        16,
       ),
       child: const CreateAppointmentForm(),
     );

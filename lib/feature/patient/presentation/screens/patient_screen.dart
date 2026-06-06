@@ -8,7 +8,6 @@ class PatientScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
       appBar: CustomAppBar(
@@ -18,8 +17,8 @@ class PatientScreen extends StatelessWidget {
       body: const PatientView(),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(
-          bottom: size.height * 0.02,
-          right: size.width * 0.02,
+          bottom: CustomBottomNavigationBar.reservedBottomSpace(context),
+          right: 8,
         ),
         child: LabeledFloatingActionButton(
           label: 'Crear paciente',

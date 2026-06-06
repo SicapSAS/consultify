@@ -43,14 +43,13 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     final colors = Theme.of(context).colorScheme;
 
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.circular(
-        size.width * 0.04
+        12
       )
     );
 

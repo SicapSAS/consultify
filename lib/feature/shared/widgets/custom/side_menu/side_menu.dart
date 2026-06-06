@@ -28,9 +28,13 @@ class SideMenuState extends ConsumerState<SideMenu> {
     }
   }
 
+  void _navigateAndClose(VoidCallback navigation) {
+    navigation();
+    widget.scaffoldKey.currentState?.closeDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final currentRoute = _getCurrentRoute();
     final authState = ref.watch(authProvider);
     final userRole = authState.user?.role;
@@ -40,7 +44,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
       elevation: 1,
       children: [
         
-        SizedBox(height: size.height * 0.03),
+        SizedBox(height: 15),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 15,
@@ -58,15 +62,12 @@ class SideMenuState extends ConsumerState<SideMenu> {
           label: 'Inicio',
           isSelected: currentRoute == '/home',
           route: '/home',
-          onTap: () {
-            context.go('/home');
-            widget.scaffoldKey.currentState?.closeDrawer();
-          }
+          onTap: () => _navigateAndClose(() => context.go('/home')),
         ),
 
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.05,
+            horizontal: 16,
             //vertical: AppDimens.heightPercentage(0.02, context),
           ),
           child: Divider()
@@ -78,9 +79,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             icon: FontAwesomeIcons.building.data,
             label: 'Clínicas',
             isSelected: currentRoute == '/clinic-screen',
-            onTap: () {
-              context.push('/clinic-screen');
-            }
+            onTap: () => _navigateAndClose(() => context.go('/clinic-screen')),
           )
         ],
         if (userRole == Roles.adminClinic) ...[
@@ -89,60 +88,46 @@ class SideMenuState extends ConsumerState<SideMenu> {
             icon: FontAwesomeIcons.calendarCheck.data,
             label: 'Citas',
             isSelected: currentRoute == '/appointment-screen',
-            onTap: () {
-              context.push( '/appointment-screen' );
-            }
+            onTap: () => _navigateAndClose(() => context.go('/appointment-screen')),
           ),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.calendarDays.data,
             label: 'Agendas',
             isSelected: currentRoute == '/companies-screen',
-            onTap: () {
-              context.push( '/companies-screen' );
-            }
+            onTap: () => _navigateAndClose(() => context.go('')),
           ),
           CustomSideMenuSectionTitle(label: 'Pacientes'),
           CustomSideMenuItem(
             icon: Icons.person_add_alt_1_outlined,
             label: 'Pacientes',
             isSelected: currentRoute == '/patient-screen',
-            onTap: () {
-              context.push( '/patient-screen' );
-            }
+            onTap: () => _navigateAndClose(() => context.go('/patient-screen')),
           ),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userPlus.data,
             label: 'Admiciones',
             isSelected: currentRoute == '/create-patient-screen',
-            onTap: () {
-              context.push('/create-patient-screen');
-            }
+            onTap: () => _navigateAndClose(() => context.go('/create-patient-screen')),
           ),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userDoctor.data,
             label: 'Atenciones',
-            isSelected: currentRoute == '/companies-screen',
-            onTap: () {
-              context.push( '/companies-screen' );
-            }
+            isSelected: currentRoute == '',
+            onTap: () => _navigateAndClose(() => context.go('')),
           ),
           CustomSideMenuSectionTitle(label: 'Configuración'),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.gear.data,
             label: 'Parametrizar',
-            isSelected: currentRoute == '/companies-screen',
-            onTap: () {
-              context.push( '/companies-screen' );
-            }
+            isSelected: currentRoute == '',
+            onTap: () => _navigateAndClose(() => context.go('')),
           ),
           CustomSideMenuSectionTitle(label: 'Doctores'),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userDoctor.data,
             label: 'Doctores',
             isSelected: currentRoute == '/doctors-screen',
-            onTap: () {
-              context.push( '/doctors-screen' );
-            }
+            onTap: () => _navigateAndClose(() => context.go('/doctors-screen')),
           )
         ]
       ]

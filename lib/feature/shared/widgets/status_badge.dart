@@ -13,24 +13,23 @@ class StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final text = label.trim().isEmpty ? '—' : label.trim();
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: size.width * 0.025,
-        vertical: size.height * 0.004,
+        horizontal: 12,
+        vertical: 4,
       ),
       decoration: BoxDecoration(
         color: accentColor.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(
-          size.width * 0.01
+          12
         )
       ),
       child: Text(
         text,
         style: TextStyle(
           color: accentColor,
-          fontSize: size.width * 0.03,
+          fontSize: 18,
           fontWeight: FontWeight.w600
         )
       )

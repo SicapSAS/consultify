@@ -80,8 +80,7 @@ class _CreateClinicFormState extends ConsumerState<CreateClinicForm> {
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(clinicProvider).isLoading;
-    final size = MediaQuery.of(context).size;
-    final fieldGap = size.height * 0.02;
+    final fieldGap = 12.0;
 
     return Form(
       key: _formKey,
@@ -96,7 +95,7 @@ class _CreateClinicFormState extends ConsumerState<CreateClinicForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.hospital.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 14,
             ),
             validator: (value) => _requiredValidator(value, 'El nombre'),
           ),
@@ -109,7 +108,7 @@ class _CreateClinicFormState extends ConsumerState<CreateClinicForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.idCard.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 14,
             ),
             validator: (value) => _requiredValidator(value, 'El NIT'),
           ),
@@ -122,7 +121,7 @@ class _CreateClinicFormState extends ConsumerState<CreateClinicForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.locationDot.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 14,
             ),
             validator: (value) => _requiredValidator(value, 'La dirección'),
           ),
@@ -135,7 +134,7 @@ class _CreateClinicFormState extends ConsumerState<CreateClinicForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.city.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 14,
             ),
             validator: (value) => _requiredValidator(value, 'La ciudad'),
           ),
@@ -148,7 +147,7 @@ class _CreateClinicFormState extends ConsumerState<CreateClinicForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.phone.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 14,
             ),
           ),
           SizedBox(height: fieldGap),
@@ -160,17 +159,17 @@ class _CreateClinicFormState extends ConsumerState<CreateClinicForm> {
             prefixIcon: Icon(
               FontAwesomeIcons.envelope.data,
               color: AppColors.secondary,
-              size: size.width * 0.09,
+              size: 14,
             ),
             validator: _emailValidator,
           ),
-          SizedBox(height: size.height * 0.04),
+          SizedBox(height: 16),
           CustomFilledButton(
             text: isLoading ? 'Guardando...' : 'Crear clínica',
             buttonColor: AppColors.primaryButton,
-            width: size.width * 0.4,
-            height: size.height * 0.05,
-            textSize: size.width * 0.03,
+            width: 128,
+            height: 50,
+            textSize: 18,
             onPressed: isLoading ? null : _onSubmit,
           ),
         ],

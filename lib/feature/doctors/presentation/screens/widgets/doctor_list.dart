@@ -11,19 +11,18 @@ class DoctorList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return ListView.separated(
       physics: const AlwaysScrollableScrollPhysics(),
       padding: EdgeInsets.fromLTRB(
-        size.width * 0.04,
-        size.height * 0.02,
-        size.width * 0.04,
-        size.height * 0.04,
+        16,
+        12,
+        16,
+        16,
       ),
       itemCount: doctors.length,
       separatorBuilder: (context, _) => SizedBox(
-        height: size.height * 0.015,
+        height: 12,
       ),
       itemBuilder: (context, index) {
         return DoctorCard(

@@ -17,10 +17,16 @@ class AppointmentScreen extends StatelessWidget {
         backRoute: '/home',
       ),
       body: AppointmentView(),
-      floatingActionButton: LabeledFloatingActionButton(
-        label: 'Nueva Cita',
-        heroTag: 'create-appointment-fab',
-        onPressed: () => context.push('/create-appointment-screen'),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+          bottom: CustomBottomNavigationBar.reservedBottomSpace(context),
+          right: 6,
+        ),
+        child: LabeledFloatingActionButton(
+          label: 'Nueva Cita',
+          heroTag: 'create-appointment-fab',
+          onPressed: () => context.push('/create-appointment-screen'),
+        ),
       ),
     );
   }

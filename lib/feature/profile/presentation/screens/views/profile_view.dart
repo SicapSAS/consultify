@@ -9,7 +9,6 @@ class ProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
     final user = ref.watch(authProvider).user;
 
     if (user == null) {
@@ -18,21 +17,21 @@ class ProfileView extends ConsumerWidget {
           'No hay sesión activa',
           style: TextStyle(
             color: AppColors.textPrimary.withValues(alpha: 0.6),
-            fontSize: size.width * 0.04
+            fontSize: 18
           )
         )
       );
     }
 
-    final horizontalPadding = size.width * 0.06;
-    final verticalGap = size.height * 0.02;
+    final horizontalPadding = 16.0;
+    final verticalGap = 12.0;
 
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
         horizontalPadding,
-        size.height * 0.02,
+        verticalGap,
         horizontalPadding,
-        size.height * 0.04
+        verticalGap
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,7 +44,7 @@ class ProfileView extends ConsumerWidget {
             label: 'Correo electrónico',
             value: user.email,
           ),
-          SizedBox(height: verticalGap * 0.75),
+          SizedBox(height: 5),
           ProfileInfoTile(
             icon: FontAwesomeIcons.idBadge.data,
             label: 'Rol',

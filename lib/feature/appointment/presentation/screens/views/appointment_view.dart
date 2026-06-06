@@ -2,7 +2,6 @@ import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AppointmentView extends ConsumerStatefulWidget {
   const AppointmentView({super.key});
@@ -23,7 +22,6 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(appointmentProvider);
-    final size = MediaQuery.of(context).size;
 
     if (state.isLoading && !state.hasLoadedOnce) {
       return const CustomLoadingWidget(
@@ -44,10 +42,13 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       child: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: EdgeInsets.fromLTRB(
-          size.width * 0.04,
-          size.height * 0.02,
-          size.width * 0.04,
-          size.height * 0.12,
+          16,
+          8,
+          16,
+          CustomBottomNavigationBar.scrollBottomPadding(
+            context,
+            withFloatingActionButton: true,
+          ),
         ),
         children: [
           AppointmentFilterBar(
@@ -56,7 +57,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
           ),
           if (state.isLoading && state.hasLoadedOnce)
             Padding(
-              padding: EdgeInsets.only(top: size.height * 0.02),
+              padding: EdgeInsets.only(top: 16),
               child: const Center(
                 child: SizedBox(
                   width: 28,
@@ -68,17 +69,8 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
                 ),
               ),
             ),
-          if (!state.isLoading && state.appointments.isEmpty)
-            Padding(
-              padding: EdgeInsets.only(top: size.height * 0.06),
-              child: CustomEmptyStateWidget(
-                message: state.filter.emptyMessage,
-                icon: FontAwesomeIcons.calendarDays.data,
-                iconColor: AppColors.secondary.withValues(alpha: 0.5),
-              ),
-            )
-          else if (!state.isLoading)
-            AppointmentListWidget(
+          if (!state.isLoading)
+            AppointmentListSection(
               appointments: state.appointments,
             ),
         ],
