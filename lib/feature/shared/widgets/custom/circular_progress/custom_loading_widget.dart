@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
@@ -6,10 +5,13 @@ import 'package:consultify/feature/feature.dart';
 class CustomLoadingWidget extends StatelessWidget {
   final String? message;
   final String? subtitle;
+  final double spinnerSize;
+
   const CustomLoadingWidget({
     super.key,
     this.message,
     this.subtitle,
+    this.spinnerSize = 72,
   });
 
   @override
@@ -18,62 +20,35 @@ class CustomLoadingWidget extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(
-            12
-          ),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 14, 
-              sigmaY: 14
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GradientSpinner(size: spinnerSize),
+            const SizedBox(height: 16),
+            Text(
+              message ?? 'Cargando...',
+              textAlign: TextAlign.center,
+              style: textTheme.titleMedium?.copyWith(
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+                letterSpacing: 0.2,
+              ),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  12
-                )
+            const SizedBox(height: 6),
+            Text(
+              subtitle ?? 'Esto puede tardar unos segundos…',
+              textAlign: TextAlign.center,
+              style: textTheme.bodyMedium?.copyWith(
+                color: AppColors.textPrimary.withValues(alpha: 0.65),
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
               ),
-              padding: EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: 16
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GradientSpinner(size: 14),
-                  SizedBox(height: 12),
-                  Text(
-                    message ?? 'Cargando...',
-                    textAlign: TextAlign.center,
-                    style: textTheme.titleMedium?.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      letterSpacing: 0.2
-                    )
-                  ),
-                  SizedBox(height: 8),
-                  Opacity(
-                    opacity: 0.75,
-                    child: Text(
-                      subtitle ?? 'Esto puede tardar unos segundos…',
-                      textAlign: TextAlign.center,
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                      )
-                    )
-                  )
-                ]
-              )
-            )
-          )
-        )
-      )
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -82,8 +57,8 @@ class GradientSpinner extends StatefulWidget {
   final double size;
 
   const GradientSpinner({
-    super.key, 
-    required this.size
+    super.key,
+    required this.size,
   });
 
   @override
@@ -99,7 +74,7 @@ class _GradientSpinnerState extends State<GradientSpinner>
     super.initState();
     _ctrl = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2)
+      duration: const Duration(milliseconds: 1200),
     )..repeat();
   }
 
@@ -111,7 +86,8 @@ class _GradientSpinnerState extends State<GradientSpinner>
 
   @override
   Widget build(BuildContext context) {
-    final thickness = 14.4;
+    final thickness = widget.size * 0.1;
+    final innerSize = widget.size - thickness * 2.4;
 
     return SizedBox(
       width: widget.size,
@@ -121,42 +97,34 @@ class _GradientSpinnerState extends State<GradientSpinner>
         builder: (_, child) {
           return Transform.rotate(
             angle: _ctrl.value * 6.28318,
-            child: child
+            child: child,
           );
         },
         child: CustomPaint(
+          size: Size.square(widget.size),
           painter: SweepRingPainter(
             thickness: thickness,
             colors: [
+              AppColors.infoBackground.withValues(alpha: 0.05),
+              AppColors.secondaryButton.withValues(alpha: 0.45),
+              AppColors.secondaryButton,
               AppColors.infoBackground.withValues(alpha: 0.15),
-              AppColors.primary,
-              AppColors.infoBackground.withValues(alpha: 0.15)
-            ]
+            ],
+            stops: const [0.0, 0.35, 0.7, 1.0],
           ),
           child: Center(
-            child: Container(
-              width:  thickness * 2.2,
-              height: thickness * 2.2,
-              decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.65),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.15),
-                    blurRadius: 2,
-                    spreadRadius: 1
-                  )
-                ]
-              ),
+            child: SizedBox(
+              width: innerSize,
+              height: innerSize,
               child: Icon(
                 Icons.refresh_rounded,
-                size: 25,
-                color: AppColors.iconDark
-              )
-            )
-          )
-        )
-      )
+                size: widget.size * 0.34,
+                color: AppColors.secondaryButton,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

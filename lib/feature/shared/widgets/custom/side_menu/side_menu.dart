@@ -91,10 +91,10 @@ class SideMenuState extends ConsumerState<SideMenu> {
             onTap: () => _navigateAndClose(() => context.go('/appointment-screen')),
           ),
           CustomSideMenuItem(
-            icon: FontAwesomeIcons.calendarDays.data,
-            label: 'Agendas',
-            isSelected: currentRoute == '/companies-screen',
-            onTap: () => _navigateAndClose(() => context.go('')),
+            icon: FontAwesomeIcons.userDoctor.data,
+            label: 'Admiciones',
+            isSelected: currentRoute == '',
+            onTap: () => _navigateAndClose(() => context.go('/')),
           ),
           CustomSideMenuSectionTitle(label: 'Pacientes'),
           CustomSideMenuItem(
@@ -103,32 +103,23 @@ class SideMenuState extends ConsumerState<SideMenu> {
             isSelected: currentRoute == '/patient-screen',
             onTap: () => _navigateAndClose(() => context.go('/patient-screen')),
           ),
-          CustomSideMenuItem(
-            icon: FontAwesomeIcons.userPlus.data,
-            label: 'Admiciones',
-            isSelected: currentRoute == '/create-patient-screen',
-            onTap: () => _navigateAndClose(() => context.go('/create-patient-screen')),
-          ),
-          CustomSideMenuItem(
-            icon: FontAwesomeIcons.userDoctor.data,
-            label: 'Atenciones',
-            isSelected: currentRoute == '',
-            onTap: () => _navigateAndClose(() => context.go('')),
-          ),
-          CustomSideMenuSectionTitle(label: 'Configuración'),
-          CustomSideMenuItem(
-            icon: FontAwesomeIcons.gear.data,
-            label: 'Parametrizar',
-            isSelected: currentRoute == '',
-            onTap: () => _navigateAndClose(() => context.go('')),
-          ),
+          
+          
+          
           CustomSideMenuSectionTitle(label: 'Doctores'),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userDoctor.data,
             label: 'Doctores',
             isSelected: currentRoute == '/doctors-screen',
             onTap: () => _navigateAndClose(() => context.go('/doctors-screen')),
-          )
+          ),
+          CustomSideMenuSectionTitle(label: 'Configuración'),
+          CustomSideMenuItem(
+            icon: FontAwesomeIcons.gear.data,
+            label: 'Horarios',
+            isSelected: currentRoute == '',
+            onTap: () => _navigateAndClose(() => context.go('')),
+          ),
         ]
       ]
     );
