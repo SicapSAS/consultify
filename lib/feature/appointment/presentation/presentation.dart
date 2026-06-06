@@ -1,6 +1,7 @@
 
 
 export 'navigation/appointment_routes.dart';
+export 'screens/appointment_detail_screen.dart';
 export 'screens/appointment_screen.dart';
 export 'screens/create_appointment_screen.dart';
 export 'screens/views/views.dart';

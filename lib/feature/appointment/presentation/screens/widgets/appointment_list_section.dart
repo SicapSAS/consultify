@@ -1,5 +1,6 @@
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AppointmentListSection extends StatelessWidget {
   final List<AppointmentList> appointments;
@@ -74,6 +75,9 @@ class AppointmentListSection extends StatelessWidget {
 
         return AppointmentListWidget(
           appointments: filteredAppointments,
+          onAppointmentTap: (appointment) {
+            context.push('/appointment-screen/${appointment.id}');
+          },
         );
       },
     );

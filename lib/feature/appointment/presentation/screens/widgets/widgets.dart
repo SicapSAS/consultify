@@ -1,3 +1,11 @@
+export 'appointment_detail_body.dart';
+export 'appointment_detail_header.dart';
+export 'appointment_detail_helpers.dart';
+export 'appointment_detail_notes_section.dart';
+export 'appointment_detail_patient_section.dart';
+export 'appointment_detail_payment_section.dart';
+export 'appointment_detail_professional_section.dart';
+export 'appointment_detail_section_card.dart';
 export 'appointment_filter_bar.dart';
 export 'appointment_list_section.dart';
 export 'appointment_list_tile.dart';

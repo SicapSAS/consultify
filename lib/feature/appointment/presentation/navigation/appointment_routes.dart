@@ -11,6 +11,15 @@ class AppointmentRoutes {
     GoRoute(
       path: '/appointment-screen',
       builder: (context, state) => const AppointmentScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) {
+            final appointmentId = state.pathParameters['id'] ?? '';
+            return AppointmentDetailScreen(appointmentId: appointmentId);
+          },
+        ),
+      ],
     ),
     GoRoute(
       path: '/create-appointment-screen',
