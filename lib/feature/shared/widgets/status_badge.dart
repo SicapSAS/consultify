@@ -22,14 +22,14 @@ class StatusBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: accentColor.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(
-          12
+          10
         )
       ),
       child: Text(
         text,
         style: TextStyle(
           color: accentColor,
-          fontSize: 18,
+          fontSize: 13,
           fontWeight: FontWeight.w600
         )
       )

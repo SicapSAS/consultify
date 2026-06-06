@@ -1,9 +1,11 @@
+import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:consultify/config/config.dart';
 
 typedef CustomTabContentBuilder = Widget Function(
   BuildContext context,
   int index,
+  String searchQuery,
 );
 
 class CustomTabSection extends StatefulWidget {
@@ -12,6 +14,8 @@ class CustomTabSection extends StatefulWidget {
   final CustomTabContentBuilder contentBuilder;
   final int initialIndex;
   final ValueChanged<int>? onTabChanged;
+  final String? searchHint;
+  final bool Function(int tabIndex)? showSearchForTab;
 
   const CustomTabSection({
     super.key,
@@ -20,6 +24,8 @@ class CustomTabSection extends StatefulWidget {
     required this.contentBuilder,
     this.initialIndex = 0,
     this.onTabChanged,
+    this.searchHint,
+    this.showSearchForTab,
   }) : assert(tabs.length >= 2, 'Debe haber al menos 2 pestañas');
 
   static Widget emptyMessageBox(BuildContext context, String message) {
@@ -52,6 +58,8 @@ class CustomTabSection extends StatefulWidget {
 class _CustomTabSectionState extends State<CustomTabSection>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -84,16 +92,25 @@ class _CustomTabSectionState extends State<CustomTabSection>
 
   void _handleTabChange() {
     if (!mounted) return;
-    setState(() {});
     if (!_tabController.indexIsChanging) {
+      if (_searchQuery.isNotEmpty) {
+        _searchController.clear();
+        _searchQuery = '';
+      }
       widget.onTabChanged?.call(_tabController.index);
     }
+    setState(() {});
+  }
+
+  void _handleSearchChanged(String value) {
+    setState(() => _searchQuery = value);
   }
 
   @override
   void dispose() {
     _tabController.removeListener(_handleTabChange);
     _tabController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -139,7 +156,20 @@ class _CustomTabSectionState extends State<CustomTabSection>
           ),
         ),
         SizedBox(height: 12),
-        widget.contentBuilder(context, _tabController.index),
+        if (widget.searchHint != null &&
+            (widget.showSearchForTab?.call(_tabController.index) ?? true)) ...[
+          AppSearchField(
+            controller: _searchController,
+            hintText: widget.searchHint,
+            onChanged: _handleSearchChanged,
+          ),
+          SizedBox(height: 12),
+        ],
+        widget.contentBuilder(
+          context,
+          _tabController.index,
+          _searchQuery,
+        ),
       ],
     );
   }

@@ -83,7 +83,7 @@ class PatientAppointmentsSection extends StatelessWidget {
         'Atendidas',
         'Canceladas',
       ],
-      contentBuilder: (context, index) {
+      contentBuilder: (context, index, searchQuery) {
         final appointments = _appointmentsForTab(index);
 
         if (appointments.isEmpty) {

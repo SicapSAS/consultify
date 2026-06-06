@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:consultify/config/config.dart';
 
+/// Utilidad para filtrar listas por texto de búsqueda (coincidencia parcial, sin distinguir mayúsculas).
+class ListSearchFilter {
+  const ListSearchFilter._();
+
+  static bool matches(String query, String searchableText) {
+    final normalizedQuery = query.trim().toLowerCase();
+    if (normalizedQuery.isEmpty) return true;
+    return searchableText.toLowerCase().contains(normalizedQuery);
+  }
+
+  static List<T> filter<T>(
+    List<T> items,
+    String query,
+    String Function(T item) searchableText,
+  ) {
+    final normalizedQuery = query.trim().toLowerCase();
+    if (normalizedQuery.isEmpty) return items;
+
+    return items
+        .where((item) => matches(query, searchableText(item)))
+        .toList();
+  }
+}
+
 /// Campo de búsqueda con borde redondeado e ícono a la izquierda, pensado para reutilizar en varias pantallas.
 class AppSearchField extends StatelessWidget {
   const AppSearchField({
@@ -34,17 +58,17 @@ class AppSearchField extends StatelessWidget {
   final Color? backgroundColor;
   final EdgeInsetsGeometry? contentPadding;
 
-  static const double _radius = 22;
+  static const double _radius = 15;
 
   @override
   Widget build(BuildContext context) {
     final borderSide = BorderSide(
-      color: borderColor ?? AppColors.secondaryButtonDark,
+      color: borderColor ?? AppColors.infoBackground,
       width: 1,
     );
 
     final decoration = BoxDecoration(
-      color: backgroundColor ?? AppColors.tertiaryBackground,
+      color: backgroundColor ?? AppColors.primaryBackground,
       borderRadius: BorderRadius.circular(_radius),
       border: Border.fromBorderSide(borderSide),
     );
@@ -52,7 +76,7 @@ class AppSearchField extends StatelessWidget {
     final icon = leading ??
         Icon(
           Icons.search,
-          size: 14,
+          size: 18,
           color: borderColor ?? AppColors.secondaryButtonDark,
         );
 
@@ -61,7 +85,7 @@ class AppSearchField extends StatelessWidget {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 14, right: 8),
+            padding:  EdgeInsets.only(left: 14, right: 8),
             child: icon,
           ),
           Expanded(

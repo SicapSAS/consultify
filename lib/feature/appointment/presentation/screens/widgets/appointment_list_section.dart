@@ -49,18 +49,26 @@ class AppointmentListSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTabSection(
       title: 'Citas',
+      searchHint: 'Buscar por nombre de paciente',
+      showSearchForTab: (index) => _appointmentsForTab(index).isNotEmpty,
       tabs: const [
         'Confirmadas',
         'Pendientes',
         'No atendidas',
       ],
-      contentBuilder: (context, index) {
-        final filteredAppointments = _appointmentsForTab(index);
+      contentBuilder: (context, index, searchQuery) {
+        final filteredAppointments = ListSearchFilter.filter(
+          _appointmentsForTab(index),
+          searchQuery,
+          (appointment) => appointment.patientId.name,
+        );
 
         if (filteredAppointments.isEmpty) {
           return CustomTabSection.emptyMessageBox(
             context,
-            emptyMessageForTab(index),
+            searchQuery.trim().isNotEmpty
+                ? 'No se encontraron citas para "$searchQuery"'
+                : emptyMessageForTab(index),
           );
         }
 

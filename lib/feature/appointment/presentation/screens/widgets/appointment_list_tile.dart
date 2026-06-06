@@ -117,12 +117,13 @@ class AppointmentListTile extends StatelessWidget {
                     child: Text(
                       _formatSchedule(appointment),
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 17,
                         color: AppColors.textPrimary,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
+                  SizedBox(width: 8),
                   StatusBadge(
                     label: _statusLabel(appointment.status),
                     accentColor: _statusColor(appointment.status),
