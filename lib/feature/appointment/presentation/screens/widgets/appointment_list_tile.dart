@@ -40,13 +40,15 @@ class AppointmentListTile extends StatelessWidget {
       );
     }
 
-    items.add(
-      const ContextMenuItem<AppointmentMenuAction>(
-        value: AppointmentMenuAction.reschedule,
-        label: 'Reagendar',
-        icon: Icons.calendar_month_outlined,
-      ),
-    );
+    if (appointment.status.toUpperCase() != 'CANCELLED') {
+      items.add(
+        const ContextMenuItem<AppointmentMenuAction>(
+          value: AppointmentMenuAction.reschedule,
+          label: 'Reagendar',
+          icon: Icons.calendar_month_outlined,
+        ),
+      );
+    }
 
     if (_canConfirmAppointment()) {
       items.add(

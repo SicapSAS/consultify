@@ -32,7 +32,7 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
       case AppointmentMenuAction.confirm:
         await _confirmAppointment(context, appointment);
       case AppointmentMenuAction.reschedule:
-        break;
+        await _rescheduleAppointment(context, appointment);
     }
   }
 
@@ -61,6 +61,38 @@ class _AppointmentViewState extends ConsumerState<AppointmentView> {
 
     if (success) {
       AppSnackBar.success(context, 'Pago actualizado correctamente');
+      return;
+    }
+
+    final errorMessage = ref.read(appointmentProvider).errorMessage;
+    if (errorMessage.isNotEmpty) {
+      AppSnackBar.error(context, errorMessage);
+    }
+  }
+
+  Future<void> _rescheduleAppointment(
+    BuildContext context,
+    AppointmentList appointment,
+  ) async {
+    final rescheduleData =
+        await RescheduleAppointmentDialog.show(context, appointment);
+
+    if (rescheduleData == null || !context.mounted) return;
+
+    final success = await ref
+        .read(appointmentProvider.notifier)
+        .updateAppointmentStatus(
+          appointment.id,
+          AppointmentStatus(
+            date: rescheduleData.date,
+            time: rescheduleData.time,
+          ),
+        );
+
+    if (!context.mounted) return;
+
+    if (success) {
+      AppSnackBar.success(context, 'Cita reagendada correctamente');
       return;
     }
 
