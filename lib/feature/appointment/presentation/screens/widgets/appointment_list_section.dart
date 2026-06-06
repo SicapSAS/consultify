@@ -4,10 +4,13 @@ import 'package:go_router/go_router.dart';
 
 class AppointmentListSection extends StatelessWidget {
   final List<AppointmentList> appointments;
+  final void Function(AppointmentList appointment, AppointmentMenuAction action)?
+      onMenuAction;
 
   const AppointmentListSection({
     super.key,
     required this.appointments,
+    this.onMenuAction,
   });
 
   static bool matchesTab(AppointmentList appointment, int tabIndex) {
@@ -78,6 +81,7 @@ class AppointmentListSection extends StatelessWidget {
           onAppointmentTap: (appointment) {
             context.push('/appointment-screen/${appointment.id}');
           },
+          onMenuAction: onMenuAction,
         );
       },
     );

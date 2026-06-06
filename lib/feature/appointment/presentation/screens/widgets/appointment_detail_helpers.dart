@@ -99,6 +99,16 @@ class AppointmentDetailHelpers {
 
   static String formatAmount(int amount) {
     if (amount <= 0) return 'Sin monto registrado';
-    return '\$ ${NumberFormat('#,###', 'es_CO').format(amount)}';
+    return '\$ ${formatAmountInput(amount)}';
+  }
+
+  static String formatAmountInput(int amount) {
+    return NumberFormat('#,###', 'es_CO').format(amount);
+  }
+
+  static int? parseAmountInput(String text) {
+    final digits = text.replaceAll(RegExp(r'[^\d]'), '');
+    if (digits.isEmpty) return null;
+    return int.tryParse(digits);
   }
 }

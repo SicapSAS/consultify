@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 class AppointmentListWidget extends StatelessWidget {
   final List<AppointmentList> appointments;
   final void Function(AppointmentList appointment)? onAppointmentTap;
+  final void Function(AppointmentList appointment, AppointmentMenuAction action)?
+      onMenuAction;
 
   const AppointmentListWidget({
     super.key,
     required this.appointments,
     this.onAppointmentTap,
+    this.onMenuAction,
   });
 
   @override
@@ -26,6 +29,9 @@ class AppointmentListWidget extends StatelessWidget {
           appointment: appointment,
           onTap: onAppointmentTap != null
               ? () => onAppointmentTap!(appointment)
+              : null,
+          onMenuAction: onMenuAction != null
+              ? (action) => onMenuAction!(appointment, action)
               : null,
         );
       },
