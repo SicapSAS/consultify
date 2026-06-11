@@ -1,5 +1,5 @@
 
 
-export 'datasources/datasource.dart';
-export 'entities/entities.dart';
-export 'repositories/repository.dart';
+export 'datasources/my_profile_datasource.dart';
+export 'entities/my_profile_entity.dart';
+export 'repositories/my_profile_repository.dart';
