@@ -10,7 +10,6 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
       appBar: const CustomAppBar(
-        title: 'Perfil',
         backRoute: '/home',
       ),
       body: const ProfileView(),
