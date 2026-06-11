@@ -30,7 +30,8 @@ class ClinicView extends ConsumerWidget {
 
     if (!confirmed || !context.mounted) return;
 
-    final success = await ref.read(clinicProvider.notifier).deactivateClinic(clinic.id);
+    final success =
+        await ref.read(clinicProvider.notifier).deactivateClinic(clinic.id);
 
     if (!context.mounted) return;
 
@@ -62,20 +63,123 @@ class ClinicView extends ConsumerWidget {
       );
     }
 
+    final activeClinics =
+        state.clinics.where((clinic) => clinic.isActive).toList();
+    final inactiveClinics =
+        state.clinics.where((clinic) => !clinic.isActive).toList();
+
     if (state.clinics.isEmpty) {
-      return CustomEmptyStateWidget(
-        message: 'No hay clínicas registradas',
-        icon: FontAwesomeIcons.hospital.data,
-        iconColor: AppColors.secondary.withValues(alpha: 0.5),
+      return CustomRefreshableContent(
+        onRefresh: () => ref.read(clinicProvider.notifier).getClinics(),
+        isRefreshing: state.isLoading,
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+            CustomEmptyStateWidget(
+              message: 'No hay clínicas registradas',
+              icon: FontAwesomeIcons.hospital.data,
+              iconColor: AppColors.secondary.withValues(alpha: 0.5),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          Container(
+            color: AppColors.secondaryBackground,
+            child: TabBar(
+              labelColor: AppColors.secondary,
+              unselectedLabelColor: AppColors.secondary.withValues(alpha: 0.5),
+              indicatorColor: AppColors.secondaryButton,
+              indicatorWeight: 3,
+              labelStyle: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
+              unselectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+              ),
+              tabs: const [
+                Tab(text: 'Activas'),
+                Tab(text: 'Inactivas'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                _ClinicTabContent(
+                  clinics: activeClinics,
+                  emptyMessage: 'No hay clínicas activas',
+                  isRefreshing: state.isLoading,
+                  onRefresh: () => ref.read(clinicProvider.notifier).getClinics(),
+                  onMenuAction: (clinic, action) =>
+                      _onMenuAction(context, ref, clinic, action),
+                ),
+                _ClinicTabContent(
+                  clinics: inactiveClinics,
+                  emptyMessage: 'No hay clínicas inactivas',
+                  isRefreshing: state.isLoading,
+                  onRefresh: () => ref.read(clinicProvider.notifier).getClinics(),
+                  onMenuAction: (clinic, action) =>
+                      _onMenuAction(context, ref, clinic, action),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ClinicTabContent extends StatelessWidget {
+  final List<ListClinic> clinics;
+  final String emptyMessage;
+  final bool isRefreshing;
+  final Future<void> Function() onRefresh;
+  final void Function(ListClinic clinic, ClinicMenuAction action)? onMenuAction;
+
+  const _ClinicTabContent({
+    required this.clinics,
+    required this.emptyMessage,
+    required this.isRefreshing,
+    required this.onRefresh,
+    this.onMenuAction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (clinics.isEmpty) {
+      return CustomRefreshableContent(
+        onRefresh: onRefresh,
+        isRefreshing: isRefreshing,
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+            CustomEmptyStateWidget(
+              message: emptyMessage,
+              icon: FontAwesomeIcons.hospital.data,
+              iconColor: AppColors.secondary.withValues(alpha: 0.5),
+            ),
+          ],
+        ),
       );
     }
 
     return CustomRefreshableContent(
-      onRefresh: () => ref.read(clinicProvider.notifier).getClinics(),
-      isRefreshing: state.isLoading,
+      onRefresh: onRefresh,
+      isRefreshing: isRefreshing,
       child: ClinicList(
-        clinics: state.clinics,
-        onMenuAction: (clinic, action) => _onMenuAction(context, ref, clinic, action),
+        clinics: clinics,
+        onMenuAction: onMenuAction,
       ),
     );
   }

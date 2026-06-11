@@ -14,7 +14,7 @@ class ClinicScreen extends StatelessWidget {
         title: 'Clínicas',
         backRoute: '/home',
       ),
-      body: ClinicView(),
+      body: const ClinicView(),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(
           bottom: CustomBottomNavigationBar.reservedBottomSpace(context),

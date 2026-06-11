@@ -149,13 +149,6 @@ class ClinicListTile extends StatelessWidget {
                               text: clinic.email!.trim(),
                             ),
                           ],
-                          if (isInactive) ...[
-                            SizedBox(height: rowGap),
-                            const StatusBadge(
-                              label: 'Inactiva',
-                              accentColor: AppColors.disabledBackground,
-                            ),
-                          ],
                         ],
                       )
                     )
@@ -197,27 +190,28 @@ class _ClinicDetailRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
           icon,
-          size: 12,
-          color: AppColors.textPrimary.withValues(alpha: 0.45)
+          size: 16,
+          color: AppColors.textPrimary.withValues(alpha: 0.45),
         ),
-        SizedBox(width: 4),
+        const SizedBox(width: 8),
         Expanded(
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 17,
               color: AppColors.textPrimary.withValues(alpha: 0.7),
-              fontWeight: FontWeight.w500
+              fontWeight: FontWeight.w500,
+              height: 1.2,
             ),
             maxLines: 2,
-            overflow: TextOverflow.ellipsis
-          )
-        )
-      ]
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
     );
   }
 }
