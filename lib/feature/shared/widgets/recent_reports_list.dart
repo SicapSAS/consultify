@@ -32,20 +32,19 @@ class RecentReportsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null)
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.04,
-              vertical: size.height * 0.02
+              horizontal: 16,
+              vertical: 12
             ),
             child: Text(
               title!,
               style: TextStyle(
-                fontSize: size.width * 0.03,
+                fontSize: 18,
                 color: AppColors.secondary,
                 fontWeight: FontWeight.bold
               )
@@ -55,7 +54,7 @@ class RecentReportsList extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.04
+            horizontal: 16
           ),
           itemCount: reports.length,
           itemBuilder: (context, index) {
@@ -83,17 +82,16 @@ class ReportSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final statusColor = report.statusColor ?? AppColors.secondaryButton;
 
     return Container(
       margin: EdgeInsets.only(
-        bottom: isLast ? 0 : size.height * 0.015
+        bottom: isLast ? 0 : 12
       ),
       decoration: BoxDecoration(
         color: AppColors.secondaryBackground,
         borderRadius: BorderRadius.circular(
-          size.width * 0.02
+          12
         ),
         boxShadow: [
           BoxShadow(
@@ -108,25 +106,25 @@ class ReportSummaryCard extends StatelessWidget {
           // Aquí se puede agregar navegación o acción
         },
         child: Padding(
-          padding: EdgeInsets.all(size.width * 0.04),
+          padding: EdgeInsets.all(12),
           child: Row(
             children: [
               Container(
-                width: size.width * 0.12,
-                height: size.width * 0.12,
+                width: 12,
+                height: 12,
                 decoration: BoxDecoration(
                   color: statusColor.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(
-                    size.width * 0.07
+                    12
                   )
                 ),
                 child: Icon(
                   report.icon,
                   color: statusColor,
-                  size: size.width * 0.08
+                  size: 14
                 )
               ),
-              SizedBox(width: size.width * 0.03),
+              SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,62 +132,62 @@ class ReportSummaryCard extends StatelessWidget {
                     Text(
                       report.title,
                       style: TextStyle(
-                        fontSize: size.width * 0.03,
+                        fontSize: 18,
                         color: AppColors.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: size.height * 0.005),
+                    SizedBox(height: 8),
                     Text(
                       report.description,
                       style: TextStyle(
-                        fontSize: size.width * 0.03 * 0.9,
+                        fontSize: 18,
                         color: AppColors.secondary.withValues(alpha: 0.7)
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis
                     ),
-                    SizedBox(height: size.height * 0.005),
+                    SizedBox(height: 8),
                     Row(
                       children: [
                         Icon(
                           FontAwesomeIcons.clock.data,
-                          size: size.width * 0.08,
+                          size: 14,
                           color: AppColors.secondary.withValues(alpha: 0.5),
                         ),
-                        SizedBox(width: size.width * 0.01),
+                        SizedBox(width: 12),
                         Flexible(
                           child: Text(
                             report.time,
                             style: TextStyle(
-                              fontSize: size.width * 0.03,
+                              fontSize: 18,
                               color: AppColors.secondary.withValues(alpha: 0.5),
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        SizedBox(width: size.width * 0.02),
+                        SizedBox(width: 12),
                         Flexible(
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: size.width * 0.02,
-                                vertical: size.height * 0.003,
+                                horizontal: 12,
+                                vertical: 8,
                               ),
                               decoration: BoxDecoration(
                                 color: statusColor.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(
-                                  size.width * 0.01,
+                                  12,
                                 ),
                               ),
                               child: Text(
                                 report.type,
                                 style: TextStyle(
-                                  fontSize: size.width * 0.03 * 0.85,
+                                  fontSize: 18,
                                   color: statusColor,
                                   fontWeight: FontWeight.w500,
                                 ),

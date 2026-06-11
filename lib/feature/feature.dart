@@ -20,11 +20,11 @@ export 'clinic/clinic.dart';
 //*********** Patient ***********/
 export 'patient/patient.dart';
 
-//*********** Ads ***********/
-//export 'ads/ads.dart';
+//*********** Appointments ***********/
+export 'appointment/appointment.dart';
 
-//*********** Assemblies ***********/
-//export 'assemblies/assemblies.dart';
+//*********** Doctors ***********/
+export 'doctors/doctors.dart';
 
 //*********** Logo ***********/
 //export 'logo/logo.dart';

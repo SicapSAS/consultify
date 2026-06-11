@@ -44,8 +44,7 @@ class ShortcutsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final outerPadding = size.width * 0.04;
+    final outerPadding = 12.0;
     return Padding(
       padding: EdgeInsets.all(outerPadding),
       child: LayoutBuilder(
@@ -83,11 +82,10 @@ class _ShortcutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final iconColor = shortcut.iconColor ?? AppColors.secondaryButton;
     final backgroundColor =
         shortcut.backgroundColor ?? AppColors.secondaryBackground;
-    final iconPixelSize = shortcut.iconSize ?? size.width * 0.08;
+    final iconPixelSize = shortcut.iconSize ?? 14.4;
 
     return InkWell(
       onTap: () {
@@ -98,13 +96,13 @@ class _ShortcutCard extends StatelessWidget {
         }
       },
       borderRadius: BorderRadius.circular(
-        size.width * 0.05,
+        12,
       ),
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(
-            size.width * 0.05,
+            12,
           ),
           boxShadow: [
             BoxShadow(
@@ -122,10 +120,10 @@ class _ShortcutCard extends StatelessWidget {
               color: iconColor,
               size: iconPixelSize,
             ),
-            SizedBox(height: size.height * 0.01),
+            SizedBox(height: 8),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: size.width * 0.02
+                horizontal: 8
               ),
               child: Text(
                 shortcut.label,
@@ -134,7 +132,7 @@ class _ShortcutCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: AppColors.secondary,
-                  fontSize: size.width * 0.03 * 0.9,
+                  fontSize: 18,
                 )
               )
             )

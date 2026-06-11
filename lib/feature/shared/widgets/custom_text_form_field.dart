@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:consultify/config/config.dart';
 
 
@@ -20,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool enabled;
   final TextCapitalization textCapitalization;
   final Color? borderColor;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextFormField({
     super.key, 
@@ -39,18 +41,18 @@ class CustomTextFormField extends StatelessWidget {
     this.enabled = true,
     this.textCapitalization = TextCapitalization.none,
     this.borderColor,
+    this.inputFormatters,
   });
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     final colors = Theme.of(context).colorScheme;
 
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.circular(
-        size.width * 0.04
+        12
       )
     );
 
@@ -84,6 +86,7 @@ class CustomTextFormField extends StatelessWidget {
         onFieldSubmitted: onFieldSubmitted,
         obscureText: obscureText,
         keyboardType: keyboardType,
+        inputFormatters: inputFormatters,
         style:  TextStyle( 
           fontSize: 20, 
           color: AppColors.textPrimary.withValues(alpha: 0.78)

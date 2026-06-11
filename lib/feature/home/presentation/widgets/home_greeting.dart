@@ -7,20 +7,19 @@ class HomeGreeting extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        size.width * 0.06,
-        size.height * 0.02,
-        size.width * 0.06,
-        size.height * 0.012,
+        16,
+        12,
+        16,
+        12,
       ),
       child: Text(
         'Hola, qué vas hacer hoy?',
         style: TextStyle(
           color: AppColors.textPrimary,
           fontWeight: FontWeight.w600,
-          fontSize: size.width * 0.04,
+          fontSize: 18,
         ),
       ),
     );

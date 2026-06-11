@@ -9,50 +9,65 @@ class ProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
-    final user = ref.watch(authProvider).user;
+    final authUser = ref.watch(authProvider).user;
+    final state = ref.watch(myProfileProvider);
 
-    if (user == null) {
+    if (authUser == null) {
       return Center(
         child: Text(
           'No hay sesión activa',
           style: TextStyle(
             color: AppColors.textPrimary.withValues(alpha: 0.6),
-            fontSize: size.width * 0.04
-          )
-        )
+            fontSize: 18,
+          ),
+        ),
       );
     }
 
-    final horizontalPadding = size.width * 0.06;
-    final verticalGap = size.height * 0.02;
+    if (state.isLoading && state.myProfile == null) {
+      return const CustomLoadingWidget(
+        message: 'Cargando tu perfil...',
+        subtitle: 'Obteniendo tus datos de cuenta',
+      );
+    }
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(
-        horizontalPadding,
-        size.height * 0.02,
-        horizontalPadding,
-        size.height * 0.04
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    if (state.isError && state.myProfile == null) {
+      return CustomErrorStateWidget(
+        message: state.errorMessage,
+        onRetry: () => ref.read(myProfileProvider.notifier).getMyProfile(),
+      );
+    }
+
+    final profile = state.myProfile;
+    if (profile == null) {
+      return CustomEmptyStateWidget(
+        message: 'No se encontró información del perfil',
+        icon: FontAwesomeIcons.user.data,
+        iconColor: AppColors.secondary.withValues(alpha: 0.5),
+      );
+    }
+
+    return CustomRefreshableContent(
+      onRefresh: () => ref.read(myProfileProvider.notifier).getMyProfile(),
+      isRefreshing: state.isLoading,
+      child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: EdgeInsets.fromLTRB(
+          16,
+          12,
+          16,
+          CustomBottomNavigationBar.scrollBottomPadding(context),
+        ),
         children: [
-          
-          ProfileHeader(name: user.name),
-          SizedBox(height: verticalGap),
-          ProfileInfoTile(
-            icon: FontAwesomeIcons.envelope.data,
-            label: 'Correo electrónico',
-            value: user.email,
+          ProfileHeader(
+            name: profile.name,
+            roleLabel: ProfileDetailsSections.roleLabel(profile),
+            isActive: profile.isActive,
           ),
-          SizedBox(height: verticalGap * 0.75),
-          ProfileInfoTile(
-            icon: FontAwesomeIcons.idBadge.data,
-            label: 'Rol',
-            value: Roles.toDisplayString(user.role),
-          )
-        ]
-      )
+          const SizedBox(height: 20),
+          ProfileDetailsSections(profile: profile),
+        ],
+      ),
     );
   }
 }

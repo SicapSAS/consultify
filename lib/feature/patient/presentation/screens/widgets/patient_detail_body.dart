@@ -11,21 +11,20 @@ class PatientDetailBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return ListView(
       physics: const AlwaysScrollableScrollPhysics(),
       padding: EdgeInsets.fromLTRB(
-        size.width * 0.04,
-        size.height * 0.02,
-        size.width * 0.04,
-        size.height * 0.04
+        16,
+        12,
+        16,
+        16
       ),
       children: [
         PatientDetailHeader(
           patient: history.patient,
           totalAppointments: history.total
         ),
-        SizedBox(height: size.height * 0.02),
+        SizedBox(height: 16),
         PatientAppointmentsSection(history: history),
       ]
     );

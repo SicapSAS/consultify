@@ -25,7 +25,6 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
@@ -34,10 +33,10 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
           label,
           style: TextStyle(
             color: AppColors.textPrimary.withValues(alpha: 0.55),
-            fontSize: size.width * 0.03
+            fontSize: 18
           )
         ),
-        SizedBox(height: size.height * 0.008),
+        SizedBox(height: 8),
         TextField(
           controller: controller,
           enabled: enabled,
@@ -53,7 +52,7 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             final cap = maxLength ?? this.maxLength;
             return Padding(
               padding: EdgeInsets.only(
-                top: size.height * 0.004
+                top: 4
               ),
               child: Align(
                 alignment: Alignment.centerRight,
@@ -61,7 +60,7 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
                   '$currentLength/$cap',
                   style: TextStyle(
                     color: AppColors.textPrimary.withValues(alpha: 0.45),
-                    fontSize: size.width * 0.03
+                    fontSize: 18
                   )
                 )
               )
@@ -71,15 +70,15 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(
               color: AppColors.textPrimary.withValues(alpha: 0.35),
-              fontSize: size.width * 0.03
+              fontSize: 18
             ),
             contentPadding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.03,
-              vertical: size.height * 0.014
+              horizontal: 12,
+              vertical: 12
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
-                size.width * 0.02
+                12
               ),
               borderSide: BorderSide(
                 color: AppColors.textPrimary.withValues(alpha: 0.2)
@@ -87,7 +86,7 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
-                size.width * 0.02
+                12
               ),
               borderSide: BorderSide(
                 color: AppColors.textPrimary.withValues(alpha: 0.2)
@@ -95,14 +94,14 @@ class CustomLabeledMultilineTextField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
-                size.width * 0.02
+                12
               ),
               borderSide: BorderSide(color: AppColors.secondaryButton)
             )
           ),
           style: TextStyle(
             color: AppColors.textPrimary,
-            fontSize: size.width * 0.03
+            fontSize: 18
           ),
           onChanged: onChanged
         )

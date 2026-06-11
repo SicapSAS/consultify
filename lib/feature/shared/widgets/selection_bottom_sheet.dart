@@ -56,12 +56,11 @@ class _SelectionBottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.secondaryBackground,
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(size.width * 0.06)
+          top: Radius.circular(12)
         )
       ),
       child: SafeArea(
@@ -71,39 +70,39 @@ class _SelectionBottomSheetContent extends StatelessWidget {
           children: [
             // Indicador de arrastre
             Padding(
-              padding: EdgeInsets.only(top: size.height * 0.015),
+              padding: EdgeInsets.only(top: 12),
               child: Container(
-                width: size.width * 0.1,
-                height: size.height * 0.005,
+                width: 12,
+                height: 8,
                 decoration: BoxDecoration(
                   color: AppColors.textPrimary.withValues(alpha: 0.25),
                   borderRadius: BorderRadius.circular(
-                    size.width * 0.01
+                    12
                   )
                 )
               )
             ),
-            SizedBox(height: size.height * 0.02),
+            SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.06,
+                  horizontal: 16,
                 ),
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: size.width * 0.03,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: AppColors.textPrimary,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: size.height * 0.025),
+            SizedBox(height: 12),
             ...options.map((option) => _OptionTile(option: option)),
-            SizedBox(height: size.height * 0.02)
+            SizedBox(height: 12)
           ]
         )
       )
@@ -118,7 +117,6 @@ class _OptionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final iconColor = option.iconColor ?? AppColors.secondaryButton;
 
     return Material(
@@ -132,22 +130,22 @@ class _OptionTile extends StatelessWidget {
         },
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.06,
-            vertical: size.height * 0.018,
+            horizontal: 16,
+            vertical: 12,
           ),
           child: Row(
             children: [
               Icon(
                 option.icon,
                 color: iconColor,
-                size: size.width * 0.08
+                size: 14
               ),
-              SizedBox(width: size.width * 0.04),
+              SizedBox(width: 12),
               Expanded(
                 child: Text(
                   option.label,
                   style: TextStyle(
-                    fontSize: size.width * 0.03,
+                    fontSize: 18,
                     color: AppColors.textPrimary
                   )
                 )

@@ -28,19 +28,23 @@ final goRouterProvider = Provider((ref) {
         builder: (context, state) => const CheckAuthStatusScreen()
       ),
 
-      /* ********** Home Routes ********** */
-      GoRoute(
-        path: '/home',
-        builder: (context, state) => const HomeScreen()
-      ),
-      /* ********** Profile Routes ********** */
+      /* ********** App Shell (barra inferior en todas las vistas autenticadas) ********** */
+      ShellRoute(
+        builder: (context, state, child) => AppShell(child: child),
+        routes: [
+          GoRoute(
+            path: '/home',
+            builder: (context, state) => const HomeScreen(),
+          ),
+          ...ClinicRoutes.routes,
+          ...PatientRoutes.routes,
+          ...AppointmentRoutes.routes,
+          ...DoctorsRoutes.routes,
       ...ProfileRoutes.routes,
+        ],
+      ),
 
-      /* ********** Clinic Routes ********** */
-      ...ClinicRoutes.routes,
 
-      /* ********** Patient Routes ********** */
-      ...PatientRoutes.routes,
     ],
 
 

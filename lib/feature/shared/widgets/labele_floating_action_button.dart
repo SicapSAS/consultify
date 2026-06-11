@@ -17,6 +17,8 @@ class LabeledFloatingActionButton extends StatelessWidget {
   final List<BoxShadow>? labelBoxShadow;
   final List<BoxShadow>? buttonBoxShadow;
 
+  static const double reservedHeight = 96;
+
   const LabeledFloatingActionButton({
     super.key,
     required this.label,
@@ -37,26 +39,25 @@ class LabeledFloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         // Etiqueta
         Container(
           padding: labelPadding ?? EdgeInsets.symmetric(
-            vertical: size.height * 0.007,
-            horizontal: size.width * 0.017
+            vertical: 6,
+            horizontal: 12
           ),
           decoration: BoxDecoration(
             color: labelBackgroundColor ?? AppColors.secondaryBackground,
             borderRadius: BorderRadius.circular(
-              borderRadius ?? size.width * 0.05
+              borderRadius ?? 12
             ),
             boxShadow: labelBoxShadow ?? [
               BoxShadow(
                 color: AppColors.textPrimary,
-                blurRadius: size.width * 0.02,
-                offset: Offset(0, size.width * 0.015)
+                blurRadius: 12,
+                offset: Offset(0, 12)
               )
             ]
           ),
@@ -68,12 +69,10 @@ class LabeledFloatingActionButton extends StatelessWidget {
             )
           )
         ),
-        SizedBox(
-          height: 5
-        ),
+        SizedBox( height: 2 ),
         // Botón flotante
         Container(
-          width: 50,
+          width: 40,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             boxShadow: buttonBoxShadow ?? [
@@ -92,7 +91,7 @@ class LabeledFloatingActionButton extends StatelessWidget {
             child: Icon(
               icon,
               color: iconColor ?? AppColors.primaryBackground,
-              size: iconSize ?? 40,
+              size: iconSize ?? 30,
             )
           )
         )
