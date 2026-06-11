@@ -38,6 +38,80 @@ class DoctorNotifier extends StateNotifier<DoctorRepositoryState> {
       state = state.copyWith(errorMessage: 'Error al cargar los doctores', isLoading: false);
     }
   }
+
+  // 🚀 2. CREAR DOCTOR
+  Future<bool> createDoctor(DoctorCreate doctorCreate) async {
+    state = state.copyWith(isPosting: true, errorMessage: '');
+    try {
+      final newDoctor = await doctorsRepository.createDoctor(doctorCreate);
+      
+      // Agregamos el nuevo doctor al estado de forma inmutable
+      state = state.copyWith(
+        doctors: [...state.doctors, newDoctor],
+        isPosting: false,
+      );
+      
+      await getDoctors(); // Sincronizamos con el backend
+      return true;
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isPosting: false);
+      return false;
+    } catch (e) {
+      state = state.copyWith(errorMessage: 'Error al crear el médico.', isPosting: false);
+      return false;
+    }
+  }
+
+  // 🔄 3. ACTUALIZAR DOCTOR
+  Future<bool> updateDoctor(String doctorId, DoctorUpdate doctorUpdate) async {
+    state = state.copyWith(isPosting: true, errorMessage: '');
+    try {
+      final editedDoctor = await doctorsRepository.updateDoctor(doctorId, doctorUpdate);
+      
+      // Recorremos la lista y reemplazamos únicamente el doctor que se modificó
+      final updatedList = state.doctors.map((d) => d.id == doctorId ? editedDoctor : d).toList();
+      
+      state = state.copyWith(
+        doctors: updatedList,
+        isPosting: false,
+      );
+      
+      await getDoctors(); // Sincronizamos la lista
+      return true;
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isPosting: false);
+      return false;
+    } catch (e) {
+      state = state.copyWith(errorMessage: 'Error al actualizar el médico.', isPosting: false);
+      return false;
+    }
+  }
+
+  // 🗑️ 4. INHABILITAR / ELIMINAR DOCTOR
+  Future<bool> deleteDoctor(String doctorId) async {
+    state = state.copyWith(isPosting: true, errorMessage: '');
+    try {
+      await doctorsRepository.deleteDoctor(doctorId);
+      
+      // Filtramos la lista local para remover visualmente al doctor inhabilitado al instante
+      final updatedList = state.doctors.where((d) => d.id != doctorId).toList();
+      
+      state = state.copyWith(
+        doctors: updatedList,
+        isPosting: false,
+      );
+      
+      await getDoctors(); // Sincronizamos con el conteo de la nube
+      return true;
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isPosting: false);
+      return false;
+    } catch (e) {
+      state = state.copyWith(errorMessage: 'Error al eliminar el médico.', isPosting: false);
+      return false;
+    }
+  }
+  
 }
 
 /* *********** Repository State ************* */
