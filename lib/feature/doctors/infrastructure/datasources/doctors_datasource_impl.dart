@@ -66,16 +66,38 @@ class DoctorsDatasourceImpl implements DoctorsDatasource {
   Future<Doctor> updateDoctor(String doctorId, DoctorUpdate doctorUpdate) async {
     try {
       final data = DoctorUpdateMapper.toJson(doctorUpdate);
-      
-      // ⚠️ NOTA: Usamos /doctos/update/ tal cual aparece en tu Postman
-      final response = await dio.put('/doctos/update/$doctorId', data: data);
-      
+      final response = await dio.put('/doctors/update/$doctorId', data: data);
       return DoctorListMapper.fromJson(response.data);
     } on DioException catch (e) {
       throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al actualizar los datos del médico.');
     } catch (e) {
       if (e is CustomError) rethrow;
       throw const CustomError(message: 'Ocurrió un error inesperado al actualizar el doctor.');
+    }
+  }
+
+  @override
+  Future<Doctor> updateDoctorStatus(String doctorId, bool isActive) async {
+    try {
+      final response = await dio.put(
+        '/doctors/update/$doctorId',
+        data: {'isActive': isActive},
+      );
+      return DoctorListMapper.fromJson(response.data);
+    } on DioException catch (e) {
+      throw DioErrorMapper.fromDioException(
+        e,
+        mensajeFallback: isActive
+            ? 'Error al habilitar al doctor.'
+            : 'Error al inhabilitar al doctor.',
+      );
+    } catch (e) {
+      if (e is CustomError) rethrow;
+      throw CustomError(
+        message: isActive
+            ? 'Ocurrió un error inesperado al habilitar el doctor.'
+            : 'Ocurrió un error inesperado al inhabilitar el doctor.',
+      );
     }
   }
 }

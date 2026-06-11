@@ -3,4 +3,5 @@ enum DoctorMenuAction {
   update,
   delete,
   disable,
+  enable,
 }

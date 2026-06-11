@@ -67,16 +67,16 @@ class DoctorNotifier extends StateNotifier<DoctorRepositoryState> {
     state = state.copyWith(isPosting: true, errorMessage: '');
     try {
       final editedDoctor = await doctorsRepository.updateDoctor(doctorId, doctorUpdate);
-      
-      // Recorremos la lista y reemplazamos únicamente el doctor que se modificó
-      final updatedList = state.doctors.map((d) => d.id == doctorId ? editedDoctor : d).toList();
-      
+
+      final updatedList =
+          state.doctors.map((d) => d.id == doctorId ? editedDoctor : d).toList();
+
       state = state.copyWith(
         doctors: updatedList,
         isPosting: false,
       );
-      
-      await getDoctors(); // Sincronizamos la lista
+
+      await getDoctors();
       return true;
     } on CustomError catch (e) {
       state = state.copyWith(errorMessage: e.message, isPosting: false);
@@ -87,7 +87,28 @@ class DoctorNotifier extends StateNotifier<DoctorRepositoryState> {
     }
   }
 
-  // 🗑️ 4. INHABILITAR / ELIMINAR DOCTOR
+  Future<bool> updateDoctorStatus(String doctorId, bool isActive) async {
+    state = state.copyWith(isPosting: true, errorMessage: '');
+    try {
+      await doctorsRepository.updateDoctorStatus(doctorId, isActive);
+      await getDoctors();
+      state = state.copyWith(isPosting: false);
+      return true;
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isPosting: false);
+      return false;
+    } catch (e) {
+      state = state.copyWith(
+        errorMessage: isActive
+            ? 'Error al habilitar el doctor.'
+            : 'Error al inhabilitar el doctor.',
+        isPosting: false,
+      );
+      return false;
+    }
+  }
+
+  // 🗑️ 4. ELIMINAR DOCTOR
   Future<bool> deleteDoctor(String doctorId) async {
     state = state.copyWith(isPosting: true, errorMessage: '');
     try {

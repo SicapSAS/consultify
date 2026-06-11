@@ -14,24 +14,31 @@ class DoctorCard extends StatelessWidget {
   });
 
   List<ContextMenuItem<DoctorMenuAction>> _buildMenuItems() {
-    return const [
-      ContextMenuItem<DoctorMenuAction>(
+    return [
+      const ContextMenuItem<DoctorMenuAction>(
         value: DoctorMenuAction.update,
         label: 'Actualizar',
         icon: Icons.edit_outlined,
       ),
-      ContextMenuItem<DoctorMenuAction>(
+      const ContextMenuItem<DoctorMenuAction>(
         value: DoctorMenuAction.delete,
         label: 'Eliminar',
         icon: Icons.delete_outline,
         isDestructive: true,
       ),
-      ContextMenuItem<DoctorMenuAction>(
-        value: DoctorMenuAction.disable,
-        label: 'Inhabilitar',
-        icon: Icons.block_outlined,
-        isDestructive: true,
-      ),
+      if (doctor.isActive)
+        const ContextMenuItem<DoctorMenuAction>(
+          value: DoctorMenuAction.disable,
+          label: 'Inhabilitar',
+          icon: Icons.block_outlined,
+          isDestructive: true,
+        )
+      else
+        const ContextMenuItem<DoctorMenuAction>(
+          value: DoctorMenuAction.enable,
+          label: 'Habilitar',
+          icon: Icons.check_circle_outline,
+        ),
     ];
   }
 
