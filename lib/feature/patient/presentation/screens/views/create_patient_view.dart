@@ -11,13 +11,7 @@ class CreatePatientView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(
-        16,
-        12,
-        16,
-        16,
-      ),
+    return FormScrollView(
       child: CreatePatientForm(patient: patient),
     );
   }
