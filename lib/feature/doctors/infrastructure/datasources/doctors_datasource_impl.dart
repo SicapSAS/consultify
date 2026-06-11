@@ -55,7 +55,7 @@ class DoctorsDatasourceImpl implements DoctorsDatasource {
       await dio.delete('/doctors/delete/$doctorId');
       return true;
     } on DioException catch (e) {
-      throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al inhabilitar al doctor.');
+      throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al eliminar al doctor.');
     } catch (e) {
       if (e is CustomError) rethrow;
       throw const CustomError(message: 'Ocurrió un error inesperado al eliminar el doctor.');

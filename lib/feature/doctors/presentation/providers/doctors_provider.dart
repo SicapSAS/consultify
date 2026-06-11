@@ -114,7 +114,7 @@ class DoctorNotifier extends StateNotifier<DoctorRepositoryState> {
     try {
       await doctorsRepository.deleteDoctor(doctorId);
       
-      // Filtramos la lista local para remover visualmente al doctor inhabilitado al instante
+      // Eliminamos de la lista local de forma inmediata
       final updatedList = state.doctors.where((d) => d.id != doctorId).toList();
       
       state = state.copyWith(

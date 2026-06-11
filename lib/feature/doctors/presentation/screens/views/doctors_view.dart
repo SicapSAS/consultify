@@ -18,11 +18,36 @@ class DoctorsView extends ConsumerWidget {
       case DoctorMenuAction.update:
         context.push('/create-doctor-screen', extra: doctor);
       case DoctorMenuAction.delete:
-        return;
+        await _confirmDelete(context, ref, doctor);
       case DoctorMenuAction.disable:
         await _confirmStatusChange(context, ref, doctor, isActive: false);
       case DoctorMenuAction.enable:
         await _confirmStatusChange(context, ref, doctor, isActive: true);
+    }
+  }
+
+  Future<void> _confirmDelete(
+    BuildContext context,
+    WidgetRef ref,
+    Doctor doctor,
+  ) async {
+    final confirmed = await DeleteDoctorDialog.show(context, doctor);
+
+    if (!confirmed || !context.mounted) return;
+
+    final success =
+        await ref.read(doctorsProvider.notifier).deleteDoctor(doctor.id);
+
+    if (!context.mounted) return;
+
+    if (success) {
+      AppSnackBar.success(context, 'Doctor eliminado correctamente');
+      return;
+    }
+
+    final errorMessage = ref.read(doctorsProvider).errorMessage;
+    if (errorMessage.isNotEmpty) {
+      AppSnackBar.error(context, errorMessage);
     }
   }
 
