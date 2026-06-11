@@ -12,9 +12,9 @@ class AppointmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'Citas Registradas',
-        backRoute: '/home',
+        openDrawer: true,
       ),
       body: AppointmentView(),
       floatingActionButton: Padding(

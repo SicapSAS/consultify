@@ -10,9 +10,9 @@ class PatientScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'Pacientes',
-        backRoute: '/home',
+        openDrawer: true,
       ),
       body: const PatientView(),
       floatingActionButton: Padding(

@@ -45,17 +45,13 @@ class CustomBottomNavigationBar extends ConsumerWidget {
       icon: FontAwesomeIcons.houseChimney.data,
       label: 'Inicio',
     ),
-    /* _NavBarItem(
-      icon: FontAwesomeIcons.houseChimney.data,
-      label: 'Nuevo',
+    _NavBarItem(
+      icon: FontAwesomeIcons.calendarCheck.data,
+      label: 'Citas',
     ),
     _NavBarItem(
-      icon: FontAwesomeIcons.houseChimney.data,
-      label: 'Nuevo',
-    ), */
-    _NavBarItem(
-      icon: FontAwesomeIcons.user.data,
-      label: 'Perfil',
+      icon: FontAwesomeIcons.users.data,
+      label: 'Pacientes',
     ),
   ];
 
@@ -98,7 +94,7 @@ class CustomBottomNavigationBar extends ConsumerWidget {
               return Expanded(
                 child: _BottomNavItem(
                   item: _items[index],
-                  isSelected: currentIndex == index,
+                  isSelected: currentIndex >= 0 && currentIndex == index,
                   onTap: () {
                     onTap(index);
                     if (routes != null &&

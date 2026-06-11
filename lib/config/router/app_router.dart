@@ -36,13 +36,15 @@ final goRouterProvider = Provider((ref) {
             path: '/home',
             builder: (context, state) => const HomeScreen(),
           ),
-          ...ProfileRoutes.routes,
           ...ClinicRoutes.routes,
           ...PatientRoutes.routes,
           ...AppointmentRoutes.routes,
           ...DoctorsRoutes.routes,
+      ...ProfileRoutes.routes,
         ],
       ),
+
+
     ],
 
 

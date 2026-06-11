@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? logoPath;
   final String? backRoute;
   final VoidCallback? onBackPressed;
+  final bool openDrawer;
   final List<Widget>? actions;
   final bool centerTitle;
   final Color? backgroundColor;
@@ -19,12 +20,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.logoPath,
     this.backRoute,
     this.onBackPressed,
+    this.openDrawer = false,
     this.actions,
     this.centerTitle = true,
     this.backgroundColor,
   }) : assert(
           backRoute == null || onBackPressed == null,
           'No se puede proporcionar tanto backRoute como onBackPressed',
+        ),
+        assert(
+          !openDrawer || (backRoute == null && onBackPressed == null),
+          'No se puede combinar openDrawer con backRoute u onBackPressed',
         );
 
   @override
@@ -46,6 +52,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget? _buildLeading(BuildContext context) {
+    if (openDrawer) {
+      return IconButton(
+        onPressed: () => AppShell.scaffoldKey.currentState?.openDrawer(),
+        icon: Icon(
+          Icons.menu_rounded,
+          color: AppColors.secondary,
+          size: 35,
+        ),
+      );
+    }
+
     if (backRoute == null && onBackPressed == null) {
       return null;
     }

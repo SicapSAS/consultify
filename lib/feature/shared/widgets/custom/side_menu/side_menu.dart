@@ -56,6 +56,13 @@ class SideMenuState extends ConsumerState<SideMenu> {
           )
         ),
         SizedBox(height: 15),
+        CustomSideMenuSectionTitle(label: 'Mi cuenta'),
+        CustomSideMenuItem(
+          icon: FontAwesomeIcons.user.data,
+          label: 'Perfil',
+          isSelected: currentRoute == '/profile-screen',
+          onTap: () => _navigateAndClose(() => context.go('/profile-screen')),
+        ),
         CustomSideMenuSectionTitle(label: 'Opcion principal'),
         CustomSideMenuItem(
           icon: FontAwesomeIcons.houseChimney.data,
@@ -68,7 +75,15 @@ class SideMenuState extends ConsumerState<SideMenu> {
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 16,
-            //vertical: AppDimens.heightPercentage(0.02, context),
+          ),
+          child: Divider()
+        ),
+
+        
+
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
           ),
           child: Divider()
         ),
@@ -83,29 +98,12 @@ class SideMenuState extends ConsumerState<SideMenu> {
           )
         ],
         if (userRole == Roles.adminClinic) ...[
-          CustomSideMenuSectionTitle(label: 'Citas'),
-          CustomSideMenuItem(
-            icon: FontAwesomeIcons.calendarCheck.data,
-            label: 'Citas',
-            isSelected: currentRoute == '/appointment-screen',
-            onTap: () => _navigateAndClose(() => context.go('/appointment-screen')),
-          ),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userDoctor.data,
             label: 'Admiciones',
             isSelected: currentRoute == '',
             onTap: () => _navigateAndClose(() => context.go('/')),
           ),
-          CustomSideMenuSectionTitle(label: 'Pacientes'),
-          CustomSideMenuItem(
-            icon: Icons.person_add_alt_1_outlined,
-            label: 'Pacientes',
-            isSelected: currentRoute == '/patient-screen',
-            onTap: () => _navigateAndClose(() => context.go('/patient-screen')),
-          ),
-          
-          
-          
           CustomSideMenuSectionTitle(label: 'Doctores'),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userDoctor.data,

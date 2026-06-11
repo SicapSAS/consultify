@@ -17,12 +17,20 @@ class AppShell extends StatelessWidget {
 
   static const navRoutes = [
     '/home',
-    '/profile-screen',
+    '/appointment-screen',
+    '/patient-screen',
   ];
 
+  /// Índice activo del bottom nav. -1 si la ruta no pertenece a la barra.
   static int selectedIndexForPath(String path) {
-    if (path == navRoutes[1]) return 1;
-    return 0;
+    if (path == '/home') return 0;
+    if (path.startsWith('/appointment-screen') || path == '/create-appointment-screen') {
+      return 1;
+    }
+    if (path.startsWith('/patient-screen') || path == '/create-patient-screen') {
+      return 2;
+    }
+    return -1;
   }
 
   @override
