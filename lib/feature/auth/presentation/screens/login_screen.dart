@@ -14,33 +14,32 @@ class LoginScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.primaryBackground,
       body: SafeArea(
-        child: SingleChildScrollView(
-          reverse: false,
-          child: SizedBox(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 32),
-                
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: Image.asset(
-                    'assets/logo/consultify_transparente2.png',
-                    width: 256,
-                    fit: BoxFit.contain
-                  )
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Image.asset(
+                        'assets/logo/consultify_transparente2.png',
+                        width: 256,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    const _LoginForm(),
+                  ],
                 ),
-                SizedBox(height: 32),
-                _LoginForm()
-                
-              ]
-            )
-          )
-        )
-      )
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -64,8 +63,9 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
     });
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomTextFormField(
             label: 'Correo electrónico',
@@ -101,16 +101,16 @@ class _LoginFormState extends ConsumerState<_LoginForm> {
               }
             )
           ),
-          SizedBox(height: 12),
-          SizedBox(
-            width: 128,
-            child: CustomFilledButton(
-              text: 'Iniciar sesión', 
-              buttonColor: AppColors.primaryButton,
-              onPressed: loginForm.isPosting ? null : 
-                () => ref.read(loginFormProvider.notifier).onFormSubmit()
-            )
-          )
+          const SizedBox(height: 12),
+          CustomFilledButton(
+            text: 'Iniciar sesión',
+            buttonColor: AppColors.primaryButton,
+            width: 200,
+            height: 50,
+            onPressed: loginForm.isPosting
+                ? null
+                : () => ref.read(loginFormProvider.notifier).onFormSubmit(),
+          ),
         ]
       )
     );
