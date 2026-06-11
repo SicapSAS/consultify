@@ -36,7 +36,7 @@ class DoctorsDatasourceImpl implements DoctorsDatasource {
       final data = DoctorCreateMapper.toJson(doctorCreate);
       
       // Asumiendo que tu endpoint de registro sigue la convención estándar del backend
-      final response = await dio.post('/doctors', data: data);
+      final response = await dio.post('/register/doctor', data: data);
       
       // El backend registra al médico y nos devuelve el objeto poblado con su nuevo _id
       return DoctorListMapper.fromJson(response.data);

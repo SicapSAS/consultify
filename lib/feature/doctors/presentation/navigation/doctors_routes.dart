@@ -10,7 +10,11 @@ class DoctorsRoutes {
   static final routes = [
     GoRoute(
       path: '/doctors-screen',
-      builder: (context, state) => DoctorsScreen()
-    )
+      builder: (context, state) => const DoctorsScreen(),
+    ),
+    GoRoute(
+      path: '/create-doctor-screen',
+      builder: (context, state) => const CreateDoctorScreen(),
+    ),
   ];
 }
