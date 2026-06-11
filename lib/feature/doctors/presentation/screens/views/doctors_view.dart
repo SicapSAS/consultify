@@ -3,6 +3,7 @@ import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class DoctorsView extends ConsumerWidget {
   const DoctorsView({super.key});
@@ -15,6 +16,7 @@ class DoctorsView extends ConsumerWidget {
   ) async {
     switch (action) {
       case DoctorMenuAction.update:
+        context.push('/create-doctor-screen', extra: doctor);
       case DoctorMenuAction.delete:
         return;
       case DoctorMenuAction.disable:

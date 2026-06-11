@@ -2,12 +2,17 @@ import 'package:consultify/feature/feature.dart';
 import 'package:flutter/material.dart';
 
 class CreateDoctorView extends StatelessWidget {
-  const CreateDoctorView({super.key});
+  final Doctor? doctor;
+
+  const CreateDoctorView({
+    super.key,
+    this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const FormScrollView(
-      child: CreateDoctorForm(),
+    return FormScrollView(
+      child: CreateDoctorForm(doctor: doctor),
     );
   }
 }

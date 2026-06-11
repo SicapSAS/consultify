@@ -1,28 +1,21 @@
 class DoctorUpdate {
+  final String name;
+  final String email;
+  final String specialty;
+  final String professionalCardNumber;
+  final String documentType;
+  final String documentId;
 
-    // Campos para actualizar el doctor, todos son OPCIONALES.
-    final String name;
-    final String email;
-    final String specialty;
-    final String professionalCardNumber;
-    final String documentType;
-    final String documentId;
+  /// Opcional. Si se deja en blanco, no se actualiza la contraseña.
+  final String password;
 
-    /// Este campo solo se usa para inhabilitar o habilitar el doctor. olo funciona con el boon de Inhabilitar/Habilitar.
-    final bool isActive;
-
-    /// Si se desea cambiar la contraseña, se debe proporcionar, si no, se debe dejar en blanco.
-    final String password;
-
-    DoctorUpdate({
-        required this.name,
-        required this.email,
-        required this.specialty,
-        required this.professionalCardNumber,
-        required this.documentType,
-        required this.documentId,
-        required this.isActive,
-        required this.password,
-    });
-
+  DoctorUpdate({
+    required this.name,
+    required this.email,
+    required this.specialty,
+    required this.professionalCardNumber,
+    required this.documentType,
+    required this.documentId,
+    this.password = '',
+  });
 }

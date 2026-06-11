@@ -14,7 +14,10 @@ class DoctorsRoutes {
     ),
     GoRoute(
       path: '/create-doctor-screen',
-      builder: (context, state) => const CreateDoctorScreen(),
+      builder: (context, state) {
+        final doctor = state.extra as Doctor?;
+        return CreateDoctorScreen(doctor: doctor);
+      },
     ),
   ];
 }

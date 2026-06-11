@@ -6,7 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateDoctorForm extends ConsumerStatefulWidget {
-  const CreateDoctorForm({super.key});
+  final Doctor? doctor;
+
+  const CreateDoctorForm({
+    super.key,
+    this.doctor,
+  });
 
   @override
   ConsumerState<CreateDoctorForm> createState() => _CreateDoctorFormState();
@@ -36,6 +41,36 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
   String? _documentType;
   String? _specialty;
   bool _obscurePassword = true;
+  late List<String> _availableSpecialties;
+
+  bool get _isEditing => widget.doctor != null;
+
+  @override
+  void initState() {
+    super.initState();
+    _availableSpecialties = List<String>.from(_specialties);
+
+    final doctor = widget.doctor;
+    if (doctor == null) return;
+
+    final type = doctor.documentType;
+    if (type.isNotEmpty && _documentTypes.contains(type)) {
+      _documentType = type;
+    }
+
+    final specialty = doctor.specialty.trim();
+    if (specialty.isNotEmpty) {
+      if (!_availableSpecialties.contains(specialty)) {
+        _availableSpecialties = [specialty, ..._availableSpecialties];
+      }
+      _specialty = specialty;
+    }
+
+    _nameController.text = doctor.name;
+    _emailController.text = doctor.email;
+    _documentIdController.text = doctor.documentId;
+    _professionalCardController.text = doctor.professionalCardNumber;
+  }
 
   @override
   void dispose() {
@@ -67,6 +102,10 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
   }
 
   String? _passwordValidator(String? value) {
+    if (_isEditing && (value == null || value.trim().isEmpty)) {
+      return null;
+    }
+
     if (value == null || value.trim().isEmpty) {
       return 'La contraseña es obligatoria';
     }
@@ -87,22 +126,41 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
     }
     if (!_formKey.currentState!.validate()) return;
 
-    final data = DoctorCreate(
-      name: _nameController.text.trim(),
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-      specialty: _specialty!,
-      documentType: _documentType!,
-      documentId: _documentIdController.text.trim(),
-      professionalCardNumber: _professionalCardController.text.trim(),
-    );
-
-    final success = await ref.read(doctorsProvider.notifier).createDoctor(data);
+    final notifier = ref.read(doctorsProvider.notifier);
+    final success = _isEditing
+        ? await notifier.updateDoctor(
+            widget.doctor!.id,
+            DoctorUpdate(
+              name: _nameController.text.trim(),
+              email: _emailController.text.trim(),
+              specialty: _specialty!,
+              documentType: _documentType!,
+              documentId: _documentIdController.text.trim(),
+              professionalCardNumber: _professionalCardController.text.trim(),
+              password: _passwordController.text.trim(),
+            ),
+          )
+        : await notifier.createDoctor(
+            DoctorCreate(
+              name: _nameController.text.trim(),
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+              specialty: _specialty!,
+              documentType: _documentType!,
+              documentId: _documentIdController.text.trim(),
+              professionalCardNumber: _professionalCardController.text.trim(),
+            ),
+          );
 
     if (!mounted) return;
 
     if (success) {
-      AppSnackBar.success(context, 'Doctor creado correctamente');
+      AppSnackBar.success(
+        context,
+        _isEditing
+            ? 'Doctor actualizado correctamente'
+            : 'Doctor creado correctamente',
+      );
       context.pop();
       return;
     }
@@ -131,6 +189,7 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
             label: 'Nombre completo',
             showLabel: false,
             textCapitalization: TextCapitalization.words,
+            enabled: !isPosting,
             prefixIcon: Icon(
               FontAwesomeIcons.user.data,
               color: AppColors.secondary,
@@ -189,7 +248,7 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
           Select<String>(
             onTap: (value) => setState(() => _specialty = value),
             defaultValue: 'Seleccione especialidad',
-            items: _specialties,
+            items: _availableSpecialties,
             selected: _specialty,
             getTextBySelected: (specialty) => specialty,
             isActive: !isPosting,
@@ -214,7 +273,7 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
           const SizedBox(height: fieldGap),
           CustomTextFormField(
             controller: _passwordController,
-            label: 'Contraseña',
+            label: _isEditing ? 'Nueva contraseña (opcional)' : 'Contraseña',
             showLabel: false,
             obscureText: _obscurePassword,
             enabled: !isPosting,
@@ -239,7 +298,9 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
           ),
           const SizedBox(height: 16),
           CustomFilledButton(
-            text: isPosting ? 'Guardando...' : 'Registrar',
+            text: isPosting
+                ? 'Guardando...'
+                : (_isEditing ? 'Actualizar' : 'Registrar'),
             buttonColor: AppColors.primaryButton,
             width: 200,
             height: 50,

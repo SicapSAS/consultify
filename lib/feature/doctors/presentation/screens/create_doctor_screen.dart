@@ -4,17 +4,24 @@ import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 
 class CreateDoctorScreen extends StatelessWidget {
-  const CreateDoctorScreen({super.key});
+  final Doctor? doctor;
+
+  const CreateDoctorScreen({
+    super.key,
+    this.doctor,
+  });
+
+  bool get _isEditing => doctor != null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
       appBar: CustomAppBar(
-        title: 'Nuevo doctor',
+        title: _isEditing ? 'Actualizar doctor' : 'Nuevo doctor',
         onBackPressed: () => context.pop(),
       ),
-      body: const CreateDoctorView(),
+      body: CreateDoctorView(doctor: doctor),
     );
   }
 }

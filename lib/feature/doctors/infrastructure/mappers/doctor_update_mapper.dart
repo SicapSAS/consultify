@@ -10,12 +10,10 @@ class DoctorUpdateMapper {
       'professionalCardNumber': doctor.professionalCardNumber,
       'documentType': doctor.documentType,
       'documentId': doctor.documentId,
-      'isActive': doctor.isActive,
     };
 
-    // 🔑 Si la contraseña no está en blanco, la incluimos en el payload de actualización
     if (doctor.password.trim().isNotEmpty) {
-      data['password'] = doctor.password;
+      data['password'] = doctor.password.trim();
     }
 
     return data;
