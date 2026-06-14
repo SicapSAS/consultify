@@ -9,7 +9,10 @@ class SpecialityRoutes {
     ),
     GoRoute(
       path: '/create-specialty-screen',
-      builder: (context, state) => const CreateSpecialityScreen(),
+      builder: (context, state) {
+        final specialty = state.extra as Specialty?;
+        return CreateSpecialityScreen(specialty: specialty);
+      },
     ),
   ];
 }

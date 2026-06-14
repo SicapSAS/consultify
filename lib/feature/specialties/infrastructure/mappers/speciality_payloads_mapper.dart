@@ -4,9 +4,12 @@ import 'package:consultify/feature/feature.dart'; // Tu entidad SpecialityUpdate
 
 class SpecialtyUpdateMapper {
   static Map<String, dynamic> toJson(SpecialityUpdate specialty) {
+    final description = specialty.description?.trim();
+
     return {
       'name': specialty.name,
-      'description': specialty.description ?? '',
+      if (description != null && description.isNotEmpty)
+        'description': description,
     };
   }
 }

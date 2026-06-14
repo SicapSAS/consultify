@@ -6,7 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateSpecialityForm extends ConsumerStatefulWidget {
-  const CreateSpecialityForm({super.key});
+  final Specialty? specialty;
+
+  const CreateSpecialityForm({
+    super.key,
+    this.specialty,
+  });
 
   @override
   ConsumerState<CreateSpecialityForm> createState() =>
@@ -17,6 +22,18 @@ class _CreateSpecialityFormState extends ConsumerState<CreateSpecialityForm> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
+
+  bool get _isEditing => widget.specialty != null;
+
+  @override
+  void initState() {
+    super.initState();
+    final specialty = widget.specialty;
+    if (specialty == null) return;
+
+    _nameController.text = specialty.name;
+    _descriptionController.text = specialty.description;
+  }
 
   @override
   void dispose() {
@@ -36,19 +53,37 @@ class _CreateSpecialityFormState extends ConsumerState<CreateSpecialityForm> {
     if (!_formKey.currentState!.validate()) return;
 
     final description = _descriptionController.text.trim();
-    final specialtyCreate = SpecialityCreate(
-      name: _nameController.text.trim(),
-      description: description.isEmpty ? null : description,
-    );
+    final isPosting = ref.read(specialityProvider).isPosting;
+    if (isPosting) return;
 
-    final success = await ref
-        .read(specialityProvider.notifier)
-        .createSpecialty(specialtyCreate);
+    final bool success;
+
+    if (_isEditing) {
+      success = await ref.read(specialityProvider.notifier).updateSpecialty(
+            widget.specialty!.id,
+            SpecialityUpdate(
+              name: _nameController.text.trim(),
+              description: description.isEmpty ? null : description,
+            ),
+          );
+    } else {
+      success = await ref.read(specialityProvider.notifier).createSpecialty(
+            SpecialityCreate(
+              name: _nameController.text.trim(),
+              description: description.isEmpty ? null : description,
+            ),
+          );
+    }
 
     if (!mounted) return;
 
     if (success) {
-      AppSnackBar.success(context, 'Especialidad creada correctamente');
+      AppSnackBar.success(
+        context,
+        _isEditing
+            ? 'Especialidad actualizada correctamente'
+            : 'Especialidad creada correctamente',
+      );
       context.pop();
       return;
     }
@@ -89,7 +124,11 @@ class _CreateSpecialityFormState extends ConsumerState<CreateSpecialityForm> {
           ),
           const SizedBox(height: 16),
           CustomFilledButton(
-            text: isPosting ? 'Guardando...' : 'Crear especialidad',
+            text: isPosting
+                ? 'Guardando...'
+                : _isEditing
+                    ? 'Actualizar'
+                    : 'Crear especialidad',
             buttonColor: AppColors.primaryButton,
             width: 200,
             height: 50,

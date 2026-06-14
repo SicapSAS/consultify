@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 
 class SpecialtiesList extends StatelessWidget {
   final List<Specialty> specialties;
+  final void Function(Specialty specialty, SpecialityMenuAction action)?
+      onMenuAction;
 
   const SpecialtiesList({
     super.key,
     required this.specialties,
+    this.onMenuAction,
   });
 
   @override
@@ -25,7 +28,13 @@ class SpecialtiesList extends StatelessWidget {
       itemCount: specialties.length,
       separatorBuilder: (context, _) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
-        return SpecialityCard(specialty: specialties[index]);
+        final specialty = specialties[index];
+        return SpecialityCard(
+          specialty: specialty,
+          onMenuAction: onMenuAction != null
+              ? (action) => onMenuAction!(specialty, action)
+              : null,
+        );
       },
     );
   }
