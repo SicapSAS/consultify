@@ -111,6 +111,13 @@ class SideMenuState extends ConsumerState<SideMenu> {
             isSelected: currentRoute == '/doctors-screen',
             onTap: () => _navigateAndClose(() => context.go('/doctors-screen')),
           ),
+          CustomSideMenuSectionTitle(label: 'Especialidades'),
+          CustomSideMenuItem(
+            icon: FontAwesomeIcons.stethoscope.data,
+            label: 'Especialidades',
+            isSelected: currentRoute == '/specialties-screen',
+            onTap: () => _navigateAndClose(() => context.go('/specialties-screen')),
+          ),
           CustomSideMenuSectionTitle(label: 'Configuración'),
           CustomSideMenuItem(
             icon: FontAwesomeIcons.gear.data,

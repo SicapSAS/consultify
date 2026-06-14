@@ -40,7 +40,8 @@ final goRouterProvider = Provider((ref) {
           ...PatientRoutes.routes,
           ...AppointmentRoutes.routes,
           ...DoctorsRoutes.routes,
-      ...ProfileRoutes.routes,
+          ...SpecialityRoutes.routes,
+          ...ProfileRoutes.routes,
         ],
       ),
 
