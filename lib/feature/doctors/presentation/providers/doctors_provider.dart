@@ -132,6 +132,23 @@ class DoctorNotifier extends StateNotifier<DoctorRepositoryState> {
       return false;
     }
   }
+
+  // 🔑 NUEVO MÉTODO: Consultar perfil detallado y horarios del doctor
+  Future<void> getDoctorById(String doctorId) async {
+    state = state.copyWith(
+      isLoading: true,
+      errorMessage: '',
+      selectedDoctor: null,
+    );
+    try {
+      final doctorShow = await doctorsRepository.getDoctorById(doctorId);
+      state = state.copyWith(selectedDoctor: doctorShow, isLoading: false);
+    } on CustomError catch (e) {
+      state = state.copyWith(errorMessage: e.message, isLoading: false);
+    } catch (e) {
+      state = state.copyWith(errorMessage: 'Error al obtener el horario del médico.', isLoading: false);
+    }
+  }
   
 }
 
@@ -139,12 +156,14 @@ class DoctorNotifier extends StateNotifier<DoctorRepositoryState> {
 
 class DoctorRepositoryState {
   final List<Doctor> doctors;
+  final DcotorShow? selectedDoctor;
   final bool isLoading;
   final String errorMessage;
   final bool isPosting;
 
   DoctorRepositoryState({
     this.doctors = const [],
+    this.selectedDoctor,
     this.isLoading = false,
     this.errorMessage = '',
     this.isPosting = false,
@@ -152,11 +171,13 @@ class DoctorRepositoryState {
 
   DoctorRepositoryState copyWith({
     List<Doctor>? doctors,
+    DcotorShow? selectedDoctor,
     bool? isLoading,
     String? errorMessage,
     bool? isPosting,
   }) => DoctorRepositoryState(
     doctors: doctors ?? this.doctors,
+    selectedDoctor: selectedDoctor ?? this.selectedDoctor,
     isLoading: isLoading ?? this.isLoading,
     errorMessage: errorMessage ?? this.errorMessage,
     isPosting: isPosting ?? this.isPosting,

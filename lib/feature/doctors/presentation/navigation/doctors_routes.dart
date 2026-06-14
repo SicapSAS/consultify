@@ -11,6 +11,15 @@ class DoctorsRoutes {
     GoRoute(
       path: '/doctors-screen',
       builder: (context, state) => const DoctorsScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) {
+            final doctorId = state.pathParameters['id'] ?? '';
+            return DoctorDetailScreen(doctorId: doctorId);
+          },
+        ),
+      ],
     ),
     GoRoute(
       path: '/create-doctor-screen',

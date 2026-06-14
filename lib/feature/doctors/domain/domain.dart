@@ -5,3 +5,4 @@ export 'entities/doctors_list.dart';
 export 'entities/doctor_create.dart';
 export 'entities/doctor_update.dart';
 export 'repositories/doctors_repository.dart';
+export 'entities/doctor_show.dart';

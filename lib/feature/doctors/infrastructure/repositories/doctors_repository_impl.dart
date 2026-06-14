@@ -31,4 +31,9 @@ class DoctorsRepositoryImpl implements DoctorsRepository {
   Future<Doctor> updateDoctorStatus(String doctorId, bool isActive) {
     return dataSource.updateDoctorStatus(doctorId, isActive);
   }
+  
+  @override
+  Future<DcotorShow> getDoctorById(String doctorId) {
+    return dataSource.getDoctorById(doctorId);
+  }
 }

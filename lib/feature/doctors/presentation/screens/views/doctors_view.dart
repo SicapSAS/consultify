@@ -158,6 +158,8 @@ class DoctorsView extends ConsumerWidget {
                   emptyMessage: 'No hay doctores habilitados',
                   isRefreshing: state.isLoading,
                   onRefresh: () => ref.read(doctorsProvider.notifier).getDoctors(),
+                  onDoctorTap: (doctor) =>
+                      context.push('/doctors-screen/${doctor.id}'),
                   onMenuAction: (doctor, action) =>
                       _onMenuAction(context, ref, doctor, action),
                 ),
@@ -166,6 +168,8 @@ class DoctorsView extends ConsumerWidget {
                   emptyMessage: 'No hay doctores inhabilitados',
                   isRefreshing: state.isLoading,
                   onRefresh: () => ref.read(doctorsProvider.notifier).getDoctors(),
+                  onDoctorTap: (doctor) =>
+                      context.push('/doctors-screen/${doctor.id}'),
                   onMenuAction: (doctor, action) =>
                       _onMenuAction(context, ref, doctor, action),
                 ),
@@ -183,6 +187,7 @@ class _DoctorTabContent extends StatelessWidget {
   final String emptyMessage;
   final bool isRefreshing;
   final Future<void> Function() onRefresh;
+  final void Function(Doctor doctor)? onDoctorTap;
   final void Function(Doctor doctor, DoctorMenuAction action)? onMenuAction;
 
   const _DoctorTabContent({
@@ -190,6 +195,7 @@ class _DoctorTabContent extends StatelessWidget {
     required this.emptyMessage,
     required this.isRefreshing,
     required this.onRefresh,
+    this.onDoctorTap,
     this.onMenuAction,
   });
 
@@ -218,6 +224,7 @@ class _DoctorTabContent extends StatelessWidget {
       isRefreshing: isRefreshing,
       child: DoctorList(
         doctors: doctors,
+        onDoctorTap: onDoctorTap,
         onMenuAction: onMenuAction,
       ),
     );

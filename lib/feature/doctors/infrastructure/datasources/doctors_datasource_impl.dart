@@ -100,4 +100,19 @@ class DoctorsDatasourceImpl implements DoctorsDatasource {
       );
     }
   }
+  
+  @override
+  Future<DcotorShow> getDoctorById(String doctorId) async {
+    try {
+      // 🔍 GET /doctors/show/{{doctorId}}
+      final response = await dio.get('/doctors/show/$doctorId');
+      
+      return DoctorShowMapper.fromJson(response.data ?? {});
+    } on DioException catch (e) {
+      throw DioErrorMapper.fromDioException(e, mensajeFallback: 'Error al obtener los detalles del doctor.');
+    } catch (e) {
+      if (e is CustomError) rethrow;
+      throw const CustomError(message: 'Ocurrió un error inesperado al consultar el doctor.');
+    }
+  }
 }

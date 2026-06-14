@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class DoctorList extends StatelessWidget {
   final List<Doctor> doctors;
+  final void Function(Doctor doctor)? onDoctorTap;
   final void Function(Doctor doctor, DoctorMenuAction action)? onMenuAction;
 
   const DoctorList({
     super.key,
     required this.doctors,
+    this.onDoctorTap,
     this.onMenuAction,
   });
 
@@ -30,6 +32,7 @@ class DoctorList extends StatelessWidget {
         final doctor = doctors[index];
         return DoctorCard(
           doctor: doctor,
+          onTap: onDoctorTap != null ? () => onDoctorTap!(doctor) : null,
           onMenuAction: onMenuAction != null
               ? (action) => onMenuAction!(doctor, action)
               : null,

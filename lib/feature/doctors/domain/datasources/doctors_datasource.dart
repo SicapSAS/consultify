@@ -8,4 +8,5 @@ abstract class DoctorsDatasource {
   Future<Doctor> updateDoctorStatus(String doctorId, bool isActive);
   Future<bool> deleteDoctor(String doctorId);
   Future<Doctor> createDoctor(DoctorCreate doctorCreate);
+  Future<DcotorShow> getDoctorById(String doctorId);
 }

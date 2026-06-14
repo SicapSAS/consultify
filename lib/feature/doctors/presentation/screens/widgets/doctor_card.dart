@@ -5,11 +5,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DoctorCard extends StatelessWidget {
   final Doctor doctor;
+  final VoidCallback? onTap;
   final ValueChanged<DoctorMenuAction>? onMenuAction;
 
   const DoctorCard({
     super.key,
     required this.doctor,
+    this.onTap,
     this.onMenuAction,
   });
 
@@ -92,7 +94,10 @@ class DoctorCard extends StatelessWidget {
                   cardPadding + menuIconSize + 4,
                   cardPadding,
                 ),
-                child: Row(
+                child: InkWell(
+                  onTap: onTap,
+                  borderRadius: BorderRadius.circular(radius),
+                  child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipOval(
@@ -157,6 +162,7 @@ class DoctorCard extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
                 ),
               ),
               Positioned(
