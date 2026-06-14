@@ -19,17 +19,6 @@ class CreateDoctorForm extends ConsumerStatefulWidget {
 
 class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
   static const _documentTypes = ['CC', 'TI', 'CE', 'PP', 'PAS'];
-  static const _specialties = [
-    'Odontología General',
-    'Ortodoncia',
-    'Endodoncia',
-    'Periodoncia',
-    'Odontopediatría',
-    'Cirugía Oral',
-    'Implantología',
-    'Estética Dental',
-    'Prostodoncia',
-  ];
 
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
@@ -41,14 +30,34 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
   String? _documentType;
   String? _specialty;
   bool _obscurePassword = true;
-  late List<String> _availableSpecialties;
 
   bool get _isEditing => widget.doctor != null;
+
+  List<String> get _availableSpecialties {
+    final activeNames = ref
+        .watch(specialityProvider)
+        .specialties
+        .where((specialty) => specialty.isActive)
+        .map((specialty) => specialty.name)
+        .toList();
+
+    if (_isEditing) {
+      final currentSpecialty = widget.doctor!.specialty.trim();
+      if (currentSpecialty.isNotEmpty &&
+          !activeNames.contains(currentSpecialty)) {
+        return [currentSpecialty, ...activeNames];
+      }
+    }
+
+    return activeNames;
+  }
 
   @override
   void initState() {
     super.initState();
-    _availableSpecialties = List<String>.from(_specialties);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(specialityProvider.notifier).getSpecialties();
+    });
 
     final doctor = widget.doctor;
     if (doctor == null) return;
@@ -60,9 +69,6 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
 
     final specialty = doctor.specialty.trim();
     if (specialty.isNotEmpty) {
-      if (!_availableSpecialties.contains(specialty)) {
-        _availableSpecialties = [specialty, ..._availableSpecialties];
-      }
       _specialty = specialty;
     }
 
@@ -174,6 +180,7 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
   @override
   Widget build(BuildContext context) {
     final isPosting = ref.watch(doctorsProvider).isPosting;
+    final isLoadingSpecialties = ref.watch(specialityProvider).isLoading;
     const fieldGap = 10.0;
     const rowGap = 10.0;
     const documentTypeWidth = 150.0;
@@ -251,8 +258,10 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
             items: _availableSpecialties,
             selected: _specialty,
             getTextBySelected: (specialty) => specialty,
-            isActive: !isPosting,
-            disabledMessage: '',
+            isActive: !isPosting && !isLoadingSpecialties,
+            disabledMessage: isLoadingSpecialties
+                ? 'Cargando especialidades...'
+                : 'No hay especialidades activas',
             width: selectWidth,
             areTheSame: (a, b) => a == b,
           ),
@@ -305,7 +314,7 @@ class _CreateDoctorFormState extends ConsumerState<CreateDoctorForm> {
             width: 200,
             height: 50,
             textSize: 20,
-            onPressed: isPosting ? null : _onSubmit,
+            onPressed: isPosting || isLoadingSpecialties ? null : _onSubmit,
           ),
         ],
       ),
