@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:consultify/config/config.dart';
 import 'package:consultify/feature/feature.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeGreeting extends ConsumerWidget {
   const HomeGreeting({super.key});
@@ -20,45 +21,83 @@ class HomeGreeting extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            firstName.isEmpty ? 'Hola, bienvenido' : 'Hola, $firstName',
-            style: const TextStyle(
-              color: AppColors.textPrimary,
-              fontWeight: FontWeight.w700,
-              fontSize: 22,
-            ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              AppColors.secondary,
+              AppColors.primaryButton,
+              AppColors.secondaryButton,
+            ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            _subtitleForRole(user?.role ?? ''),
-            style: TextStyle(
-              color: AppColors.textPrimary.withValues(alpha: 0.7),
-              fontWeight: FontWeight.w500,
-              fontSize: 15,
-            ),
-          ),
-          if (roleLabel.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: AppColors.secondaryButton.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                roleLabel,
-                style: const TextStyle(
-                  color: AppColors.secondary,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                ),
-              ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.secondary.withValues(alpha: 0.25),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
             ),
           ],
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              firstName.isEmpty ? 'Hola, bienvenido' : 'Hola, $firstName',
+              style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontWeight: FontWeight.w800,
+                fontSize: 22,
+                letterSpacing: 0.2,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              _subtitleForRole(user?.role ?? ''),
+              style: TextStyle(
+                color: AppColors.textSecondary.withValues(alpha: 0.85),
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+              ),
+            ),
+            if (roleLabel.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.18),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.35),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.idBadge.data,
+                      size: 14,
+                      color: AppColors.textSecondary.withValues(alpha: 0.9),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      roleLabel,
+                      style: TextStyle(
+                        color: AppColors.textSecondary.withValues(alpha: 0.95),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
