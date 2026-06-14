@@ -86,6 +86,7 @@ class _SuperAdminDashboard extends ConsumerWidget {
           bottom: CustomBottomNavigationBar.scrollBottomPadding(context),
         ),
         children: [
+          const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -170,6 +171,7 @@ class _ReceptionDashboard extends ConsumerWidget {
           bottom: CustomBottomNavigationBar.scrollBottomPadding(context),
         ),
         children: [
+          const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -291,6 +293,7 @@ class _ProfessionalDashboard extends ConsumerWidget {
           bottom: CustomBottomNavigationBar.scrollBottomPadding(context),
         ),
         children: [
+          const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
