@@ -26,7 +26,8 @@ export 'appointment/appointment.dart';
 //*********** Doctors ***********/
 export 'doctors/doctors.dart';
 
-//*********** Logo ***********/
+//*********** Speciality ***********/
+export 'specialties/speciality.dart';
 //export 'logo/logo.dart';
 
 //*********** Documents ***********/
