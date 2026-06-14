@@ -122,8 +122,8 @@ class SideMenuState extends ConsumerState<SideMenu> {
           CustomSideMenuItem(
             icon: FontAwesomeIcons.gear.data,
             label: 'Horarios',
-            isSelected: currentRoute == '',
-            onTap: () => _navigateAndClose(() => context.go('')),
+            isSelected: currentRoute == '/schedules-screen',
+            onTap: () => _navigateAndClose(() => context.go('/schedules-screen')),
           ),
         ]
       ]

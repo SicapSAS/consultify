@@ -30,8 +30,8 @@ export 'doctors/doctors.dart';
 export 'specialties/speciality.dart';
 //export 'logo/logo.dart';
 
-//*********** Documents ***********/
-//export 'documents/documents.dart';
+//*********** Schedules ***********/
+export 'schedules/schedules.dart';
 
 //*********** Authorizations ***********/
 //export 'authorizations/authorizations.dart';
