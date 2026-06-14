@@ -17,7 +17,10 @@ class SpecialtiesList extends StatelessWidget {
         16,
         12,
         16,
-        CustomBottomNavigationBar.scrollBottomPadding(context),
+        CustomBottomNavigationBar.scrollBottomPadding(
+          context,
+          withFloatingActionButton: true,
+        ),
       ),
       itemCount: specialties.length,
       separatorBuilder: (context, _) => const SizedBox(height: 12),

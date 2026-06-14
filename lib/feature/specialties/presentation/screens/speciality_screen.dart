@@ -23,7 +23,7 @@ class SpecialityScreen extends StatelessWidget {
         child: LabeledFloatingActionButton(
           label: 'Crear especialidad',
           heroTag: 'create-specialty-fab',
-          onPressed: () => context.push('/specialties-screen'),
+          onPressed: () => context.push('/create-specialty-screen'),
         ),
       ),
     );
