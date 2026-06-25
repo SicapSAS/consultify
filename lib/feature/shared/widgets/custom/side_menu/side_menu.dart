@@ -97,7 +97,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
             onTap: () => _navigateAndClose(() => context.go('/clinic-screen')),
           )
         ],
-        if (userRole == Roles.adminClinic) ...[
+        if (userRole == Roles.adminClinic || userRole == Roles.professional || userRole == Roles.superAdmin) ...[
           CustomSideMenuItem(
             icon: FontAwesomeIcons.userDoctor.data,
             label: 'Admiciones',
